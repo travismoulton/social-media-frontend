@@ -9,6 +9,10 @@
 html {
   font-size: 62.5%;
   font-family: 'Lato';
+
+  /* Variables */
+  --color-red: #e17055;
+  --color-white: #fff;
 }
 
 body {
