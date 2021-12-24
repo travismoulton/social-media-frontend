@@ -1,0 +1,17 @@
+.NavItem {
+  list-style: none;
+}
+
+.NavItem a {
+  color: var(--color-white);
+  text-decoration: none;
+  width: 100%;
+}
+
+.NavItem a:hover,
+.NavItem a:active,
+.NavItem a.active {
+  columns: var(--color-white);
+  border-bottom: 1px solid;
+  padding-bottom: 0.1rem;
+}
