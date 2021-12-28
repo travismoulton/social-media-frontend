@@ -25,13 +25,14 @@ function App() {
   async function getPost() {
     await axios
       .get('posts/61c351e705137531ce817834', {
+        // headers: { Cookie: `jwt=${cookies['jwt']}` },
         withCredentials: true,
       })
       .then(({ data }) => console.log(data));
   }
 
   async function logout() {
-    await axios.get('/user/logout');
+    await axios.get('/user/logout').then(({ data }) => console.log(data));
   }
 
   return (
