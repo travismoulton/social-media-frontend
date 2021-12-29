@@ -5,6 +5,7 @@ export default function NavItems() {
   return (
     <ul data-testid="NavItems" className={classes.NavItems}>
       <NavItem link="login">Login</NavItem>
+      <NavItem link="logout">Logout</NavItem>
     </ul>
   );
 }

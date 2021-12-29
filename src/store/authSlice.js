@@ -16,11 +16,7 @@ const authSlice = createSlice({
       state.loading = true;
       state.inAuth = true;
     },
-    // authSuccess: {
-    //   reducer(state, action) {
-    //     const { user } = action.payload;
-    //   },
-    // },
+
     authSuccess: (state, action) => {
       console.log(action.payload);
       const { user } = action.payload;
@@ -29,9 +25,31 @@ const authSlice = createSlice({
       state.loading = false;
       state.inAuth = false;
     },
+
+    authFail: (state, action) => {
+      state.error = action.error;
+      state.loading = false;
+      state.inAuth = false;
+      state.user = null;
+    },
+
+    authLogout: (state, action) => {
+      state.error = null;
+      state.loading = false;
+      state.user = null;
+      state.inAuth = false;
+    },
+
+    authReset: (state, action) => {
+      state.error = null;
+      state.loading = false;
+      state.user = null;
+      state.inAuth = false;
+    },
   },
 });
 
 export default authSlice.reducer;
 
-export const { authStart, authSuccess } = authSlice.actions;
+export const { authStart, authSuccess, authFail, authLogout, authReset } =
+  authSlice.actions;

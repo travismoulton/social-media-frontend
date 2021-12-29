@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import axios from './shared/axiosInstances/users';
 import Login from './components/Login/Login';
+import Logout from './components/Logout/Logout';
 import Layout from './components/Layout/Layout';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   const routes = (
     <Switch>
       <Route path="/login" component={Login} />
+      <Route path="/logout" component={Logout} />
     </Switch>
   );
 
