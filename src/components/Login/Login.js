@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import Input from '../UI/Input/Input';
 import { loginUtils } from './loginUtils';
+import { authStart, authSuccess } from '../../store/authSlice';
 
 const { login } = loginUtils;
 
@@ -23,6 +25,8 @@ export default function Login() {
     },
     value: '',
   });
+
+  const dispatch = useDispatch();
 
   function updateEmail(e) {
     setEmailInput({ ...emailInput, value: e.target.value });
@@ -46,12 +50,16 @@ export default function Login() {
     />
   ));
 
+  async function loginAndUpdateStore() {
+    dispatch(authStart());
+    const { data: user } = await login(emailInput.value, passwordInput.value);
+    dispatch(authSuccess(user));
+  }
+
   return (
     <>
       {form}
-      <button onClick={() => login(emailInput.value, passwordInput.value)}>
-        Login
-      </button>
+      <button onClick={loginAndUpdateStore}>Login</button>
     </>
   );
 }

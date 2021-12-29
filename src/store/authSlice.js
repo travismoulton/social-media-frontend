@@ -22,6 +22,7 @@ const authSlice = createSlice({
     //   },
     // },
     authSuccess: (state, action) => {
+      console.log(action.payload);
       const { user } = action.payload;
       state.user = user;
       state.error = false;
