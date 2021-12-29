@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 import axios from './shared/axiosInstances/auth';
 import './App.css';
@@ -24,6 +25,12 @@ function App() {
   async function logout() {
     await axios.get('/user/logout').then(({ data }) => console.log(data));
   }
+
+  const routes = (
+    <Switch>
+      <Route path="/login" component={Login} />
+    </Switch>
+  );
 
   return (
     <>
