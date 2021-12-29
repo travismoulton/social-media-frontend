@@ -10,12 +10,28 @@ describe('<NavItem>', () => {
   test('renders', () => {
     const { getByText } = render(
       <MemoryRouter>
-        <NavItem {...props} />{' '}
+        <NavItem {...props} />
       </MemoryRouter>
     );
 
     expect(getByText('Test Link')).toBeInTheDocument();
   });
 
-  test();
+  test('sets the correct path', () => {
+    const history = createMemoryHistory();
+
+    const { getByText } = render(
+      <Router history={history}>
+        <NavItem {...props} />
+      </Router>
+    );
+
+    const testLink = getByText('Test Link');
+
+    act(() => {
+      fireEvent.click(testLink);
+    });
+
+    expect(history.location.pathname).toBe('/test-link');
+  });
 });
