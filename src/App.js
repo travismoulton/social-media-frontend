@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import axios from './shared/axiosInstances/auth';
 import './App.css';
+import axios from './shared/axiosInstances/auth';
+import Login from './components/Login/Login';
+import Layout from './components/Layout/Layout';
 
 function App() {
   const [email, setEmail] = useState('');
@@ -32,28 +34,7 @@ function App() {
     </Switch>
   );
 
-  return (
-    <>
-      {' '}
-      <form>
-        <input
-          type="email"
-          placeholder="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button onClick={login}>Submit</button>
-      </form>
-      <button onClick={logout}>Logout</button>
-      <button onClick={getPost}>Get post</button>
-    </>
-  );
+  return <Layout>{routes}</Layout>;
 }
 
 export default App;
