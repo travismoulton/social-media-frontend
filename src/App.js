@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import './App.css';
-import axios from './shared/axiosInstances/auth';
+import axios from './shared/axiosInstances/users';
 import Login from './components/Login/Login';
 import Layout from './components/Layout/Layout';
 

@@ -1,6 +1,9 @@
 import { useState } from 'react';
 
 import Input from '../UI/Input/Input';
+import { loginUtils } from './loginUtils';
+
+const { login } = loginUtils;
 
 export default function Login() {
   const [emailInput, setEmailInput] = useState({
@@ -46,7 +49,9 @@ export default function Login() {
   return (
     <>
       {form}
-      <button>Login</button>
+      <button onClick={() => login(emailInput.value, passwordInput.value)}>
+        Login
+      </button>
     </>
   );
 }
