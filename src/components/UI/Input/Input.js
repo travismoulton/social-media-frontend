@@ -1,10 +1,18 @@
 import classes from './Input.module.css';
+import CustomSelect from './CustomSelect/CustomSelect';
 
 export default function Input(props) {
   let inputElement = null;
 
-  const { elementType, elementConfig, value, changed, id, wrapperClass } =
-    props;
+  const {
+    elementType,
+    elementConfig,
+    value,
+    changed,
+    id,
+    wrapperClass,
+    isSearchable,
+  } = props;
 
   switch (elementType) {
     case 'input':
@@ -19,6 +27,18 @@ export default function Input(props) {
           />
         </div>
       );
+      break;
+
+    case 'select':
+      inputElement = (
+        <CustomSelect
+          changed={changed}
+          options={elementConfig.options}
+          value={value}
+          isSearchable={isSearchable}
+        />
+      );
+
       break;
     default:
       inputElement = <p>Something went wrong</p>;
