@@ -1,21 +1,28 @@
 import { Switch, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import './App.css';
-import axios from './shared/axiosInstances/users';
 import Login from './components/Login/Login';
 import Logout from './components/Logout/Logout';
 import Layout from './components/Layout/Layout';
+import { authSuccess } from './store/authSlice';
+import { appUtils } from './appUtils';
+
+const { checkForUser } = appUtils;
 
 function App() {
-  async function getPost() {
-    await axios
-      .get('posts/61c351e705137531ce817834')
-      .then(({ data }) => console.log(data));
-  }
+  const dispatch = useDispatch();
 
-  async function logout() {
-    await axios.get('/user/logout').then(({ data }) => console.log(data));
-  }
+  useEffect(() => {
+    (async () => {
+      // When the app is loaded, checkForUser will send a request to the API
+      // If there is a valid token on the request, coresponding user data will
+      // be sent back, and set in the store.
+      const user = await checkForUser();
+      if (user) dispatch(authSuccess(user));
+    })();
+  }, [dispatch]);
 
   const routes = (
     <Switch>
