@@ -8,7 +8,7 @@ export default function CustomSelect(props) {
       onChange={changed}
       options={options}
       inputId={selectId}
-      value={value}
+      // value={value}
       isSearchable={isSearchable}
     />
   );

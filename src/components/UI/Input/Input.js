@@ -31,12 +31,14 @@ export default function Input(props) {
 
     case 'select':
       inputElement = (
-        <CustomSelect
-          changed={changed}
-          options={elementConfig.options}
-          value={value}
-          isSearchable={isSearchable}
-        />
+        <div className={classes.SelectWrapper}>
+          <CustomSelect
+            changed={changed}
+            options={elementConfig.options}
+            value={value}
+            isSearchable={isSearchable}
+          />
+        </div>
       );
 
       break;
