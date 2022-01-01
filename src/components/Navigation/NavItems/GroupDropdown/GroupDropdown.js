@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-import Input from '../../../UI/Input/Input';
+import GroupSelect from './GroupSelect/GroupSelect';
 import { utils } from './groupDropdownUtils';
 
 const { fetchUserGroups } = utils;
@@ -61,10 +60,9 @@ export default function GroupDropdown() {
   }
 
   return (
-    <Input
-      elementType={dropdown.elementType}
-      elementConfig={dropdown.elementConfig}
-      value={dropdown.value}
+    <GroupSelect
+      options={dropdown.elementConfig.options}
+      isSearchable={false}
       changed={(e) => changed(e.value)}
     />
   );
