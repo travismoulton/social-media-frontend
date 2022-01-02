@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import Input from '../UI/Input/Input';
 import { loginUtils } from './loginUtils';
-import { authStart, authSuccess } from '../../store/authSlice';
+import { authStart, authSuccess, authFail } from '../../store/authSlice';
 import classes from './Login.module.css';
 import checkValidityHandler from '../../shared/checkValidityHandler';
 
@@ -46,7 +46,10 @@ export default function Login() {
     touched: false,
   });
 
-  const [error, setError] = useState({ isError: false });
+  const [error, setError] = useState({
+    isError: false,
+    msg: <p style={{ color: 'red' }}>Incorrect email or password</p>,
+  });
 
   function inputChangedHandler(e, input) {
     const { value } = e.target;
@@ -108,8 +111,15 @@ export default function Login() {
 
   async function loginAndUpdateStore() {
     dispatch(authStart());
-    const { data: user } = await login(emailInput.value, passwordInput.value);
-    dispatch(authSuccess(user));
+    const { data } = await login(emailInput.value, passwordInput.value);
+    console.log(data);
+
+    // data.data contains the user info
+    if (data.status === 'success') dispatch(authSuccess(data.data));
+    else if (data.status === 'fail') {
+      dispatch(authFail());
+      setError({ ...error, isError: true });
+    }
   }
 
   return (
@@ -118,6 +128,7 @@ export default function Login() {
       {user && <Redirect to="/" />}
       <div className={classes.Login}>
         {form}
+        {error.isError && error.msg}
         <button
           className={`${'Global-btn-1 ' + classes.Btn}`}
           onClick={loginHandler}
