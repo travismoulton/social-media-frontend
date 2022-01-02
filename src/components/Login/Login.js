@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Input from '../UI/Input/Input';
 import { loginUtils } from './loginUtils';
@@ -9,6 +10,8 @@ import classes from './Login.module.css';
 const { login } = loginUtils;
 
 export default function Login() {
+  const { user } = useSelector((state) => state.auth);
+
   const [emailInput, setEmailInput] = useState({
     elementType: 'input',
     elementConfig: {
@@ -64,14 +67,18 @@ export default function Login() {
   }
 
   return (
-    <div className={classes.Login}>
-      {form}
-      <button
-        className={`${'Global-btn-1 ' + classes.Btn}`}
-        onClick={loginAndUpdateStore}
-      >
-        Login
-      </button>
-    </div>
+    <>
+      {/* If the user is already logged in redirect to the homepage */}
+      {user && <Redirect to="/" />}
+      <div className={classes.Login}>
+        {form}
+        <button
+          className={`${'Global-btn-1 ' + classes.Btn}`}
+          onClick={loginAndUpdateStore}
+        >
+          Login
+        </button>
+      </div>
+    </>
   );
 }
