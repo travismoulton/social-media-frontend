@@ -1,6 +1,6 @@
 import { Switch, Route } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './App.css';
 import Login from './components/Login/Login';
@@ -19,8 +19,9 @@ function App() {
       // When the app is loaded, checkForUser will send a request to the API
       // If there is a valid token on the request, coresponding user data will
       // be sent back, and set in the store.
-      const user = await checkForUser();
-      if (user) dispatch(authSuccess(user));
+
+      const userToLogin = await checkForUser();
+      if (userToLogin) dispatch(authSuccess(userToLogin));
     })();
   }, [dispatch]);
 
@@ -31,7 +32,11 @@ function App() {
     </Switch>
   );
 
-  return <Layout>{routes}</Layout>;
+  return (
+    <div className="App">
+      <Layout>{routes}</Layout>
+    </div>
+  );
 }
 
 export default App;

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import Input from '../UI/Input/Input';
 import { loginUtils } from './loginUtils';
 import { authStart, authSuccess } from '../../store/authSlice';
+import classes from './Login.module.css';
 
 const { login } = loginUtils;
 
@@ -59,7 +60,12 @@ export default function Login() {
   return (
     <>
       {form}
-      <button onClick={loginAndUpdateStore}>Login</button>
+      <button
+        className={`${'Global-btn-1 ' + classes.Btn}`}
+        onClick={loginAndUpdateStore}
+      >
+        Login
+      </button>
     </>
   );
 }
