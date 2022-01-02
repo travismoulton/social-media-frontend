@@ -1,10 +1,11 @@
 import NavBar from '../Navigation/NavBar/NavBar';
+import classes from './Layout.module.css';
 
-export default function Layout({ children }) {
+export default function Layout({ children, isAuthenticated }) {
   return (
     <>
-      <NavBar />
-      <main>{children}</main>
+      <NavBar isAuthenticated={isAuthenticated} />
+      <main className={classes.Main}>{children}</main>
     </>
   );
 }

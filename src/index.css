@@ -13,9 +13,29 @@ html {
   /* Variables */
   --color-red: #e17055;
   --color-white: #fff;
+  --color-dark-blue: #0079d3;
+  --color-dark-blue-hover: #1484d7;
 }
 
 body {
   box-sizing: border-box;
   font-size: 1.6rem;
+}
+
+.Global-btn-1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: unset;
+  line-height: 1.8rem;
+  background-color: var(--color-dark-blue);
+  border-radius: 99rem;
+  padding: 0 1.6rem;
+  transition: color 0.1s ease-in;
+  color: var(--color-white);
+  border-style: none;
+}
+
+.Global-btn-1:hover {
+  background-color: var(--color-dark-blue-hover);
+  cursor: pointer;
 }
