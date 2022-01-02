@@ -10,9 +10,28 @@
   border-radius: 5px;
 }
 
+/* Why does this need to repeat properties from TextInput? */
+.Invalid {
+  border: 2px solid var(--color-red);
+  background-color: #fda49a;
+}
+
+.InputAsteric {
+  position: absolute;
+  margin-left: 0.3rem;
+  top: -0.3rem;
+  left: 100%;
+  font-size: 2rem;
+}
+
 .TextInput::placeholder {
   color: #4d4d4d;
   font-size: 1.6rem;
+}
+
+.Invalid::placeholder {
+  font-weight: 700;
+  color: #000;
 }
 
 .TextInput:focus {

@@ -18,12 +18,6 @@ describe('<Login />', () => {
   let mockLogin;
   beforeEach(() => {
     mockLogin = createSpy(utils, 'login', Promise.resolve({ data: mockUser }));
-
-    mockLogin = jest
-      .spyOn(utils, 'login')
-      .mockImplementationOnce(
-        jest.fn(() => Promise.resolve({ data: mockUser }))
-      );
   });
 
   afterEach(() => {
@@ -75,5 +69,23 @@ describe('<Login />', () => {
     await waitFor(() => {
       expect(mockLogin).toBeCalledWith('email@email.com', 'password');
     });
+  });
+
+  test('If email or password is missing, API is not called', async () => {
+    customRender(<Login />);
+
+    expect(
+      screen.queryByPlaceholderText('Username is required')
+    ).not.toBeInTheDocument();
+
+    const btn = screen.getByRole('button');
+
+    fireEvent.click(btn);
+
+    expect(
+      screen.getByPlaceholderText('Username is required')
+    ).toBeInTheDocument();
+
+    await waitFor(() => expect(mockLogin).not.toBeCalled());
   });
 });

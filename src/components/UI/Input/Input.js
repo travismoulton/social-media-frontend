@@ -14,9 +14,13 @@ export default function Input(props) {
     isSearchable,
     className,
     label,
+    invalid,
+    touched,
+    required,
   } = props;
 
   const inputClasses = [classes[className] || className];
+  if (invalid && touched) inputClasses.push(classes.Invalid);
 
   switch (elementType) {
     case 'input':
@@ -24,7 +28,7 @@ export default function Input(props) {
         inputClasses.push(classes.TextInput);
 
       inputElement = (
-        <div className={classes[wrapperClass]}>
+        <div className={classes[wrapperClass]} style={{ position: 'relative' }}>
           {label && <label htmlFor={id}>{label}</label>}
 
           <input
@@ -36,6 +40,7 @@ export default function Input(props) {
             className={inputClasses.join(' ')}
             data-testid={id}
           />
+          {required && <span className={classes.InputAsteric}>*</span>}
         </div>
       );
       break;

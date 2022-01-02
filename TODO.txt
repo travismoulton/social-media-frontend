@@ -1,0 +1,4 @@
+//1: Login
+  //A: Add forgot password and register links
+  //B: Make enter click the login button
+  //: Need to handle username / password incorrect
