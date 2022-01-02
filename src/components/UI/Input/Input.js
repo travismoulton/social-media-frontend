@@ -12,18 +12,28 @@ export default function Input(props) {
     id,
     wrapperClass,
     isSearchable,
+    className,
+    label,
   } = props;
+
+  const inputClasses = [classes[className] || className];
 
   switch (elementType) {
     case 'input':
+      if (['text', 'password', 'email'].includes(elementConfig.type))
+        inputClasses.push(classes.TextInput);
+
       inputElement = (
         <div className={classes[wrapperClass]}>
+          {label && <label htmlFor={id}>{label}</label>}
+
           <input
             {...elementConfig}
             value={value}
             onChange={changed}
             autoComplete="false"
             id={id}
+            className={inputClasses.join(' ')}
           />
         </div>
       );

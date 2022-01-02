@@ -1,3 +1,11 @@
 .SelectWrapper {
   width: 60rem;
 }
+
+.LoginInputWrapper {
+  width: 50rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto 1.5rem auto;
+}

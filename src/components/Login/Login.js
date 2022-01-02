@@ -47,6 +47,7 @@ export default function Login() {
       key={i}
       value={el.value}
       changed={updateFunctions[i]}
+      wrapperClass="LoginInputWrapper"
     />
   ));
 
