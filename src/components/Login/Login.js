@@ -16,6 +16,8 @@ export default function Login() {
       placeholder: 'Your email address',
     },
     value: '',
+    label: 'Email',
+    id: 'email',
   });
 
   const [passwordInput, setPasswordInput] = useState({
@@ -25,6 +27,8 @@ export default function Login() {
       placeholder: 'Your Password',
     },
     value: '',
+    label: 'Password',
+    id: 'password',
   });
 
   const dispatch = useDispatch();
@@ -44,11 +48,12 @@ export default function Login() {
     <Input
       elementType={el.elementType}
       elementConfig={el.elementConfig}
-      // need to come back and change this
-      key={i}
+      key={el.id}
       value={el.value}
       changed={updateFunctions[i]}
       wrapperClass="LoginInputWrapper"
+      label={el.label}
+      id={el.id}
     />
   ));
 
@@ -59,7 +64,7 @@ export default function Login() {
   }
 
   return (
-    <>
+    <div className={classes.Login}>
       {form}
       <button
         className={`${'Global-btn-1 ' + classes.Btn}`}
@@ -67,6 +72,6 @@ export default function Login() {
       >
         Login
       </button>
-    </>
+    </div>
   );
 }

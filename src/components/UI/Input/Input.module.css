@@ -2,8 +2,25 @@
   width: 60rem;
 }
 
+.TextInput {
+  padding: 0.2rem;
+  border: 2px solid #eee;
+  width: 21rem;
+  height: 3.4rem;
+  border-radius: 5px;
+}
+
+.TextInput::placeholder {
+  color: #4d4d4d;
+  font-size: 1.6rem;
+}
+
+.TextInput:focus {
+  outline: none;
+}
+
 .LoginInputWrapper {
-  width: 50rem;
+  width: 35rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
