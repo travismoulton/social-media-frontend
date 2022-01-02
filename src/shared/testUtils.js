@@ -20,7 +20,6 @@ function customRender(
   function wrapper({ children }) {
     return <Provider store={store}>{children}</Provider>;
   }
-
   return render(ui, { wrapper, ...renderOptions });
 }
 

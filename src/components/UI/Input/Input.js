@@ -34,6 +34,7 @@ export default function Input(props) {
             autoComplete="false"
             id={id}
             className={inputClasses.join(' ')}
+            data-testid={id}
           />
         </div>
       );
