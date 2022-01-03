@@ -22,6 +22,7 @@ export default function NavItems() {
           <NavItem link="/">
             <BiHomeSmile />
           </NavItem>
+          <NavItem link="register">Register</NavItem>
           <NavItem link="login">Login</NavItem>
         </>
       )}

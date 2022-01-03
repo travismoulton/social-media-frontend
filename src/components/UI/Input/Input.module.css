@@ -38,7 +38,8 @@
   outline: none;
 }
 
-.LoginInputWrapper {
+.LoginInputWrapper,
+.RegisterInputWrapper {
   width: 35rem;
   display: flex;
   justify-content: space-between;

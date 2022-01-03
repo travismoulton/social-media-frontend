@@ -6,6 +6,7 @@ import './App.css';
 import Login from './components/Login/Login';
 import Logout from './components/Logout/Logout';
 import Layout from './components/Layout/Layout';
+import Register from './components/Register/Register';
 import { authSuccess } from './store/authSlice';
 import { appUtils } from './appUtils';
 
@@ -29,6 +30,7 @@ function App() {
     <Switch>
       <Route path="/login" component={Login} />
       <Route path="/logout" component={Logout} />
+      <Route path="/register" component={Register} />
     </Switch>
   );
 

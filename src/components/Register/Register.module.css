@@ -1,0 +1,11 @@
+.Register {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Btn {
+  width: 24.8rem;
+  height: 4rem;
+}
