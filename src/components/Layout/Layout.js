@@ -5,7 +5,9 @@ export default function Layout({ children, isAuthenticated }) {
   return (
     <>
       <NavBar isAuthenticated={isAuthenticated} />
-      <main className={classes.Main}>{children}</main>
+      <main data-testid="main" className={classes.Main}>
+        {children}
+      </main>
     </>
   );
 }
