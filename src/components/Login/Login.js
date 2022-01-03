@@ -112,7 +112,6 @@ export default function Login() {
   async function loginAndUpdateStore() {
     dispatch(authStart());
     const { data } = await login(emailInput.value, passwordInput.value);
-    console.log(data);
 
     // data.data contains the user info
     if (data.status === 'success') dispatch(authSuccess(data.data));
