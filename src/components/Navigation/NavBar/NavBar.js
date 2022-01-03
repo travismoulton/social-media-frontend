@@ -4,7 +4,7 @@ import NavItems from '../NavItems/NavItems';
 export default function NavBar() {
   return (
     <header className={classes.Nav}>
-      <nav className={classes.NavBar}>
+      <nav data-testid="Nav" className={classes.NavBar}>
         <NavItems />
       </nav>
     </header>
