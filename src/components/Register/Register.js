@@ -80,7 +80,7 @@ export default function Login() {
 
   const [error, setError] = useState({
     isError: false,
-    msgJsx: <p style={{ color: 'red' }}></p>,
+    msg: null,
   });
 
   function inputChangedHandler(e, input) {
@@ -136,7 +136,16 @@ export default function Login() {
     );
   }
 
-  function registerHandler() {
+  const passwordsDontMatchError = {
+    isError: true,
+    msg: <p style={{ color: 'red' }}>Passwords do not match</p>,
+  };
+
+  function setErrorMessageFromServer(msg) {
+    setError({ isError: true, msg: <p style={{ color: 'red' }}>{msg}</p> });
+  }
+
+  function checkAllInputsForValues() {
     // If any field is empty, set it as touched to display it in red
     if (!nameInput.value)
       setInputAsTouched(nameInput, setNameInput, 'A username is required');
@@ -154,6 +163,20 @@ export default function Login() {
         setConfirmPasswordInput,
         'Password must be confirmed'
       );
+  }
+
+  function checkPasswordHasEightCharacters() {
+    // Only display password length error if the passwords match and have a value
+    return checkPasswordsMatch() && passwordInput.value.length > 7;
+  }
+
+  const passwordTooShortError = {
+    isError: true,
+    msg: <p style={{ color: 'red' }}>Password must be at least 8 characters</p>,
+  };
+
+  async function registerHandler() {
+    checkAllInputsForValues();
 
     const allFieldsHaveAValue =
       emailInput.valid &&
@@ -161,9 +184,17 @@ export default function Login() {
       nameInput.valid &&
       confirmPasswordInput.valid;
 
-    if (allFieldsHaveAValue && checkPasswordsMatch()) registerAndUpdateStore();
+    if (!checkPasswordsMatch()) setError({ ...passwordsDontMatchError });
 
-    // TODO: Need to set an error message if passwords dont match
+    if (!checkPasswordHasEightCharacters())
+      setError({ ...passwordTooShortError });
+
+    if (
+      allFieldsHaveAValue &&
+      checkPasswordsMatch() &&
+      checkPasswordHasEightCharacters()
+    )
+      await registerAndUpdateStore();
   }
 
   async function registerAndUpdateStore() {
@@ -181,7 +212,7 @@ export default function Login() {
     if (data.status === 'success') dispatch(authSuccess(data.data));
     else if (data.status === 'fail') {
       dispatch(authFail());
-      setError({ ...error, isError: true });
+      setErrorMessageFromServer(data.data.message);
     }
   }
 
