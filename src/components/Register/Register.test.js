@@ -25,7 +25,7 @@ describe('<Register />', () => {
     mockRegister = createSpy(
       utils,
       'register',
-      Promise.resolve({ data: { user: mockUser, status: 'success' } })
+      Promise.resolve({ data: mockUser })
     );
   });
 
@@ -50,19 +50,6 @@ describe('<Register />', () => {
       </Router>
     );
 
-    // fireEvent.change(screen.getByLabelText('Username'), {
-    //   target: { value: 'travis' },
-    // });
-    // fireEvent.change(screen.getByLabelText('Email'), {
-    //   target: { value: 'travis@test.com' },
-    // });
-    // fireEvent.change(screen.getByLabelText('Password'), {
-    //   target: { value: 'pass1234' },
-    // });
-    // fireEvent.change(screen.getByLabelText('Confirm Password'), {
-    //   target: { value: 'pass1234' },
-    // });
-
     updateInput('Username', 'travis');
     updateInput('Email', 'travis@test.com');
     updateInput('Password', 'pass1234');
@@ -70,6 +57,54 @@ describe('<Register />', () => {
 
     fireEvent.click(screen.getByRole('button'));
 
-    await waitFor(() => expect(mockRegister).toBeCalled());
+    await waitFor(() =>
+      expect(mockRegister).toBeCalledWith(
+        expect.objectContaining({
+          email: 'travis@test.com',
+          name: 'travis',
+          password: 'pass1234',
+        })
+      )
+    );
+  });
+
+  test("if passwords don't match, the api is not called and the error is displayed", async () => {
+    customRender(<Register />);
+
+    updateInput('Username', 'travis');
+    updateInput('Email', 'travis@test.com');
+    updateInput('Password', 'pass1234');
+    updateInput('Confirm Password', 'p');
+
+    fireEvent.click(screen.getByRole('button'));
+
+    await waitFor(() => expect(mockRegister).not.toBeCalled());
+
+    const errorMsg = screen.getByText('Password must be at least 8 characters');
+    expect(errorMsg).toBeInTheDocument();
+  });
+
+  test('if an input field is not filled out, the error placeholder is updated', async () => {
+    customRender(<Register />);
+
+    fireEvent.click(screen.getByRole('button'));
+
+    await waitFor(() => expect(mockRegister).not.toBeCalled());
+
+    expect(
+      screen.getByPlaceholderText('A username is required')
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByPlaceholderText('An email is required')
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByPlaceholderText('A Password is required')
+    ).toBeInTheDocument();
+
+    expect(
+      screen.getByPlaceholderText('Password must be confirmed')
+    ).toBeInTheDocument();
   });
 });
