@@ -18,6 +18,15 @@ function updateInput(label, value) {
   fireEvent.change(screen.getByLabelText(label), { target: { value } });
 }
 
+function setup() {
+  const history = createMemoryHistory();
+  customRender(
+    <Router history={history}>
+      <Register />
+    </Router>
+  );
+}
+
 describe('<Register />', () => {
   let mockRegister;
 
@@ -35,7 +44,7 @@ describe('<Register />', () => {
   });
 
   test('renders', () => {
-    customRender(<Register />);
+    setup();
     expect(screen.getByText('Username')).toBeInTheDocument();
     expect(screen.getByText('Email')).toBeInTheDocument();
     expect(screen.getByText('Password')).toBeInTheDocument();
@@ -43,12 +52,7 @@ describe('<Register />', () => {
   });
 
   test('calls the register method when all fields are filled out properly', async () => {
-    const history = createMemoryHistory();
-    customRender(
-      <Router history={history}>
-        <Register />
-      </Router>
-    );
+    setup();
 
     updateInput('Username', 'travis');
     updateInput('Email', 'travis@test.com');
@@ -69,7 +73,7 @@ describe('<Register />', () => {
   });
 
   test("if passwords don't match, the api is not called and the error is displayed", async () => {
-    customRender(<Register />);
+    setup();
 
     updateInput('Username', 'travis');
     updateInput('Email', 'travis@test.com');
@@ -85,7 +89,7 @@ describe('<Register />', () => {
   });
 
   test('if an input field is not filled out, the error placeholder is updated', async () => {
-    customRender(<Register />);
+    setup();
 
     fireEvent.click(screen.getByRole('button'));
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import Input from '../UI/Input/Input';
 import { loginUtils } from './loginUtils';
@@ -134,6 +134,9 @@ export default function Login() {
         >
           Login
         </button>
+        <p>
+          Need an account? <Link to="register">Register</Link>
+        </p>
       </div>
     </>
   );

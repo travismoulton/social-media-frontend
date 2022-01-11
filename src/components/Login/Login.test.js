@@ -14,6 +14,22 @@ import { loginUtils as utils } from './loginUtils';
 
 jest.mock('./loginUtils');
 
+function setup() {
+  const mockState = {
+    auth: { user: {} },
+  };
+
+  const history = createMemoryHistory();
+  customRender(
+    <Router history={history}>
+      <Login />
+    </Router>,
+    { preloadedState: mockState }
+  );
+
+  return history;
+}
+
 describe('<Login />', () => {
   let mockLogin;
   beforeEach(() => {
@@ -26,35 +42,19 @@ describe('<Login />', () => {
   });
 
   test('renders', () => {
-    customRender(<Login />);
+    setup();
 
-    const element = screen.getByText('Email');
-
-    expect(element).toBeInTheDocument();
+    expect(screen.getByText('Email')).toBeInTheDocument();
   });
 
   test('redirects if logged in', () => {
-    const mockState = {
-      auth: { user: {} },
-    };
-
-    const history = createMemoryHistory();
-    customRender(
-      <Router history={history}>
-        <Login />
-      </Router>,
-      { preloadedState: mockState }
-    );
+    const history = setup();
 
     expect(history.location.pathname).toBe('/');
   });
 
   test('makes API call with email and password', async () => {
-    customRender(
-      <Router history={createMemoryHistory()}>
-        <Login />
-      </Router>
-    );
+    setup();
 
     fireEvent.change(screen.getByTestId('email'), {
       target: { value: 'email@email.com' },
@@ -72,7 +72,7 @@ describe('<Login />', () => {
   });
 
   test('If email or password is missing, API is not called', async () => {
-    customRender(<Login />);
+    setup();
 
     expect(
       screen.queryByPlaceholderText('Username is required')
