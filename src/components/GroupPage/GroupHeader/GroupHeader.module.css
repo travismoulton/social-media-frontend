@@ -1,0 +1,10 @@
+.Top {
+  height: 6.4rem;
+  width: 100%;
+  background-color: #0c4b32;
+}
+
+.Bottom {
+  padding: 1rem 20rem 0rem 20rem;
+  display: flex;
+}

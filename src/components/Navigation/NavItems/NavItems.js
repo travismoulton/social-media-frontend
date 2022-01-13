@@ -15,7 +15,7 @@ export default function NavItems() {
           <NavItem link="/">
             <BiHomeSmile />
           </NavItem>
-          <NavItem link="logout">Logout</NavItem>
+          <NavItem link="/logout">Logout</NavItem>
           <GroupDropdown />
           <ShowCreateGroupBtn />
         </>
@@ -24,8 +24,8 @@ export default function NavItems() {
           <NavItem link="/">
             <BiHomeSmile />
           </NavItem>
-          <NavItem link="register">Register</NavItem>
-          <NavItem link="login">Login</NavItem>
+          <NavItem link="/register">Register</NavItem>
+          <NavItem link="/login">Login</NavItem>
         </>
       )}
     </ul>

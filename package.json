@@ -15,7 +15,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.0",
     "react-select": "^5.2.1",
-    "react-transition-group": "^4.4.2"
+    "react-transition-group": "^4.4.2",
+    "slugify": "^1.6.5"
   },
   "scripts": {
     "start": "HTTPS=true SSL_CRT_FILE=../../../localhost.pem SSL_KEY_FILE=../../../localhost-key.pem react-scripts start",

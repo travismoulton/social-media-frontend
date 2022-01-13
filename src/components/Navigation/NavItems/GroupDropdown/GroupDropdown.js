@@ -38,7 +38,7 @@ export default function GroupDropdown() {
       ...dropdown,
       elementConfig: {
         ...dropdown.elementConfig,
-        options: [{ value: 0, label: null }, ...groupsAsOptions],
+        options: [...groupsAsOptions],
       },
     });
   }, [dropdown, groupsAsOptions]);
@@ -50,7 +50,7 @@ export default function GroupDropdown() {
       groupsAsOptions &&
       // The length of the select menu options should be one more than the length of groups,
       // as there is a blank option. This prevents it from being updated more than once
-      dropdown.elementConfig.options.length !== groupsAsOptions.length + 1;
+      dropdown.elementConfig.options.length !== groupsAsOptions.length;
 
     if (shouldUpdateDropdownOptions) setDropdownOptions();
   }, [user, groupsAsOptions, setDropdownOptions, dropdown]);
