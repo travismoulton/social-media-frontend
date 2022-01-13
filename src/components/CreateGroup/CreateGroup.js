@@ -26,6 +26,8 @@ export default function CreateGroup({ show, closeModal }) {
     touched: false,
   });
 
+  const [error, setError] = useState(null);
+
   function setInputAsTouched() {
     setInput({
       ...input,
@@ -48,15 +50,23 @@ export default function CreateGroup({ show, closeModal }) {
     });
   }
 
-  function createGroupHandler() {
+  async function createGroupHandler() {
     if (!input.value) setInputAsTouched();
-    else createGroup(input.value);
+    if (input.value) {
+      const data = await createGroup(input.value);
+
+      if (data.status === 'fail') {
+        setError(
+          <p className={classes.Error}>That group name is already taken</p>
+        );
+      }
+    }
   }
 
   const header = (
     <div className={classes.Header}>
       <p>Create a group</p>
-      <CgClose className={classes.Svg} />
+      <CgClose className={classes.Svg} onClick={closeModal} />
     </div>
   );
 
@@ -101,6 +111,7 @@ export default function CreateGroup({ show, closeModal }) {
           wrapperClass="GroupNameWrapper"
           touched={input.touched}
         />
+        {error}
         {footer}
       </Modal>
     </>

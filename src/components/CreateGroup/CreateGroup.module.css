@@ -41,3 +41,13 @@
   border-top: 1px solid #c6ccd2;
   margin-top: 5rem;
 }
+
+.Error {
+  color: red;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  bottom: 25%;
+  transform: translateX(-50%);
+}

@@ -4,6 +4,8 @@ export const createGroupUtils = {
   createGroup: async function (groupName) {
     const { data } = await axios
       .post('/', { name: groupName })
-      .catch((err) => console.log(err));
+      .catch((err) => err.response);
+
+    return data;
   },
 };
