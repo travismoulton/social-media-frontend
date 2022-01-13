@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import GroupDropdown from './GroupDropdown/GroupDropdown';
 import NavItem from './NavItem/NavItem';
+import ShowCreateGroupBtn from './ShowCreateGroupBtn/ShowCreateGroupBtn';
 import classes from './NavItems.module.css';
 
 export default function NavItems() {
@@ -16,6 +17,7 @@ export default function NavItems() {
           </NavItem>
           <NavItem link="logout">Logout</NavItem>
           <GroupDropdown />
+          <ShowCreateGroupBtn />
         </>
       ) : (
         <>

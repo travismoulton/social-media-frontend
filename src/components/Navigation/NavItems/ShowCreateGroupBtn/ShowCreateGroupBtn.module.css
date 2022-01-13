@@ -1,0 +1,12 @@
+.Link {
+  color: #000;
+  text-decoration: none;
+  font-size: 1.6rem;
+}
+
+.Link:hover {
+  columns: var(--color-white);
+  border-bottom: 1px solid;
+  padding-bottom: 0.1rem;
+  cursor: pointer;
+}

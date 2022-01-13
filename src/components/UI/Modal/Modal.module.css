@@ -2,11 +2,11 @@
   position: fixed;
   z-index: 500;
   background-color: #fff;
-  width: 50%;
+  width: 30%;
   border: 1px solid #ccc;
   box-shadow: 1px 1px 1px #000;
-  padding: 1.6rem;
-  left: 25%;
+
+  left: 35%;
   top: 30%;
   box-sizing: border-box;
   transition: all 0.3s ease-out;

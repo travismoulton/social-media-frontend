@@ -3,7 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 
 import './modal.css';
 import classes from './Modal.module.css';
-import Backdrop from '../Input/Backdrop/Backdrop';
+import Backdrop from '../Backdrop/Backdrop';
 
 export default function Modal(props) {
   const { show, modalClosed, children, testId } = props;

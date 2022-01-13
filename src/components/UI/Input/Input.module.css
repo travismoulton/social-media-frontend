@@ -39,7 +39,8 @@
 }
 
 .LoginInputWrapper,
-.RegisterInputWrapper {
+.RegisterInputWrapper,
+.GroupNameWrapper {
   width: 35rem;
   display: flex;
   justify-content: space-between;

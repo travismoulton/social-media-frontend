@@ -39,3 +39,21 @@ body {
   background-color: var(--color-dark-blue-hover);
   cursor: pointer;
 }
+
+.Global-btn-2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: unset;
+  line-height: 1.8rem;
+  background-color: transparent;
+  border-radius: 99rem;
+  padding: 0 1.6rem;
+  transition: color 0.1s ease-in;
+  color: var(--color-dark-blue);
+  border-color: var(--color-dark-blue);
+}
+
+.Global-btn-2:hover {
+  cursor: pointer;
+  background-color: rgba(0, 121, 211, 0.04);
+}
