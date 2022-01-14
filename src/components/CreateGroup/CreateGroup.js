@@ -1,15 +1,22 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { CgClose } from 'react-icons/cg';
+import { useHistory } from 'react-router-dom';
+import slugify from 'slugify';
 
 import Input from '../UI/Input/Input';
 import Modal from '../UI/Modal/Modal';
 import classes from './CreateGroup.module.css';
 import checkValidityHandler from '../../shared/checkValidityHandler';
 import { createGroupUtils } from './createGroupUtils';
+import { addGroupMembership } from '../../store/authSlice';
 
 const { createGroup } = createGroupUtils;
 
 export default function CreateGroup({ show, closeModal }) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const [nameInput, setNameInput] = useState({
     elementType: 'input',
     elementConfig: {
@@ -72,21 +79,27 @@ export default function CreateGroup({ show, closeModal }) {
   }
 
   async function createGroupHandler() {
-    if (!nameInput.value) setInputAsTouched();
+    if (!nameInput.value) {
+      setInputAsTouched();
+      return;
+    }
 
     const groupData = {
       name: nameInput.value,
       description: descriptionInput.value,
     };
 
-    if (nameInput.value) {
-      const data = await createGroup(groupData);
+    const data = await createGroup(groupData);
+    const { data: group } = data;
 
-      if (data.status === 'fail') {
-        setError(
-          <p className={classes.Error}>That group name is already taken</p>
-        );
-      }
+    if (data.status === 'fail') {
+      setError(
+        <p className={classes.Error}>That group name is already taken</p>
+      );
+    } else if (data.status === 'success') {
+      dispatch(addGroupMembership(group._id));
+      closeModal();
+      history.push(`/group/${slugify(group.name)}`, { groupId: group._id });
     }
   }
 
