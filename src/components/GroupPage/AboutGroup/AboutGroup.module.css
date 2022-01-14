@@ -1,0 +1,17 @@
+.Container {
+  border: 1px solid #eee;
+  position: absolute;
+  right: 15%;
+}
+
+.Banner {
+  background-color: #0c4b32;
+}
+
+.Banner p {
+  margin: 0;
+  padding: 2rem;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: #fff;
+}

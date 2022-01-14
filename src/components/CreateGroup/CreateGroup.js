@@ -10,7 +10,7 @@ import { createGroupUtils } from './createGroupUtils';
 const { createGroup } = createGroupUtils;
 
 export default function CreateGroup({ show, closeModal }) {
-  const [input, setInput] = useState({
+  const [nameInput, setNameInput] = useState({
     elementType: 'input',
     elementConfig: {
       type: 'text',
@@ -19,6 +19,22 @@ export default function CreateGroup({ show, closeModal }) {
     value: '',
     label: 'Group Name',
     id: 'groupName',
+    valid: false,
+    validation: {
+      required: true,
+    },
+    touched: false,
+  });
+
+  const [descriptionInput, setDescriptionInput] = useState({
+    elementType: 'input',
+    elementConfig: {
+      type: 'textarea',
+      placeholder: 'A short description about this group',
+    },
+    value: '',
+    label: 'Describe your group',
+    id: 'groupDescription',
     valid: false,
     validation: {
       required: true,
@@ -51,8 +67,8 @@ export default function CreateGroup({ show, closeModal }) {
   }
 
   async function createGroupHandler() {
-    if (!input.value) setInputAsTouched();
-    if (input.value) {
+    if (!nameInput.value) setInputAsTouched();
+    if (nameInput.value) {
       const data = await createGroup(input.value);
 
       if (data.status === 'fail') {
