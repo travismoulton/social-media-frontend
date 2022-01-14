@@ -46,10 +46,34 @@ const authSlice = createSlice({
       state.user = null;
       state.inAuth = false;
     },
+
+    removeUserMembership: (state, action) => {
+      const groupId = action.payload;
+      const { groupMemberships: memberships } = state.user;
+      const groupIndex = memberships.indexOf(groupId);
+
+      const updatedMemberships = memberships
+        .splice(0, groupIndex)
+        .concat(memberships.splice(groupIndex + 1));
+
+      state.user.groupMemberships = updatedMemberships;
+    },
+
+    addGroupMembership: (state, action) => {
+      const groupId = action.payload;
+      state.user.groupMemberships.push(groupId);
+    },
   },
 });
 
 export default authSlice.reducer;
 
-export const { authStart, authSuccess, authFail, authLogout, authReset } =
-  authSlice.actions;
+export const {
+  authStart,
+  authSuccess,
+  authFail,
+  authLogout,
+  authReset,
+  removeUserMembership,
+  addGroupMembership,
+} = authSlice.actions;

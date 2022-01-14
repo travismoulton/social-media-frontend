@@ -7,4 +7,9 @@
 .Bottom {
   padding: 1rem 20rem 0rem 20rem;
   display: flex;
+  align-items: center;
+}
+
+.Bottom h1 {
+  margin: 0;
 }
