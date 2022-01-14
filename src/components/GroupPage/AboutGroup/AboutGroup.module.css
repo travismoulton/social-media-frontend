@@ -2,6 +2,8 @@
   border: 1px solid #eee;
   position: absolute;
   right: 15%;
+  width: 30rem;
+  border-radius: 3px;
 }
 
 .Banner {
@@ -14,4 +16,14 @@
   font-size: 1.6rem;
   text-transform: uppercase;
   color: #fff;
+}
+
+.InnerWrapper,
+.BtnAndDateWrapper {
+  padding: 1rem;
+}
+
+.InnerWrapper {
+  font-size: 1.4rem;
+  line-height: 2.1rem;
 }

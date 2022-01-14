@@ -12,14 +12,16 @@ export default function GroupPage() {
   const [group, setGroup] = useState(null);
 
   useEffect(() => {
-    (async () => {
-      const groupId = history.location.state.groupId;
-      const {
-        data: { Group },
-      } = await fetchGroup(groupId);
+    const groupId = history.location.state.groupId;
 
-      setGroup(Group);
-    })();
+    if (!group || group._id !== groupId)
+      (async () => {
+        const {
+          data: { Group },
+        } = await fetchGroup(groupId);
+
+        setGroup(Group);
+      })();
   }, [group, history]);
 
   return (
