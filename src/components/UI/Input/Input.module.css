@@ -24,7 +24,8 @@
   font-size: 2rem;
 }
 
-.TextInput::placeholder {
+.TextInput::placeholder,
+.GroupDescription::placeholder {
   color: #4d4d4d;
   font-size: 1.6rem;
 }
@@ -34,16 +35,35 @@
   color: #000;
 }
 
-.TextInput:focus {
+.TextInput:focus,
+.GroupDescription:focus {
   outline: none;
 }
 
 .LoginInputWrapper,
 .RegisterInputWrapper,
-.GroupNameWrapper {
+.GroupNameWrapper,
+.GroupDescriptionWrapper {
   width: 35rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto 1.5rem auto;
+}
+
+.GroupNameWrapper {
+  width: 70%;
+}
+
+.GroupDescriptionWrapper {
+  margin: 0 auto;
+  width: 70%;
+}
+
+.GroupDescription {
+  width: 100%;
+  height: 15rem;
+  padding: 0.2rem;
+  border: 2px solid #eee;
+  border-radius: 5px;
 }

@@ -58,6 +58,25 @@ export default function Input(props) {
       );
 
       break;
+
+    case 'textarea':
+      inputElement = (
+        <div className={classes[wrapperClass]} style={{ position: 'relative' }}>
+          {label && <label>{label}</label>}
+          <textarea
+            {...elementConfig}
+            value={value}
+            onChange={changed}
+            autoComplete="false"
+            className={inputClasses.join(' ')}
+            data-testid={id}
+            rows="4"
+            cols="32"
+            maxLength="128"
+          ></textarea>
+        </div>
+      );
+      break;
     default:
       inputElement = <p>Something went wrong</p>;
   }

@@ -24,52 +24,63 @@ export default function CreateGroup({ show, closeModal }) {
       required: true,
     },
     touched: false,
+    wrapperClass: 'GroupNameWrapper',
   });
 
   const [descriptionInput, setDescriptionInput] = useState({
-    elementType: 'input',
+    elementType: 'textarea',
     elementConfig: {
-      type: 'textarea',
       placeholder: 'A short description about this group',
     },
     value: '',
-    label: 'Describe your group',
+
     id: 'groupDescription',
     valid: false,
     validation: {
-      required: true,
+      required: false,
     },
     touched: false,
+    wrapperClass: 'GroupDescriptionWrapper',
+    className: 'GroupDescription',
   });
 
   const [error, setError] = useState(null);
 
   function setInputAsTouched() {
-    setInput({
-      ...input,
+    setNameInput({
+      ...nameInput,
       touched: true,
       elementConfig: {
-        ...input.elementConfig,
+        ...nameInput.elementConfig,
         placeholder: 'Group name is required',
       },
     });
   }
 
-  function inputChangedHandler(e) {
+  function inputChangedHandler(e, input) {
     const { value } = e.target;
 
-    setInput({
+    const updatedInput = {
       ...input,
       value,
-      touched: true,
       valid: checkValidityHandler(value, input.validation),
-    });
+      touched: true,
+    };
+
+    if (input.id === 'groupName') setNameInput(updatedInput);
+    if (input.id === 'groupDescription') setDescriptionInput(updatedInput);
   }
 
   async function createGroupHandler() {
     if (!nameInput.value) setInputAsTouched();
+
+    const groupData = {
+      name: nameInput.value,
+      description: descriptionInput.value,
+    };
+
     if (nameInput.value) {
-      const data = await createGroup(input.value);
+      const data = await createGroup(groupData);
 
       if (data.status === 'fail') {
         setError(
@@ -111,22 +122,35 @@ export default function CreateGroup({ show, closeModal }) {
     </div>
   );
 
+  const form = [nameInput, descriptionInput].map((el) => (
+    <Input
+      elementConfig={el.elementConfig}
+      elementType={el.elementType}
+      value={el.value}
+      label={el.label}
+      id={el.id}
+      invalid={!el.valid}
+      required
+      changed={(e) => inputChangedHandler(e, el)}
+      wrapperClass={el.wrapperClass}
+      touched={el.touched}
+      key={el.id}
+      className={el.className}
+    />
+  ));
+
+  const textAreaCharCounter = (
+    <p className={classes.CharCounter}>
+      {128 - descriptionInput.value.length} charachters remaining
+    </p>
+  );
+
   return (
     <>
       <Modal show={show} modalClosed={closeModal}>
         {header}
-        <Input
-          elementConfig={input.elementConfig}
-          elementType={input.elementType}
-          value={input.value}
-          label={input.label}
-          id={input.id}
-          invalid={!input.valid}
-          required
-          changed={inputChangedHandler}
-          wrapperClass="GroupNameWrapper"
-          touched={input.touched}
-        />
+        {form}
+        {textAreaCharCounter}
         {error}
         {footer}
       </Modal>

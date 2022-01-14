@@ -1,9 +1,9 @@
 import axios from '../../shared/axiosInstances/groups';
 
 export const createGroupUtils = {
-  createGroup: async function (groupName) {
+  createGroup: async function (groupData) {
     const { data } = await axios
-      .post('/', { name: groupName })
+      .post('/', groupData)
       .catch((err) => err.response);
 
     return data;
