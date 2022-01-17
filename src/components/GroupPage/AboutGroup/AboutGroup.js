@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+import slugify from 'slugify';
 
 import classes from './AboutGroup.module.css';
 
-export default function AboutGroup({ group }) {
+export default function AboutGroup({ group, top, inPostCreation }) {
   const months = [
     'Jan',
     'Feb',
@@ -29,7 +30,7 @@ export default function AboutGroup({ group }) {
   formatGroupDateStr();
 
   return (
-    <div className={classes.Container}>
+    <div className={classes.Container} style={{ top: top }}>
       <div className={classes.Banner}>
         <p>About {group.name}</p>
       </div>
@@ -42,7 +43,13 @@ export default function AboutGroup({ group }) {
       <div className={classes.BtnAndDateWrapper}>
         <p>{formatGroupDateStr()}</p>
         <div className={`Global-btn-1 ${classes.CreatePostBtn}`}>
-          <Link className={classes.Link} to="/createPost">
+          <Link
+            className={classes.Link}
+            to={{
+              pathname: `/group/${slugify(group.name)}/createThread`,
+              state: { group },
+            }}
+          >
             Create Post
           </Link>
         </div>

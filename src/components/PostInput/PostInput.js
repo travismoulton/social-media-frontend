@@ -4,18 +4,19 @@ import { useHistory } from 'react-router-dom';
 import Input from '../UI/Input/Input';
 import checkValidityHandler from '../../shared/checkValidityHandler';
 
-export default function CreatePost() {
+export default function PostInput({ postContent, setPostContent }) {
   const history = useHistory();
 
   const [contentInput, setContentInput] = useState({
     elementType: 'textarea',
     elementConfig: { placeholder: 'Say something...' },
-    value: '',
+    value: postContent || '',
     id: 'createPost',
     valid: false,
     validation: { required: true },
     touched: false,
-    wrapperClass: 'CreaetPostWrapper',
+    wrapperClass: 'PostInputWrapper',
+    className: 'PostInput',
   });
 
   function setInputAsTouched(input, setStateFn) {
@@ -32,7 +33,10 @@ export default function CreatePost() {
       touched: true,
     };
 
-    if (input.id === 'createPost') setContentInput(updatedInput);
+    if (input.id === 'createPost') {
+      setContentInput(updatedInput);
+      setPostContent(value);
+    }
   }
 
   const form = [contentInput].map((el) => (
@@ -46,7 +50,8 @@ export default function CreatePost() {
       touched={el.touched}
       key={el.id}
       wrapperClass={el.wrapperClass}
-      changed={inputChangedHandler}
+      changed={(e) => inputChangedHandler(e, el)}
+      className={el.className}
     />
   ));
 
