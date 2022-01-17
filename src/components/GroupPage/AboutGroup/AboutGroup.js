@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import classes from './AboutGroup.module.css';
 
 export default function AboutGroup({ group }) {
@@ -12,7 +14,11 @@ export default function AboutGroup({ group }) {
       </div>
       <div className={classes.BtnAndDateWrapper}>
         <p>created at...</p>
-        <button>Create Post</button>
+        <div className={`Global-btn-1 ${classes.CreatePostBtn}`}>
+          <Link className={classes.Link} to="/createPost">
+            Create Post
+          </Link>
+        </div>
       </div>
     </div>
   );

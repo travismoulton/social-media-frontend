@@ -8,6 +8,7 @@ import Logout from './components/Logout/Logout';
 import Layout from './components/Layout/Layout';
 import Register from './components/Register/Register';
 import GroupPage from './components/GroupPage/GroupPage';
+import CreatePost from './components/CreatePost/CreatePost';
 
 import { authSuccess } from './store/authSlice';
 import { appUtils } from './appUtils';
@@ -33,6 +34,7 @@ function App() {
       <Route path="/logout" component={Logout} />
       <Route path="/register" component={Register} />
       <Route path="/group/:groupName" component={GroupPage} />
+      <Route path="/createPost" component={CreatePost} />
     </Switch>
   );
 
