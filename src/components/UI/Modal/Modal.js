@@ -1,16 +1,26 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import reactDom from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 
 import './modal.css';
 import classes from './Modal.module.css';
 import Backdrop from '../Backdrop/Backdrop';
 
+const modalContainer = document.getElementById('modalContainer');
+
 export default function Modal(props) {
   const { show, modalClosed, children, testId } = props;
+  const portalRef = useRef(document.createElement('div'));
+
+  console.log(portalRef.current);
 
   const nodeRef = useRef(null);
 
-  return (
+  useEffect(() => {
+    modalContainer.appendChild(portalRef.current);
+  }, []);
+
+  const render = (
     <>
       <Backdrop show={show} clicked={modalClosed} />
       <CSSTransition
@@ -31,4 +41,6 @@ export default function Modal(props) {
       </CSSTransition>
     </>
   );
+
+  return reactDom.createPortal(render, portalRef.current);
 }

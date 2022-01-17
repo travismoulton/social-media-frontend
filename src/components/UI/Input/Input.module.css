@@ -56,7 +56,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: -1;
 }
 
 .ThreadTitleInput {
@@ -74,7 +73,6 @@
 
 .PostInputWrapper {
   width: 50%;
-  z-index: -1;
 }
 
 .GroupDescription,
