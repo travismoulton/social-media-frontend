@@ -2,6 +2,8 @@
   border: 1px solid #eee;
   position: absolute;
   right: 15%;
+  width: 30rem;
+  border-radius: 3px;
 }
 
 .Banner {
@@ -16,6 +18,7 @@
   color: #fff;
 }
 
+<<<<<<< HEAD
 .CreatePostBtn {
   width: 12.5rem;
   height: 2.5rem;
@@ -28,4 +31,14 @@
 .Link {
   text-decoration: none;
   color: #fff;
+=======
+.InnerWrapper,
+.BtnAndDateWrapper {
+  padding: 1rem;
+}
+
+.InnerWrapper {
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+>>>>>>> GroupPage
 }
