@@ -6,9 +6,9 @@ import './modal.css';
 import classes from './Modal.module.css';
 import Backdrop from '../Backdrop/Backdrop';
 
-const modalContainer = document.getElementById('modalContainer');
-
 export default function Modal(props) {
+  const modalContainer = document.getElementById('modalContainer');
+
   const { show, modalClosed, children, testId } = props;
   const portalRef = useRef(document.createElement('div'));
 

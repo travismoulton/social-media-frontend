@@ -20,7 +20,10 @@ describe('<CreateGroup />', () => {
     const portalRoot = document.createElement('div');
     portalRoot.setAttribute('id', 'modalContainer');
     document.body.appendChild(portalRoot);
-    customRender(<CreateGroup />);
+
+    const props = { show: true, closeModal: jest.fn() };
+
+    customRender(<CreateGroup {...props} />);
   }
 
   test('renders', () => {

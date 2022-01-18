@@ -4,37 +4,37 @@ import { customRender, screen } from '../../../shared/testUtils';
 import NavItems from './NavItems';
 
 describe('<NavItems />', () => {
-  test('renders', () => {
-    customRender(
-      <MemoryRouter>
-        <NavItems />
-      </MemoryRouter>
-    );
-
-    expect(screen.getByTestId('NavItems')).toBeInTheDocument();
-  });
-
-  test('renders with 3 children if user is logged in', () => {
+  function setup(withState) {
     const preloadedState = {
       auth: { user: {} },
     };
+
+    const portalRoot = document.createElement('div');
+    portalRoot.setAttribute('id', 'modalContainer');
+    document.body.appendChild(portalRoot);
 
     customRender(
       <MemoryRouter>
         <NavItems />
       </MemoryRouter>,
-      { preloadedState }
+      withState && { preloadedState }
     );
+  }
 
-    expect(screen.getByTestId('NavItems').childNodes).toHaveLength(3);
+  test('renders', () => {
+    setup(false);
+
+    expect(screen.getByTestId('NavItems')).toBeInTheDocument();
+  });
+
+  test('renders with 3 children if user is logged in', () => {
+    setup(true);
+
+    expect(screen.getByTestId('NavItems').childNodes).toHaveLength(4);
   });
 
   test('renders with 2 children if no user', () => {
-    customRender(
-      <MemoryRouter>
-        <NavItems />
-      </MemoryRouter>
-    );
+    setup(false);
 
     expect(screen.getByTestId('NavItems').childNodes).toHaveLength(3);
   });
