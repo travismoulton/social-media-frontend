@@ -12,15 +12,13 @@ export default function Modal(props) {
   const { show, modalClosed, children, testId } = props;
   const portalRef = useRef(document.createElement('div'));
 
-  console.log(portalRef.current);
-
   const nodeRef = useRef(null);
 
   useEffect(() => {
     modalContainer.appendChild(portalRef.current);
   }, []);
 
-  const render = (
+  const component = (
     <>
       <Backdrop show={show} clicked={modalClosed} />
       <CSSTransition
@@ -42,5 +40,5 @@ export default function Modal(props) {
     </>
   );
 
-  return reactDom.createPortal(render, portalRef.current);
+  return reactDom.createPortal(component, portalRef.current);
 }

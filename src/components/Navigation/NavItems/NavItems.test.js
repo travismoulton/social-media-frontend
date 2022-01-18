@@ -36,6 +36,6 @@ describe('<NavItems />', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByTestId('NavItems').childNodes).toHaveLength(2);
+    expect(screen.getByTestId('NavItems').childNodes).toHaveLength(3);
   });
 });

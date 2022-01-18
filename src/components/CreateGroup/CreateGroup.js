@@ -73,7 +73,7 @@ export default function CreateGroup({ show, closeModal }) {
       setNameInput({
         ...nameInput,
         touched: true,
-        inputError: 'Group name is required',
+        errorMsg: 'Group name is required',
       });
       return;
     }
