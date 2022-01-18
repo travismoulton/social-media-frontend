@@ -12,8 +12,7 @@
 
 /* Why does this need to repeat properties from TextInput? */
 .Invalid {
-  border: 2px solid var(--color-red);
-  background-color: #fda49a;
+  border: 1px solid red;
 }
 
 .InputAsteric {
@@ -30,11 +29,6 @@
   font-size: 1.6rem;
 }
 
-.Invalid::placeholder {
-  font-weight: 700;
-  color: #000;
-}
-
 .TextInput:focus,
 .GroupDescription:focus {
   outline: none;
@@ -48,7 +42,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto 1.5rem auto;
+  margin: 0 auto 2.5rem auto;
 }
 
 .ThreadTitleWrapper {
@@ -82,4 +76,22 @@
   padding: 0.2rem;
   border: 2px solid #eee;
   border-radius: 5px;
+}
+
+/* .InputError {
+  color: red;
+  text-align: right;
+  margin-right: 15%;
+  margin-top: -1.4rem;
+  margin-bottom: 1.4rem;
+  justify-self: flex-end;
+  align-self: flex-end;
+} */
+
+.InputError {
+  position: absolute;
+  right: 0;
+  bottom: -2rem;
+  margin: 0;
+  color: red;
 }

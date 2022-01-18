@@ -28,6 +28,7 @@ export default function Login() {
       required: true,
     },
     touched: false,
+    errorMsg: '',
   });
 
   const [nameInput, setNameInput] = useState({
@@ -44,6 +45,7 @@ export default function Login() {
       required: true,
     },
     touched: false,
+    errorMsg: '',
   });
 
   const [passwordInput, setPasswordInput] = useState({
@@ -60,6 +62,7 @@ export default function Login() {
       required: true,
     },
     touched: false,
+    errorMsg: '',
   });
 
   const [confirmPasswordInput, setConfirmPasswordInput] = useState({
@@ -76,6 +79,7 @@ export default function Login() {
       required: true,
     },
     touched: false,
+    errorMsg: '',
   });
 
   const [error, setError] = useState({
@@ -113,21 +117,15 @@ export default function Login() {
         required={el.validation.required}
         invalid={!el.valid}
         touched={el.touched}
+        errorMsg={el.errorMsg}
       />
     )
   );
 
   // If on clicking the register button, any of the input fields is empty, set touched
   // to true so the Input component will render it with the proper styles
-  function setInputAsTouched(input, setStateFn, placeholderText) {
-    setStateFn({
-      ...input,
-      touched: true,
-      elementConfig: {
-        ...input.elementConfig,
-        placeholder: placeholderText,
-      },
-    });
+  function setInputAsTouched(input, setStateFn) {
+    setStateFn({ ...input, touched: true, errorMsg: 'Required Field' });
   }
 
   function checkPasswordsMatch() {
@@ -147,22 +145,12 @@ export default function Login() {
 
   function checkAllInputsForValues() {
     // If any field is empty, set it as touched to display it in red
-    if (!nameInput.value)
-      setInputAsTouched(nameInput, setNameInput, 'A username is required');
-    if (!emailInput.value)
-      setInputAsTouched(emailInput, setEmailInput, 'An email is required');
+    if (!nameInput.value) setInputAsTouched(nameInput, setNameInput);
+    if (!emailInput.value) setInputAsTouched(emailInput, setEmailInput);
     if (!passwordInput.value)
-      setInputAsTouched(
-        passwordInput,
-        setPasswordInput,
-        'A Password is required'
-      );
+      setInputAsTouched(passwordInput, setPasswordInput);
     if (!confirmPasswordInput.value)
-      setInputAsTouched(
-        confirmPasswordInput,
-        setConfirmPasswordInput,
-        'Password must be confirmed'
-      );
+      setInputAsTouched(confirmPasswordInput, setConfirmPasswordInput);
   }
 
   function checkPasswordHasEightCharacters() {

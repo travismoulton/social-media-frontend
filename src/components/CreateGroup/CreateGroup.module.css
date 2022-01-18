@@ -48,7 +48,7 @@
   justify-content: center;
   position: absolute;
   left: 50%;
-  bottom: 25%;
+  bottom: 15%;
   transform: translateX(-50%);
 }
 
@@ -56,4 +56,11 @@
   width: 70%;
   display: flex;
   margin: 0 auto;
+}
+
+.InputError {
+  text-align: right;
+  margin-right: 15%;
+  margin-bottom: 0.3rem;
+  color: red;
 }

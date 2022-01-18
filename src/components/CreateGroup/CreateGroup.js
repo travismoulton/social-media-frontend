@@ -32,6 +32,7 @@ export default function CreateGroup({ show, closeModal }) {
     },
     touched: false,
     wrapperClass: 'GroupNameWrapper',
+    errorMsg: '',
   });
 
   const [descriptionInput, setDescriptionInput] = useState({
@@ -53,17 +54,6 @@ export default function CreateGroup({ show, closeModal }) {
 
   const [error, setError] = useState(null);
 
-  function setInputAsTouched() {
-    setNameInput({
-      ...nameInput,
-      touched: true,
-      elementConfig: {
-        ...nameInput.elementConfig,
-        placeholder: 'Group name is required',
-      },
-    });
-  }
-
   function inputChangedHandler(e, input) {
     const { value } = e.target;
 
@@ -80,7 +70,11 @@ export default function CreateGroup({ show, closeModal }) {
 
   async function createGroupHandler() {
     if (!nameInput.value) {
-      setInputAsTouched();
+      setNameInput({
+        ...nameInput,
+        touched: true,
+        inputError: 'Group name is required',
+      });
       return;
     }
 
@@ -149,6 +143,7 @@ export default function CreateGroup({ show, closeModal }) {
       touched={el.touched}
       key={el.id}
       className={el.className}
+      errorMsg={el.errorMsg}
     />
   ));
 

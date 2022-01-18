@@ -28,6 +28,7 @@ export default function Login() {
       required: true,
     },
     touched: false,
+    errorMsg: '',
   });
 
   const [passwordInput, setPasswordInput] = useState({
@@ -44,6 +45,7 @@ export default function Login() {
       required: true,
     },
     touched: false,
+    errorMsg: '',
   });
 
   const [error, setError] = useState({
@@ -78,6 +80,7 @@ export default function Login() {
       required={el.validation.required}
       invalid={!el.valid}
       touched={el.touched}
+      errorMsg={el.errorMsg}
     />
   ));
 
@@ -86,19 +89,13 @@ export default function Login() {
       setEmailInput({
         ...emailInput,
         touched: true,
-        elementConfig: {
-          ...emailInput.elementConfig,
-          placeholder: 'Username is required',
-        },
+        errorMsg: 'Email is required',
       });
     if (input.id === 'password')
       setPasswordInput({
         ...passwordInput,
         touched: true,
-        elementConfig: {
-          ...passwordInput.elementConfig,
-          placeholder: 'Password is required ',
-        },
+        errorMsg: 'Password is required',
       });
   }
 

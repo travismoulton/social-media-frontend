@@ -17,6 +17,7 @@ export default function Input(props) {
     invalid,
     touched,
     required,
+    errorMsg,
   } = props;
 
   const inputClasses = [classes[className] || className];
@@ -41,6 +42,7 @@ export default function Input(props) {
             data-testid={id}
           />
           {required && <span className={classes.InputAsteric}>*</span>}
+          {errorMsg && <p className={classes.InputError}>{errorMsg}</p>}
         </div>
       );
       break;
