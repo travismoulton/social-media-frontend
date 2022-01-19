@@ -15,7 +15,10 @@ export default function SubmitThreadBtn(props) {
   async function submitHandler() {
     if (!title) setTitleTouched();
     if (!postContent) setPostContentTouched();
-    if (title && postContent) await createThread(groupId, title, postContent);
+    if (title && postContent) {
+      const { data: thread } = await createThread(groupId, title, postContent);
+      console.log(thread);
+    }
   }
 
   return (
