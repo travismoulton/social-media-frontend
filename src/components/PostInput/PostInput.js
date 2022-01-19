@@ -4,7 +4,14 @@ import { useHistory } from 'react-router-dom';
 import Input from '../UI/Input/Input';
 import checkValidityHandler from '../../shared/checkValidityHandler';
 
-export default function PostInput({ postContent, setPostContent }) {
+export default function PostInput(props) {
+  const {
+    postContent,
+    setPostContent,
+    shouldSetPostContentTouched,
+    setPostContentTouched,
+  } = props;
+
   const history = useHistory();
 
   const [contentInput, setContentInput] = useState({
@@ -17,11 +24,22 @@ export default function PostInput({ postContent, setPostContent }) {
     touched: false,
     wrapperClass: 'PostInputWrapper',
     className: 'PostInput',
+    errorMsg: '',
   });
 
-  function setInputAsTouched(input, setStateFn) {
-    setStateFn({ ...input, touched: true });
-  }
+  // When the Create Thread button is clicked, if there is no post content, a flag will be sent from
+  // CreateThread to mark the input as touched and display the error message
+  useEffect(() => {
+    if (shouldSetPostContentTouched) {
+      setContentInput({
+        ...contentInput,
+        touched: true,
+        errorMsg: 'Post can not be empty',
+      });
+
+      setPostContentTouched();
+    }
+  }, [contentInput, shouldSetPostContentTouched, setPostContentTouched]);
 
   function inputChangedHandler(e, input) {
     const { value } = e.target;
@@ -45,13 +63,14 @@ export default function PostInput({ postContent, setPostContent }) {
       elementConfig={el.elementConfig}
       value={el.value}
       id={el.id}
-      valid={el.valid}
+      invalid={!el.valid}
       required={el.validation.required}
       touched={el.touched}
       key={el.id}
       wrapperClass={el.wrapperClass}
       changed={(e) => inputChangedHandler(e, el)}
       className={el.className}
+      errorMsg={el.errorMsg}
     />
   ));
 

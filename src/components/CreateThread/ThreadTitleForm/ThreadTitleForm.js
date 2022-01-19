@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Input from '../../UI/Input/Input';
 import checkValidityHandler from '../../../shared/checkValidityHandler';
 
-export default function ThreadTitleForm({ title, setTitle }) {
+export default function ThreadTitleForm(props) {
+  const { title, setTitle, shouldSetTitleTouched, setTitleTouched } = props;
+
   const [input, setInput] = useState({
     elementType: 'input',
     elementConfig: {
@@ -17,11 +19,17 @@ export default function ThreadTitleForm({ title, setTitle }) {
     touched: false,
     wrapperClass: 'ThreadTitleWrapper',
     className: 'ThreadTitleInput',
+    errorMsg: '',
   });
 
-  function setInputAsTouched() {
-    setInput({ ...input, touched: true });
-  }
+  // When the Create Thread button is clicked, if there is no title, a flag will be sent from
+  // CreateThread to mark the input as touched and display the error message
+  useEffect(() => {
+    if (shouldSetTitleTouched) {
+      setInput({ ...input, touched: true, errorMsg: 'Title is required' });
+      setTitleTouched();
+    }
+  }, [setTitleTouched, shouldSetTitleTouched, input]);
 
   function inputChangedHandler(e) {
     const { value } = e.target;
@@ -49,6 +57,7 @@ export default function ThreadTitleForm({ title, setTitle }) {
       touched={input.touched}
       invalid={!input.valid}
       required={true}
+      errorMsg={input.errorMsg}
     />
   );
 }

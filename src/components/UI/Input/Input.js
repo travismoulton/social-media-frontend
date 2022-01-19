@@ -76,6 +76,7 @@ export default function Input(props) {
             cols="32"
             maxLength="128"
           ></textarea>
+          {errorMsg && <p className={classes.InputError}>{errorMsg}</p>}
         </div>
       );
       break;
