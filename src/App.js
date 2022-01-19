@@ -8,6 +8,7 @@ import Logout from './components/Logout/Logout';
 import Layout from './components/Layout/Layout';
 import Register from './components/Register/Register';
 import GroupPage from './components/GroupPage/GroupPage';
+import Thread from './components/Thread/Thread';
 import CreateThread from './components/CreateThread/CreateThread';
 
 import { authSuccess } from './store/authSlice';
@@ -35,6 +36,7 @@ function App() {
       <Route path="/register" component={Register} />
       <Route path="/group/:groupName/createThread" component={CreateThread} />
       <Route path="/group/:groupName" component={GroupPage} />
+      <Route path="/thread/:threadName" component={Thread} />
     </Switch>
   );
 

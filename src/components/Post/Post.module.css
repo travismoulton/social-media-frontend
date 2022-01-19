@@ -1,0 +1,13 @@
+.Post {
+  margin: 1rem;
+  border: 1px solid #000;
+}
+
+.PostHeader {
+  padding: 0.3rem 3rem;
+  margin-bottom: 1.2rem;
+}
+
+.PostContent {
+  padding: 0.3rem 3.3rem;
+}
