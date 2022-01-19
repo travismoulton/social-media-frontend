@@ -2,6 +2,7 @@ import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 
 import { groupPageUtils as utils } from './groupPageUtils';
+
 import {
   customRender,
   screen,
@@ -11,6 +12,7 @@ import {
 import GroupPage from './GroupPage';
 
 jest.mock('./groupPageUtils');
+jest.mock('./GroupHeader/MembershipBtn/membershipBtnUtils');
 
 describe('<GroupPage />', () => {
   async function setup() {
@@ -29,8 +31,6 @@ describe('<GroupPage />', () => {
     );
   }
 
-  let mockFetchGroup;
-
   const date = Date.now();
   const mockGroup = {
     name: 'fake group',
@@ -39,6 +39,8 @@ describe('<GroupPage />', () => {
     memberCount: 10,
     _id: 'groupId',
   };
+
+  let mockFetchGroup;
 
   beforeEach(() => {
     mockFetchGroup = createSpy(
@@ -53,7 +55,7 @@ describe('<GroupPage />', () => {
     mockFetchGroup = null;
   });
 
-  test('renders', async () => {
+  test('renders and sets the group on the intial setState call', async () => {
     await waitFor(() => setup());
 
     expect(screen.getAllByText('fake group', { exact: false })).toHaveLength(2);
