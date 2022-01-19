@@ -1,12 +1,7 @@
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 
-import {
-  customRender,
-  screen,
-  fireEvent,
-  waitFor,
-} from '../../../shared/testUtils';
+import { customRender, screen, fireEvent } from '../../../shared/testUtils';
 import AboutGroup from './AboutGroup';
 
 const mockGroup = {
@@ -33,7 +28,7 @@ describe('<AboutGroup />', () => {
     expect(screen.getByText('Create Post')).toBeInTheDocument();
   });
 
-  test('create post btn redirects to the right page', async () => {
+  test('create post btn redirects to the right page', () => {
     const history = createMemoryHistory();
 
     customRender(
@@ -46,8 +41,6 @@ describe('<AboutGroup />', () => {
 
     fireEvent.click(btn);
 
-    await waitFor(() =>
-      expect(history.location.pathname).toBe('/group/fake-group/createThread')
-    );
+    expect(history.location.pathname).toBe('/group/fake-group/createThread');
   });
 });
