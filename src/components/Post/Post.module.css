@@ -26,40 +26,47 @@
 }
 
 .OptionsRow {
+  margin-top: 2rem;
   display: flex;
+  border-bottom: 1px solid #eee;
+  padding: 0.5rem;
+  padding-left: 2rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
-.Vote {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.ReplyWrapper {
+  margin: 1rem;
 }
 
-.VoteBtn {
+.ReplyBtn {
+  margin-left: 2rem;
   text-decoration: none;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
-  width: 3rem;
+  width: 8rem;
   height: 3rem;
   transition: all 0.2s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 2rem;
+  transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.VoteBtn svg {
-  transition: all 0.2s;
-  height: 3rem;
-}
-
-.VoteBtn:hover {
+.ReplyBtn:hover {
   background-color: #eee;
+  border-radius: 3px;
 }
 
-.VoteBtn:hover svg {
-  color: red;
+.ReplyBtn svg {
+  margin-right: 1rem;
 }
 
-.LikesCount {
-  display: inline-block;
-  margin: 0;
+.ReplyBtn span {
+  padding-bottom: 0.3rem;
+  font-size: 1.4rem;
 }

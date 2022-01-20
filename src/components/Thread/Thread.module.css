@@ -1,7 +1,5 @@
 .Wrapper {
   padding: 10rem;
-  background-color: #eee;
-  height: calc(100vh - 4.8rem);
   display: flex;
   justify-content: center;
 }
