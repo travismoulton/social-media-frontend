@@ -7,7 +7,7 @@ import ReplyInput from './ReplyInput/ReplyInput';
 import VoteBtns from './VoteBtns/VoteBtns';
 import classes from './Post.module.css';
 
-export default function Post({ post }) {
+export default function Post({ post, reloadThread }) {
   const { user } = useSelector((state) => state.auth);
   const [showReplyInput, setShowReplyInput] = useState(false);
   const [replyContent, setReplyContent] = useState('');
@@ -20,18 +20,31 @@ export default function Post({ post }) {
     return `${margin.toString()}rem`;
   }
 
+  console.log(post);
+
   function calculateTimeSincePost() {
     const postDate = new Date(post.createdAt);
 
     const now = new Date();
 
-    const timeSincePostInHours = Math.floor((now - postDate) / 1000 / 60 / 60);
+    const timeSincePostInHours = (now - postDate) / 1000 / 60 / 60;
+
+    if (timeSincePostInHours * 60 < 1) return 'Just now';
+
+    if (timeSincePostInHours < 1)
+      return `${Math.floor(timeSincePostInHours * 60)} minute${
+        Math.floor(timeSincePostInHours * 60) > 1 ? 's' : ''
+      } ago`;
 
     if (timeSincePostInHours < 24)
-      return `${timeSincePostInHours.toString()} hrs ago`;
+      return `${Math.floor(timeSincePostInHours).toString()} hr${
+        Math.floor(timeSincePostInHours) > 1 ? 's' : ''
+      } ago`;
 
-    if (timeSincePostInHours > 24)
-      return `${Math.floor(timeSincePostInHours / 24)} days ago`;
+    if (timeSincePostInHours >= 24)
+      return `${Math.floor(timeSincePostInHours / 24)} day${
+        Math.floor(timeSincePostInHours / 24) > 1 ? 's' : ''
+      } ago`;
   }
 
   return (
@@ -50,7 +63,7 @@ export default function Post({ post }) {
           className={classes.ReplyBtn}
           onClick={() => setShowReplyInput((showReplyInput) => !showReplyInput)}
         >
-          <BsChatRightText size={16} /> <span> Reply</span>
+          <BsChatRightText size={16} /> <span>Reply</span>
         </button>
       </div>
       {showReplyInput && (
@@ -61,6 +74,8 @@ export default function Post({ post }) {
               reply={replyContent}
               parentPost={post._id}
               threadId={post.thread}
+              closeReplyBox={() => setShowReplyInput(false)}
+              reloadThread={reloadThread}
             />
           </div>
         </>

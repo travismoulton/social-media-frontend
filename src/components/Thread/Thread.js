@@ -20,7 +20,6 @@ export default function Thread() {
   }, [history, thread]);
 
   useEffect(() => {
-    // TODO: This will need to change
     if (thread && !initialPost) {
       (async () => {
         const {
@@ -32,25 +31,30 @@ export default function Thread() {
     }
   }, [thread, initialPost]);
 
+  async function reloadThread() {
+    const {
+      data: { Post: post },
+    } = await getIntialPost(thread.initialPost);
+
+    setInitialPost(post);
+  }
+
   function captureReplyChain(post = initialPost, replyChain = []) {
     replyChain.push(post);
 
-    if (post.replies.length) {
+    if (post.replies.length)
       post.replies.forEach((reply) => {
         captureReplyChain(reply, replyChain);
       });
-    }
 
     return replyChain;
   }
 
   const renderedPosts =
     initialPost &&
-    captureReplyChain().map((post) => <Post post={post} key={post.id} />);
-
-  // 1: Start with the intial post
-  // 2: Render replies, one by one
-  // 3: On each reply, if it has a reply, render it
+    captureReplyChain().map((post) => (
+      <Post post={post} key={post.id} reloadThread={reloadThread} />
+    ));
 
   return (
     initialPost && (
