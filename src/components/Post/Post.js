@@ -20,8 +20,6 @@ export default function Post({ post, reloadThread }) {
     return `${margin.toString()}rem`;
   }
 
-  console.log(post);
-
   function calculateTimeSincePost() {
     const postDate = new Date(post.createdAt);
 
