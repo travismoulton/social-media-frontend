@@ -1,0 +1,29 @@
+.Tooltip {
+  padding: 1rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #666;
+  color: var(--color-white);
+  position: fixed;
+  transform: translateX(-50%);
+}
+
+.Tooltip::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 0.6rem solid transparent;
+  border-right: 0.6rem solid transparent;
+  border-top: 0.6rem solid #666;
+  position: absolute;
+  bottom: -0.6rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .Tooltip,
+  .Tooltip::after {
+    display: none;
+  }
+}

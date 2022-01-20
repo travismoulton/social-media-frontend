@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { BsChatRightText } from 'react-icons/bs';
 
+import PostDate from './PostDate/PostDate';
 import SubmitReplyBtn from './SubmitReplyBtn/SubmitReplyBtn';
 import ReplyInput from './ReplyInput/ReplyInput';
 import VoteBtns from './VoteBtns/VoteBtns';
@@ -20,31 +21,6 @@ export default function Post({ post, reloadThread }) {
     return `${margin.toString()}rem`;
   }
 
-  function calculateTimeSincePost() {
-    const postDate = new Date(post.createdAt);
-
-    const now = new Date();
-
-    const timeSincePostInHours = (now - postDate) / 1000 / 60 / 60;
-
-    if (timeSincePostInHours * 60 < 1) return 'Just now';
-
-    if (timeSincePostInHours < 1)
-      return `${Math.floor(timeSincePostInHours * 60)} minute${
-        Math.floor(timeSincePostInHours * 60) > 1 ? 's' : ''
-      } ago`;
-
-    if (timeSincePostInHours < 24)
-      return `${Math.floor(timeSincePostInHours).toString()} hr${
-        Math.floor(timeSincePostInHours) > 1 ? 's' : ''
-      } ago`;
-
-    if (timeSincePostInHours >= 24)
-      return `${Math.floor(timeSincePostInHours / 24)} day${
-        Math.floor(timeSincePostInHours / 24) > 1 ? 's' : ''
-      } ago`;
-  }
-
   return (
     <div
       className={classes.Post}
@@ -52,7 +28,7 @@ export default function Post({ post, reloadThread }) {
     >
       <div className={classes.PostHeader}>
         <p className={classes.Author}>{post.author.name}</p>
-        <p className={classes.Date}>{calculateTimeSincePost()}</p>
+        <PostDate postTimeStamp={post.createdAt} />
       </div>
       <div className={classes.PostContent}>{post.content}</div>
       <div className={classes.OptionsRow}>
