@@ -1,10 +1,14 @@
 .Wrapper {
   padding: 10rem;
+  background-color: #eee;
+  height: calc(100vh - 4.8rem);
+  display: flex;
+  justify-content: center;
 }
 
 .Thread {
-  width: 50%;
+  width: 60%;
   border-radius: 5px;
   border: 1px solid #000;
-  background-color: #eee;
+  background-color: #fff;
 }

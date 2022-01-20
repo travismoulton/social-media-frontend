@@ -10,7 +10,7 @@ const { getIntialPost } = threadUtils;
 export default function Thread() {
   const history = useHistory();
   const [thread, setThread] = useState(null);
-  const [posts, setPosts] = useState(null);
+  const [initialPost, setInitialPost] = useState(null);
 
   useEffect(() => {
     const threadFromHistory = history.location.state.thread;
@@ -21,23 +21,41 @@ export default function Thread() {
 
   useEffect(() => {
     // TODO: This will need to change
-    if (thread && !posts) {
+    if (thread && !initialPost) {
       (async () => {
         const {
           data: { Post: post },
         } = await getIntialPost(thread.initialPost);
 
-        setPosts(post);
+        setInitialPost(post);
       })();
     }
-  }, [thread, posts]);
+  }, [thread, initialPost]);
+
+  function captureReplyChain(post = initialPost, replyChain = []) {
+    replyChain.push(post);
+
+    if (post.replies.length) {
+      post.replies.forEach((reply) => {
+        captureReplyChain(reply, replyChain);
+      });
+    }
+
+    return replyChain;
+  }
+
+  const renderedPosts =
+    initialPost &&
+    captureReplyChain().map((post) => <Post post={post} key={post.id} />);
+
+  // 1: Start with the intial post
+  // 2: Render replies, one by one
+  // 3: On each reply, if it has a reply, render it
 
   return (
-    posts && (
+    initialPost && (
       <div className={classes.Wrapper}>
-        <div className={classes.Thread}>
-          <Post post={posts} />
-        </div>
+        <div className={classes.Thread}>{renderedPosts}</div>
       </div>
     )
   );

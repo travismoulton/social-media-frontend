@@ -1,5 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import GroupHeader from './GroupHeader/GroupHeader';
 import AboutGroup from './AboutGroup/AboutGroup';
@@ -24,11 +25,25 @@ export default function GroupPage() {
       })();
   }, [group, history]);
 
+  console.log(group);
+
+  const links =
+    group &&
+    group.threads.map((thread) => (
+      <Link
+        to={{ pathname: `/thread/${thread.title}`, state: { thread } }}
+        key={thread._id}
+      >
+        {thread.title}
+      </Link>
+    ));
+
   return (
     group && (
       <>
         <GroupHeader group={group} />
         <AboutGroup group={group} />
+        {links}
       </>
     )
   );
