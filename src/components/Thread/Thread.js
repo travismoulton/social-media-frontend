@@ -42,10 +42,11 @@ export default function Thread() {
   function captureReplyChain(post = initialPost, replyChain = []) {
     replyChain.push(post);
 
-    if (post.replies.length)
+    if (post.replies.length) {
       post.replies.forEach((reply) => {
         captureReplyChain(reply, replyChain);
       });
+    }
 
     return replyChain;
   }
@@ -56,6 +57,40 @@ export default function Thread() {
       <Post post={post} key={post.id} reloadThread={reloadThread} />
     ));
 
+  function findNestedArr(arr) {
+    if (!Array.isArray(arr.at(-1))) return arr;
+    return findNestedArr(arr.at(-1));
+  }
+
+  function renderPosts() {
+    const posts = captureReplyChain().splice(1);
+    const postsArr = [captureReplyChain()[0], []];
+
+    console.log(captureReplyChain());
+
+    posts.forEach((post, i) => {
+      const nestLevel = post.ancestors.length;
+      const prevNestLevel = i > 0 && posts[i - 1].ancestors.length;
+
+      if (nestLevel > prevNestLevel) {
+        const insertPoint = findNestedArr(postsArr);
+        insertPoint.push([post]);
+      } else if (nestLevel === 1) {
+        postsArr.push([]);
+        postsArr.at(-1).push(post);
+      } else if (nestLevel < prevNestLevel) {
+        postsArr.at(-1).push(post);
+      } else if (nestLevel === prevNestLevel) {
+        const insertPoint = findNestedArr(postsArr);
+        insertPoint.push(post);
+      }
+    });
+
+    return postsArr;
+  }
+
+  initialPost && console.log(renderPosts());
+
   return (
     initialPost && (
       <div className={classes.Wrapper}>
@@ -64,3 +99,11 @@ export default function Thread() {
     )
   );
 }
+
+// const x = 3;
+
+// if (x === 3) {
+//   console.log('yay');
+// } else if (x < 4) {
+//   console.log('yay again');
+// }

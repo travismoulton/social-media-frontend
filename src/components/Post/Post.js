@@ -9,6 +9,8 @@ import VoteBtns from './VoteBtns/VoteBtns';
 import classes from './Post.module.css';
 
 export default function Post({ post, reloadThread }) {
+  // console.log(post);
+
   const { user } = useSelector((state) => state.auth);
   const [showReplyInput, setShowReplyInput] = useState(false);
   const [replyContent, setReplyContent] = useState('');

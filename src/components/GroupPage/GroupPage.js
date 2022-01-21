@@ -25,8 +25,6 @@ export default function GroupPage() {
       })();
   }, [group, history]);
 
-  console.log(group);
-
   const links =
     group &&
     group.threads.map((thread) => (
