@@ -9,25 +9,12 @@ import VoteBtns from './VoteBtns/VoteBtns';
 import classes from './Post.module.css';
 
 export default function Post({ post, reloadThread }) {
-  // console.log(post);
-
   const { user } = useSelector((state) => state.auth);
   const [showReplyInput, setShowReplyInput] = useState(false);
   const [replyContent, setReplyContent] = useState('');
 
-  function generateMarginBasedOnNestLevel() {
-    const nestLevel = post.ancestors.length;
-
-    const margin = 3 * nestLevel + 1;
-
-    return `${margin.toString()}rem`;
-  }
-
   return (
-    <div
-      className={classes.Post}
-      style={{ marginLeft: generateMarginBasedOnNestLevel() }}
-    >
+    <div className={classes.Post} style={{ marginLeft: '2rem' }}>
       <div className={classes.PostHeader}>
         <p className={classes.Author}>{post.author.name}</p>
         <PostDate postTimeStamp={post.createdAt} />

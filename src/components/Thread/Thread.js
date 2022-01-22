@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import Post from '../Post/Post';
+import PostList from '../PostList/PostList';
 import classes from './Thread.module.css';
 import { threadUtils } from './threadUtils';
 
@@ -42,7 +42,7 @@ export default function Thread() {
   function captureReplyChain(post = initialPost, replyChain = []) {
     replyChain.push(post);
 
-    if (post.replies.length) {
+    if (post && post.replies.length) {
       post.replies.forEach((reply) => {
         captureReplyChain(reply, replyChain);
       });
@@ -51,59 +51,56 @@ export default function Thread() {
     return replyChain;
   }
 
-  const renderedPosts =
-    initialPost &&
-    captureReplyChain().map((post) => (
-      <Post post={post} key={post.id} reloadThread={reloadThread} />
-    ));
-
-  function findNestedArr(arr) {
+  function findInnerMostArr(arr) {
     if (!Array.isArray(arr.at(-1))) return arr;
-    return findNestedArr(arr.at(-1));
+    return findInnerMostArr(arr.at(-1));
   }
 
-  function renderPosts() {
+  function createPostStructure() {
     const posts = captureReplyChain().splice(1);
-    const postsArr = [captureReplyChain()[0], []];
-
-    console.log(captureReplyChain());
+    const postsArr = [[captureReplyChain()[0]]];
 
     posts.forEach((post, i) => {
       const nestLevel = post.ancestors.length;
       const prevNestLevel = i > 0 && posts[i - 1].ancestors.length;
 
-      if (nestLevel > prevNestLevel) {
-        const insertPoint = findNestedArr(postsArr);
-        insertPoint.push([post]);
+      if (i > 0 && nestLevel > prevNestLevel) {
+        const innerMostArr = findInnerMostArr(postsArr);
+        innerMostArr.push([post]);
       } else if (nestLevel === 1) {
         postsArr.push([]);
         postsArr.at(-1).push(post);
       } else if (nestLevel < prevNestLevel) {
-        postsArr.at(-1).push(post);
-      } else if (nestLevel === prevNestLevel) {
-        const insertPoint = findNestedArr(postsArr);
+        function getInsertPoint(arr, nestlevel) {
+          if (nestlevel === 0) return arr;
+          return getInsertPoint(arr[1], nestlevel - 1);
+        }
+        const insertPoint = getInsertPoint(postsArr.at(-1), nestLevel - 1);
         insertPoint.push(post);
+      } else if (nestLevel === prevNestLevel) {
+        const innerMostArr = findInnerMostArr(postsArr);
+        innerMostArr.push(post);
       }
     });
 
     return postsArr;
   }
 
-  initialPost && console.log(renderPosts());
+  const postList =
+    initialPost &&
+    createPostStructure().map((posts) => (
+      <PostList
+        posts={posts}
+        reloadThread={reloadThread}
+        key={`PostList--${posts[0]._id}`}
+      />
+    ));
 
   return (
     initialPost && (
       <div className={classes.Wrapper}>
-        <div className={classes.Thread}>{renderedPosts}</div>
+        <div className={classes.Thread}>{postList}</div>
       </div>
     )
   );
 }
-
-// const x = 3;
-
-// if (x === 3) {
-//   console.log('yay');
-// } else if (x < 4) {
-//   console.log('yay again');
-// }

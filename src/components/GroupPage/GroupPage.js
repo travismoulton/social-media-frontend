@@ -41,7 +41,15 @@ export default function GroupPage() {
       <>
         <GroupHeader group={group} />
         <AboutGroup group={group} />
-        {links}
+        <div
+          style={{
+            display: 'flex',
+            padding: '30rem',
+            flexDirection: 'column',
+          }}
+        >
+          {links}
+        </div>
       </>
     )
   );
