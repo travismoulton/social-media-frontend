@@ -1,5 +1,5 @@
 import Post from '../Post/Post';
-import ReplyChain from './ReplyChain/ReplyChain';
+import ReplyChain from '../ReplyChain/ReplyChain';
 import classes from './PostList.module.css';
 
 export default function PostList({ posts, reloadThread }) {

@@ -1,14 +1,8 @@
 import { useState } from 'react';
+import classes from './ReplyChain.module.css';
 
 export default function ReplyChain({ posts, numPosts }) {
   const [show, setShow] = useState(true);
-  // console.log(firstPost.content);
-
-  // function generateMarginBasedOnNestLevel() {
-  //   const nestLevel = firstPost.ancestors.length - 1;
-  //   const margin = 1 * nestLevel;
-  //   return `${margin.toString()}rem`;
-  // }
 
   const btn = (
     <button onClick={() => setShow((show) => !show)}>
@@ -16,13 +10,23 @@ export default function ReplyChain({ posts, numPosts }) {
     </button>
   );
 
+  const hideReplyBar = (
+    <div
+      className={classes.SideBarWrapper}
+      onClick={() => setShow((show) => !show)}
+    >
+      <div className={classes.SideBar}></div>
+    </div>
+  );
+
   return (
     <div
       style={{
-        borderLeft: '1px solid #333',
+        position: 'relative',
         marginLeft: '2rem',
       }}
     >
+      {hideReplyBar}
       {btn}
       <div hidden={!show}>{posts}</div>
     </div>

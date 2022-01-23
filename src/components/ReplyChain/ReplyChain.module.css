@@ -1,0 +1,19 @@
+.SideBarWrapper {
+  cursor: pointer;
+  width: 2rem;
+  height: calc(100% - 5rem);
+  margin-top: 5rem;
+  position: absolute;
+  left: 0;
+}
+
+.SideBar {
+  width: 0.3rem;
+  background-color: green;
+  height: 100%;
+  transition: all cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.SideBarWrapper:hover .SideBar {
+  background-color: orange;
+}

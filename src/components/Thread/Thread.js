@@ -1,7 +1,8 @@
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-import PostList from '../PostList/PostList';
+import Post from '../Post/Post';
+import ReplyChain from '../ReplyChain/ReplyChain';
 import classes from './Thread.module.css';
 import { threadUtils } from './threadUtils';
 
@@ -12,6 +13,8 @@ export default function Thread() {
   const [thread, setThread] = useState(null);
   const [initialPost, setInitialPost] = useState(null);
 
+  // Upon loading the component, it uses the Thread passed through History
+  // and sets it to state
   useEffect(() => {
     const threadFromHistory = history.location.state.thread;
 
@@ -19,6 +22,8 @@ export default function Thread() {
       setThread(threadFromHistory);
   }, [history, thread]);
 
+  // Once there is a thread in State, it uses that Thread's initial post
+  // to fetch the reply chain from the API
   useEffect(() => {
     if (thread && !initialPost) {
       (async () => {
@@ -39,67 +44,44 @@ export default function Thread() {
     setInitialPost(post);
   }
 
-  function captureReplyChain(post = initialPost, replyChain = []) {
-    replyChain.push(post);
+  function generatePostStructure(postNode = initialPost) {
+    // If the post has replies, we need to recursively create nested divs to
+    // store the replies in. This creates a tree structre that allows
+    // For the hide replies functionality, as all replies to a parent post
+    // will be stored in a nested div
+    if (postNode.replies.length) {
+      const { replies } = postNode;
 
-    if (post && post.replies.length) {
-      post.replies.forEach((reply) => {
-        captureReplyChain(reply, replyChain);
-      });
+      return (
+        <>
+          <Post
+            post={postNode}
+            key={`Post--${postNode._id}`}
+            reloadThread={reloadThread}
+          />
+          <ReplyChain
+            key={`ReplyChain--${postNode._id}`}
+            posts={replies.map((reply) => generatePostStructure(reply))}
+            reloadThread={reloadThread}
+            numPosts={postNode.numAggregateReplies}
+          />
+        </>
+      );
+    } else {
+      return (
+        <Post
+          post={postNode}
+          key={`Post--${postNode._id}`}
+          reloadThread={reloadThread}
+        />
+      );
     }
-
-    return replyChain;
   }
-
-  function findInnerMostArr(arr) {
-    if (!Array.isArray(arr.at(-1))) return arr;
-    return findInnerMostArr(arr.at(-1));
-  }
-
-  function createPostStructure() {
-    const posts = captureReplyChain().splice(1);
-    const postsArr = [[captureReplyChain()[0]]];
-
-    posts.forEach((post, i) => {
-      const nestLevel = post.ancestors.length;
-      const prevNestLevel = i > 0 && posts[i - 1].ancestors.length;
-
-      if (i > 0 && nestLevel > prevNestLevel) {
-        const innerMostArr = findInnerMostArr(postsArr);
-        innerMostArr.push([post]);
-      } else if (nestLevel === 1) {
-        postsArr.push([]);
-        postsArr.at(-1).push(post);
-      } else if (nestLevel < prevNestLevel) {
-        function getInsertPoint(arr, nestlevel) {
-          if (nestlevel === 0) return arr;
-          return getInsertPoint(arr[1], nestlevel - 1);
-        }
-        const insertPoint = getInsertPoint(postsArr.at(-1), nestLevel - 1);
-        insertPoint.push(post);
-      } else if (nestLevel === prevNestLevel) {
-        const innerMostArr = findInnerMostArr(postsArr);
-        innerMostArr.push(post);
-      }
-    });
-
-    return postsArr;
-  }
-
-  const postList =
-    initialPost &&
-    createPostStructure().map((posts) => (
-      <PostList
-        posts={posts}
-        reloadThread={reloadThread}
-        key={`PostList--${posts[0]._id}`}
-      />
-    ));
 
   return (
     initialPost && (
       <div className={classes.Wrapper}>
-        <div className={classes.Thread}>{postList}</div>
+        <div className={classes.Thread}>{generatePostStructure()}</div>
       </div>
     )
   );
