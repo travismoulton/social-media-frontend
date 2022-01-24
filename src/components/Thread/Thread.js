@@ -85,9 +85,6 @@ export default function Thread() {
     }
   }
 
-  // initialPost && console.log(thread);
-  // initialPost && console.log(initialPost);
-
   return (
     initialPost && (
       <div className={classes.Wrapper}>
