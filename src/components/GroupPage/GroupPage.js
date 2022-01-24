@@ -18,10 +18,10 @@ export default function GroupPage() {
     if (!group || group._id !== groupId)
       (async () => {
         const {
-          data: { Group },
+          data: { group },
         } = await fetchGroup(groupId);
 
-        setGroup(Group);
+        setGroup(group);
       })();
   }, [group, history]);
 

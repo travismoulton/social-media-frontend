@@ -28,7 +28,7 @@ export default function Thread() {
     if (thread && !initialPost) {
       (async () => {
         const {
-          data: { Post: post },
+          data: { post },
         } = await getIntialPost(thread.initialPost);
 
         setInitialPost(post);
@@ -38,7 +38,7 @@ export default function Thread() {
 
   async function reloadThread() {
     const {
-      data: { Post: post },
+      data: { post },
     } = await getIntialPost(thread.initialPost);
 
     setInitialPost(post);
