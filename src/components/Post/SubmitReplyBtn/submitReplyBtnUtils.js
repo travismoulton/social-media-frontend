@@ -7,5 +7,7 @@ export const submitReplyBtnUtils = {
       parentPost,
       thread: threadId,
     });
+
+    return data;
   },
 };

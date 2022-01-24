@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BsChatRightText } from 'react-icons/bs';
 
 import PostDate from '../PostDate/PostDate';
@@ -11,6 +11,19 @@ import classes from '../Post.module.css';
 export default function Post({ post, reloadThread, numComments }) {
   const { user } = useSelector((state) => state.auth);
   const [replyContent, setReplyContent] = useState('');
+  const [shouldClearReplyInput, setShouldClearReplyInput] = useState(false);
+
+  // Inside the submitReplyBtn, this will be run when a reply is submitted.
+  // This will send a flag over the ReplyInput to clear the input value
+  function clearReplyInput() {
+    setReplyContent('');
+    setShouldClearReplyInput(true);
+  }
+
+  // This will run after the flag has been sent to ReplyInput and the reply has been deleted
+  useEffect(() => {
+    if (shouldClearReplyInput) setShouldClearReplyInput(false);
+  }, [shouldClearReplyInput]);
 
   return (
     <>
@@ -33,12 +46,17 @@ export default function Post({ post, reloadThread, numComments }) {
         <p>
           Comment as <span>{user.name}</span>
         </p>
-        <ReplyInput setReplyContent={setReplyContent} forInitialPost />
+        <ReplyInput
+          setReplyContent={setReplyContent}
+          forInitialPost
+          shouldClearInput={shouldClearReplyInput}
+        />
         <SubmitReplyBtn
           reply={replyContent}
           parentPost={post._id}
           threadId={post.thread}
           reloadThread={reloadThread}
+          clearReplyInput={clearReplyInput}
           forInitialPost
         />
       </div>

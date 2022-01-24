@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import classes from './ReplyChain.module.css';
 
-export default function ReplyChain({ posts, numPosts }) {
+export default function ReplyChain({ posts, numPosts, forInitialPost }) {
   const [show, setShow] = useState(true);
 
   const btn = (
@@ -19,15 +19,17 @@ export default function ReplyChain({ posts, numPosts }) {
     </div>
   );
 
+  // For the reply chain to the first post, do not show the hide replies button,
+  // apply the left margin, or the sidebar
   return (
     <div
       style={{
         position: 'relative',
-        marginLeft: '2rem',
+        marginLeft: !forInitialPost && '2rem',
       }}
     >
-      {hideReplyBar}
-      {btn}
+      {!forInitialPost && hideReplyBar}
+      {!forInitialPost && btn}
       <div hidden={!show}>{posts}</div>
     </div>
   );

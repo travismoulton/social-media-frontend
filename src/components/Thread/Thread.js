@@ -45,26 +45,32 @@ export default function Thread() {
     setInitialPost(post);
   }
 
-  function generatePostStructure(postNode = initialPost.replies[0]) {
+  function generatePostStructure(postNode = initialPost) {
     // If the post has replies, we need to recursively create nested divs to
     // store the replies in. This creates a tree structre that allows
     // For the hide replies functionality, as all replies to a parent post
     // will be stored in a nested div
+
     if (postNode.replies.length) {
       const { replies } = postNode;
 
       return (
         <>
-          <Post
-            post={postNode}
-            key={`Post--${postNode._id}`}
-            reloadThread={reloadThread}
-          />
+          {/* The initialPost is already being rendered into the DOM automatically,
+          so skip it on the first iteration of this function */}
+          {postNode !== initialPost && (
+            <Post
+              post={postNode}
+              key={`Post--${postNode._id}`}
+              reloadThread={reloadThread}
+            />
+          )}
           <ReplyChain
             key={`ReplyChain--${postNode._id}`}
             posts={replies.map((reply) => generatePostStructure(reply))}
             reloadThread={reloadThread}
             numPosts={postNode.numAggregateReplies}
+            forInitialPost={postNode === initialPost}
           />
         </>
       );

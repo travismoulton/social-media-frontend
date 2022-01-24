@@ -11,12 +11,14 @@ export default function SubmitReplyBtn(props) {
     closeReplyBox,
     reloadThread,
     forInitialPost,
+    clearReplyInput,
   } = props;
 
   async function submitHandler() {
     const data = await submitReply(reply, parentPost, threadId);
 
-    closeReplyBox();
+    forInitialPost && clearReplyInput();
+    !forInitialPost && closeReplyBox();
     reloadThread();
   }
 

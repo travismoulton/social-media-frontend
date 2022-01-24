@@ -19,13 +19,12 @@ export default function VoteBtns({ post: postData }) {
 
       // Remove the userId from post.usersLiked so we don't need to make
       // another API call
-
       setPost({
         ...post,
         usersLiked: post.usersLiked
           .splice(0, userIndex)
           .concat(post.usersLiked.splice(userIndex + 1)),
-        likeCount: post.likeCount - 1,
+        likeScore: post.likeScore - 1,
       });
     } else {
       await addLike(post._id);
@@ -35,17 +34,17 @@ export default function VoteBtns({ post: postData }) {
 
         setPost({
           ...post,
-          likeCount: post.likeCount + 1,
+
           usersLiked: [...post.usersLiked, user._id],
           usersDisliked: post.usersDisliked
             .splice(0, userIndex)
             .concat(post.usersDisliked.splice(userIndex + 1)),
-          dislikeCount: post.dislikeCount - 1,
+          likeScore: post.likeScore + 2,
         });
       } else {
         setPost({
           ...post,
-          likeCount: post.likeCount + 1,
+          likeScore: post.likeScore + 1,
           usersLiked: [...post.usersLiked, user._id],
         });
       }
@@ -62,7 +61,7 @@ export default function VoteBtns({ post: postData }) {
         usersDisliked: post.usersDisliked
           .splice(0, userIndex)
           .concat(post.usersDisliked.splice(userIndex + 1)),
-        dislikeCount: post.dislikeCount - 1,
+        likeScore: post.likeScore - 1,
       });
     } else {
       await addDislike(post._id);
@@ -74,17 +73,16 @@ export default function VoteBtns({ post: postData }) {
 
         setPost({
           ...post,
-          dislikeCount: post.dislikeCount + 1,
           usersDisliked: [...post.usersDisliked, user._id],
           usersLiked: post.usersLiked
             .splice(0, userIndex)
             .concat(post.usersLiked.splice(userIndex + 1)),
-          likeCount: post.likeCount - 1,
+          likeScore: post.likeScore - 2,
         });
       } else {
         setPost({
           ...post,
-          dislikeCount: post.dislikeCount + 1,
+          likeScore: post.likeScore - 1,
           usersDisliked: [...post.usersDisliked, user._id],
         });
       }
@@ -92,39 +90,31 @@ export default function VoteBtns({ post: postData }) {
   }
 
   return (
-    <>
-      <span className={classes.Vote}>
-        <button className={classes.VoteBtn} onClick={likeHandler}>
-          <FiArrowUp
-            size={20}
-            color={post.usersLiked.includes(user._id) ? 'red' : 'black'}
-          />
-        </button>
-        <p
-          className={classes.LikesCount}
-          style={{
-            color: post.usersLiked.includes(user._id) ? 'red' : 'black',
-          }}
-        >
-          {post.likeCount > 0 && post.likeCount}
-        </p>
-      </span>
-      <span className={classes.Vote}>
-        <button className={classes.VoteBtn} onClick={dislikeHandler}>
-          <FiArrowDown
-            size={20}
-            color={post.usersDisliked.includes(user._id) ? 'red' : 'black'}
-          />
-        </button>
-        <p
-          className={classes.LikesCount}
-          style={{
-            color: post.usersDisliked.includes(user._id) ? 'red' : 'black',
-          }}
-        >
-          {post.dislikeCount > 0 && post.dislikeCount}
-        </p>
-      </span>
-    </>
+    <span className={classes.Vote}>
+      <button className={classes.VoteBtn} onClick={likeHandler}>
+        <FiArrowUp
+          size={20}
+          color={post.usersLiked.includes(user._id) ? 'red' : 'black'}
+        />
+      </button>
+      <p
+        className={classes.LikesCount}
+        style={{
+          color: post.usersLiked.includes(user._id)
+            ? 'red'
+            : post.usersDisliked.includes(user._id)
+            ? 'blue'
+            : 'black',
+        }}
+      >
+        {post.likeScore !== 0 ? post.likeScore : 'Vote'}
+      </p>
+      <button className={classes.VoteBtn} onClick={dislikeHandler}>
+        <FiArrowDown
+          size={20}
+          color={post.usersDisliked.includes(user._id) ? 'blue' : 'black'}
+        />
+      </button>
+    </span>
   );
 }

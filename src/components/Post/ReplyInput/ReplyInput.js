@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import Input from '../../UI/Input/Input';
 import checkValidityHandler from '../../../shared/checkValidityHandler';
 
 export default function ReplyInput(props) {
-  const { setReplyContent, forInitialPost } = props;
-
-  const history = useHistory();
+  const { setReplyContent, forInitialPost, shouldClearInput } = props;
 
   const [contentInput, setContentInput] = useState({
     elementType: 'textarea',
@@ -22,19 +19,9 @@ export default function ReplyInput(props) {
     errorMsg: '',
   });
 
-  // When the Create Thread button is clicked, if there is no post content, a flag will be sent from
-  // CreateThread to mark the input as touched and display the error message
-  // useEffect(() => {
-  //   if (shouldSetPostContentTouched) {
-  //     setContentInput({
-  //       ...contentInput,
-  //       touched: true,
-  //       errorMsg: 'Post can not be empty',
-  //     });
-
-  //     setPostContentTouched();
-  //   }
-  // }, [contentInput, shouldSetPostContentTouched, setPostContentTouched]);
+  useEffect(() => {
+    if (shouldClearInput) setContentInput({ ...contentInput, value: '' });
+  }, [contentInput, shouldClearInput]);
 
   function inputChangedHandler(e, input) {
     const { value } = e.target;
