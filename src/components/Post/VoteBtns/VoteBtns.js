@@ -89,6 +89,20 @@ export default function VoteBtns({ post: postData, vertical }) {
     }
   }
 
+  function createVoteCountDisplayOutput() {
+    const { usersDisliked, usersLiked, likeScore } = post;
+
+    const userHasNotVoted =
+      !usersDisliked.includes(user._id) && !usersLiked.includes(user._id);
+
+    if (userHasNotVoted) {
+      if (likeScore === 0) return 'Vote';
+      if (likeScore !== 0) return likeScore;
+    } else {
+      return likeScore;
+    }
+  }
+
   return (
     <span className={`${classes.Vote} ${vertical && classes.Vertical}`}>
       <button className={classes.VoteBtn} onClick={likeHandler}>
@@ -107,7 +121,7 @@ export default function VoteBtns({ post: postData, vertical }) {
             : 'black',
         }}
       >
-        {post.likeScore !== 0 ? post.likeScore : 'Vote'}
+        {createVoteCountDisplayOutput()}
       </p>
       <button className={classes.VoteBtn} onClick={dislikeHandler}>
         <FiArrowDown
