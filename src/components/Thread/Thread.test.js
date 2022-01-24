@@ -8,7 +8,7 @@ import {
   createSpy,
 } from '../../shared/testUtils';
 import { threadUtils as utils } from './threadUtils';
-import { mockInitialPost, mockThread } from './mockThread';
+import { mockInitialPost, mockThread } from '../../shared/mockThread';
 import Thread from './Thread';
 
 jest.mock('./threadUtils');

@@ -1,7 +1,7 @@
 import { customRender, screen, fireEvent } from '../../shared/testUtils';
 import ReplyChain from './ReplyChain';
 import Post from '../Post/Post';
-import { mockInitialPost } from '../Thread/mockThread';
+import { mockInitialPost } from '../../shared/mockThread';
 
 describe('<ReplyChain />', () => {
   function setup() {

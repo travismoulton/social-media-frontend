@@ -28,6 +28,7 @@ const mockReplyLevel2 = {
   usersLiked: [],
   usersDisliked: [mockAuthor1, mockAuthor2],
   replies: [],
+  thread: 'mockThread',
 };
 
 const mockReplyLevel1 = {
@@ -43,6 +44,7 @@ const mockReplyLevel1 = {
   usersLiked: [mockAuthor1, mockAuthor2],
   usersDisliked: [],
   replies: [mockReplyLevel2],
+  thread: 'mockThread',
 };
 
 export const mockInitialPost = {
@@ -58,4 +60,5 @@ export const mockInitialPost = {
   usersLiked: [mockAuthor1],
   usersDisliked: [mockAuthor2],
   replies: [mockReplyLevel1],
+  thread: 'mockThread',
 };

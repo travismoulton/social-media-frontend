@@ -104,7 +104,10 @@ export default function VoteBtns({ post: postData, vertical }) {
   }
 
   return (
-    <span className={`${classes.Vote} ${vertical && classes.Vertical}`}>
+    <span
+      data-testid="VoteBtns"
+      className={`${classes.Vote} ${vertical && classes.Vertical}`}
+    >
       <button className={classes.VoteBtn} onClick={likeHandler}>
         <FiArrowUp
           size={20}

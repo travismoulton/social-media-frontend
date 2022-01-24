@@ -21,7 +21,7 @@ export default function ReplyChain({ posts, numPosts, forInitialPost }) {
   );
 
   // For the reply chain to the first post, do not show the hide replies button,
-  // apply the left margin, or the sidebar
+  // do not apply the left margin, or render the sidebar
   return (
     <div
       style={{
