@@ -30,6 +30,11 @@ export default function PostDate({ postTimeStamp }) {
         Math.floor(timeSincePostInHours) > 1 ? 's' : ''
       } ago`;
 
+    if (timeSincePostInHours > 24 * 31)
+      return `${Math.floor(timeSincePostInHours / (24 * 31))} month${
+        Math.floor(timeSincePostInHours / (24 * 31)) > 1 ? 's' : ''
+      } ago`;
+
     if (timeSincePostInHours >= 24)
       return `${Math.floor(timeSincePostInHours / 24)} day${
         Math.floor(timeSincePostInHours / 24) > 1 ? 's' : ''
@@ -56,9 +61,16 @@ export default function PostDate({ postTimeStamp }) {
 
     const date = new Date(postTimeStamp);
 
+    function formatTime() {
+      if (date.getHours() > 12)
+        return `${date.getHours() - 12}:${date.getMinutes()} PM`;
+      if (date.getHours() <= 12)
+        return `${date.getHours()}:${date.getMinutes()} AM`;
+    }
+
     return `${days[date.getDay() - 1]} ${
       months[date.getMonth()]
-    } ${date.getDate()}, ${date.getFullYear()}`;
+    } ${date.getDate()}, ${date.getFullYear()} at ${formatTime()}`;
   }
 
   function showTooltip(e) {
