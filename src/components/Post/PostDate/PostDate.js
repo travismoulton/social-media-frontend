@@ -57,9 +57,10 @@ export default function PostDate({ postTimeStamp }) {
       'Dec',
     ];
 
-    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     const date = new Date(postTimeStamp);
+    console.log(date.getDay());
 
     function formatTime() {
       if (date.getHours() > 12)
@@ -68,7 +69,7 @@ export default function PostDate({ postTimeStamp }) {
         return `${date.getHours()}:${date.getMinutes()} AM`;
     }
 
-    return `${days[date.getDay() - 1]} ${
+    return `${days[date.getDay()]} ${
       months[date.getMonth()]
     } ${date.getDate()}, ${date.getFullYear()} at ${formatTime()}`;
   }
@@ -99,6 +100,7 @@ export default function PostDate({ postTimeStamp }) {
         className={classes.Date}
         onMouseOver={showTooltip}
         onMouseOut={hideTooltip}
+        data-testid="PostDate"
       >
         {calculateTimeSincePost()}
       </p>
