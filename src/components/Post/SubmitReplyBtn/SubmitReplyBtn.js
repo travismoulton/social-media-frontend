@@ -4,7 +4,14 @@ import { submitReplyBtnUtils } from './submitReplyBtnUtils';
 const { submitReply } = submitReplyBtnUtils;
 
 export default function SubmitReplyBtn(props) {
-  const { reply, parentPost, threadId, closeReplyBox, reloadThread } = props;
+  const {
+    reply,
+    parentPost,
+    threadId,
+    closeReplyBox,
+    reloadThread,
+    forInitialPost,
+  } = props;
 
   async function submitHandler() {
     const data = await submitReply(reply, parentPost, threadId);
@@ -14,7 +21,13 @@ export default function SubmitReplyBtn(props) {
   }
 
   return (
-    <button className={`Global-btn-1 ${classes.Btn}`} onClick={submitHandler}>
+    <button
+      disabled={!reply}
+      className={`Global-btn-1 ${
+        forInitialPost ? classes.ForInitialBtn : classes.Btn
+      } ${!reply && classes.Disabled}`}
+      onClick={submitHandler}
+    >
       Submit
     </button>
   );

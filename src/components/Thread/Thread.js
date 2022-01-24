@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
+import InitialPost from '../Post/InitialPost/InitialPost';
 import Post from '../Post/Post';
 import ReplyChain from '../ReplyChain/ReplyChain';
 import classes from './Thread.module.css';
@@ -44,7 +45,7 @@ export default function Thread() {
     setInitialPost(post);
   }
 
-  function generatePostStructure(postNode = initialPost) {
+  function generatePostStructure(postNode = initialPost.replies[0]) {
     // If the post has replies, we need to recursively create nested divs to
     // store the replies in. This creates a tree structre that allows
     // For the hide replies functionality, as all replies to a parent post
@@ -81,7 +82,14 @@ export default function Thread() {
   return (
     initialPost && (
       <div className={classes.Wrapper}>
-        <div className={classes.Thread}>{generatePostStructure()}</div>
+        <div className={classes.Thread}>
+          <InitialPost
+            post={initialPost}
+            reloadThread={reloadThread}
+            numComments={initialPost.numAggregateReplies}
+          />
+          {initialPost.replies.length ? generatePostStructure() : null}
+        </div>
       </div>
     )
   );

@@ -71,6 +71,10 @@
   margin-left: 5%;
 }
 
+.InitialReplyWrapper {
+  margin-left: 2rem;
+}
+
 .GroupDescription,
 .PostInput,
 .ReplyInput {
@@ -82,7 +86,8 @@
 }
 
 .PostInput:focus,
-.GroupDescription:focus {
+.GroupDescription:focus,
+.ReplyInput {
   outline: none;
 }
 

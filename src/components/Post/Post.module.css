@@ -34,7 +34,18 @@
   margin: 1rem;
 }
 
-.ReplyBtn {
+.ReplyWrapper p {
+  margin-left: 2rem;
+  margin-bottom: 0.3rem;
+  font-weight: 400;
+}
+
+.ReplyWrapper p span {
+  color: red;
+}
+
+.ReplyBtn,
+.NumComments {
   margin-left: 2rem;
   text-decoration: none;
   background: none;
@@ -52,16 +63,24 @@
   transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.ReplyBtn:hover {
+.NumComments {
+  width: 15rem;
+  margin-left: 0;
+}
+
+.ReplyBtn:hover,
+.NumComments:hover {
   background-color: #eee;
   border-radius: 3px;
 }
 
-.ReplyBtn svg {
+.ReplyBtn svg,
+.NumComments svg {
   margin-right: 1rem;
 }
 
-.ReplyBtn span {
+.ReplyBtn span,
+.NumComments span {
   padding-bottom: 0.3rem;
   font-size: 1.4rem;
 }

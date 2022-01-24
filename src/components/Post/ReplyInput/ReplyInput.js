@@ -5,7 +5,7 @@ import Input from '../../UI/Input/Input';
 import checkValidityHandler from '../../../shared/checkValidityHandler';
 
 export default function ReplyInput(props) {
-  const { setReplyContent } = props;
+  const { setReplyContent, forInitialPost } = props;
 
   const history = useHistory();
 
@@ -17,7 +17,7 @@ export default function ReplyInput(props) {
     valid: false,
     validation: { required: true },
     touched: false,
-    wrapperClass: 'ReplyInputWrapper',
+    wrapperClass: forInitialPost ? 'InitialReplyWrapper' : 'ReplyInputWrapper',
     className: 'ReplyInput',
     errorMsg: '',
   });
