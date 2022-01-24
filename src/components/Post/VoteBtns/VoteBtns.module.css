@@ -4,6 +4,11 @@
   align-items: center;
 }
 
+.Vertical {
+  flex-direction: column;
+  height: 100%;
+}
+
 .VoteBtn {
   text-decoration: none;
   background: none;

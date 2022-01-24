@@ -8,7 +8,7 @@ import { voteBtnUtils } from './voteBtnUtils';
 
 const { addDislike, addLike, removeDislike, removeLike } = voteBtnUtils;
 
-export default function VoteBtns({ post: postData }) {
+export default function VoteBtns({ post: postData, vertical }) {
   const [post, setPost] = useState(postData);
   const { user } = useSelector((state) => state.auth);
 
@@ -90,7 +90,7 @@ export default function VoteBtns({ post: postData }) {
   }
 
   return (
-    <span className={classes.Vote}>
+    <span className={`${classes.Vote} ${vertical && classes.Vertical}`}>
       <button className={classes.VoteBtn} onClick={likeHandler}>
         <FiArrowUp
           size={20}

@@ -28,18 +28,23 @@ export default function Post({ post, reloadThread, numComments }) {
   return (
     <>
       <div
-        className={classes.Post}
+        className={`${classes.Post} ${classes.InitialPost}`}
         style={{ marginLeft: '2rem', marginBottom: '3.5rem' }}
       >
-        <div className={classes.PostHeader}>
-          <p className={classes.Author}>{post.author.name}</p>
-          <PostDate postTimeStamp={post.createdAt} />
+        <div className={classes.InitialPostLeft}>
+          <VoteBtns post={post} vertical />
         </div>
-        <div className={classes.PostContent}>{post.content}</div>
-        <div className={classes.OptionsRow}>
-          <span className={classes.NumComments}>
-            <BsChatRightText size={16} /> <span>{numComments} Comments</span>
-          </span>
+        <div className={classes.InitialPostRight}>
+          <div className={classes.PostHeader}>
+            <p className={classes.Author}>{post.author.name}</p>
+            <PostDate postTimeStamp={post.createdAt} />
+          </div>
+          <div className={classes.PostContent}>{post.content}</div>
+          <div className={classes.OptionsRow}>
+            <span className={classes.NumComments}>
+              <BsChatRightText size={16} /> <span>{numComments} Comments</span>
+            </span>
+          </div>
         </div>
       </div>
       <div className={classes.ReplyWrapper}>
