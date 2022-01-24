@@ -7,7 +7,7 @@ import ReplyChain from '../ReplyChain/ReplyChain';
 import classes from './Thread.module.css';
 import { threadUtils } from './threadUtils';
 
-const { getIntialPost } = threadUtils;
+const { fetchInitialPost } = threadUtils;
 
 export default function Thread() {
   const history = useHistory();
@@ -30,7 +30,7 @@ export default function Thread() {
       (async () => {
         const {
           data: { post },
-        } = await getIntialPost(thread.initialPost);
+        } = await fetchInitialPost(thread.initialPost);
 
         setInitialPost(post);
       })();
@@ -40,7 +40,7 @@ export default function Thread() {
   async function reloadThread() {
     const {
       data: { post },
-    } = await getIntialPost(thread.initialPost);
+    } = await fetchInitialPost(thread.initialPost);
 
     setInitialPost(post);
   }
@@ -84,6 +84,9 @@ export default function Thread() {
       );
     }
   }
+
+  // initialPost && console.log(thread);
+  // initialPost && console.log(initialPost);
 
   return (
     initialPost && (

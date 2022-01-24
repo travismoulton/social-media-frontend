@@ -14,6 +14,7 @@ export default function ReplyChain({ posts, numPosts, forInitialPost }) {
     <div
       className={classes.SideBarWrapper}
       onClick={() => setShow((show) => !show)}
+      data-testid="ReplyChainSideBar"
     >
       <div className={classes.SideBar}></div>
     </div>
@@ -30,7 +31,9 @@ export default function ReplyChain({ posts, numPosts, forInitialPost }) {
     >
       {!forInitialPost && hideReplyBar}
       {!forInitialPost && btn}
-      <div hidden={!show}>{posts}</div>
+      <div data-testid="ReplyChainContainer" hidden={!show}>
+        {posts}
+      </div>
     </div>
   );
 }
