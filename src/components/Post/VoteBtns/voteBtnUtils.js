@@ -2,15 +2,19 @@ import axios from '../../../shared/axiosInstances/posts';
 
 export const voteBtnUtils = {
   addLike: async function (postId) {
-    await axios.patch(`/${postId}/like/add`);
+    const { data } = await axios.patch(`/${postId}/like/add`);
+    return data;
   },
   removeLike: async function (postId) {
-    await axios.patch(`/${postId}/like/remove`);
+    const { data } = await axios.patch(`/${postId}/like/remove`);
+    return data;
   },
   addDislike: async function (postId) {
-    await axios.patch(`/${postId}/dislike/add`);
+    const { data } = await axios.patch(`/${postId}/dislike/add`);
+    return data;
   },
   removeDislike: async function (postId) {
-    await axios.patch(`/${postId}/dislike/remove`);
+    const { data } = await axios.patch(`/${postId}/dislike/remove`);
+    return data;
   },
 };
