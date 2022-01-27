@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 
 import InitialPost from '../Post/InitialPost/InitialPost';
 import Post from '../Post/Post';
@@ -55,7 +55,7 @@ export default function Thread() {
       const { replies } = postNode;
 
       return (
-        <>
+        <Fragment key={`Fragment--${postNode._id}`}>
           {/* The initialPost is already being rendered into the DOM automatically,
           so skip it on the first iteration of this function */}
           {postNode !== initialPost && (
@@ -72,7 +72,7 @@ export default function Thread() {
             numPosts={postNode.numAggregateReplies}
             forInitialPost={postNode === initialPost}
           />
-        </>
+        </Fragment>
       );
     } else {
       return (

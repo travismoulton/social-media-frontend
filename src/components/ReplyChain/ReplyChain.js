@@ -20,6 +20,8 @@ export default function ReplyChain({ posts, numPosts, forInitialPost }) {
     </div>
   );
 
+  // useless comment
+
   // For the reply chain to the first post, do not show the hide replies button,
   // do not apply the left margin, or render the sidebar
   return (
