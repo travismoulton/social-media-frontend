@@ -57,8 +57,8 @@ export const mockInitialPost = {
   likeScore: 0,
   isInitialPost: true,
   numAggregateReplies: 2,
-  usersLiked: [mockAuthor1],
-  usersDisliked: [mockAuthor2],
+  usersLiked: ['mockUser1'],
+  usersDisliked: ['mockUser2'],
   replies: [mockReplyLevel1],
   thread: 'mockThread',
 };

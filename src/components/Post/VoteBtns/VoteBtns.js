@@ -51,7 +51,11 @@ export default function VoteBtns({ post: postData, vertical }) {
       data-testid="VoteBtns"
       className={`${classes.Vote} ${vertical && classes.Vertical}`}
     >
-      <button className={classes.VoteBtn} onClick={likeHandler}>
+      <button
+        data-testid="upVote"
+        className={classes.VoteBtn}
+        onClick={likeHandler}
+      >
         <FiArrowUp
           size={20}
           color={post.usersLiked.includes(user._id) ? 'red' : 'black'}
@@ -69,7 +73,11 @@ export default function VoteBtns({ post: postData, vertical }) {
       >
         {createVoteCountDisplayOutput()}
       </p>
-      <button className={classes.VoteBtn} onClick={dislikeHandler}>
+      <button
+        data-testid="downVote"
+        className={classes.VoteBtn}
+        onClick={dislikeHandler}
+      >
         <FiArrowDown
           size={20}
           color={post.usersDisliked.includes(user._id) ? 'blue' : 'black'}
