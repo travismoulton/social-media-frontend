@@ -60,7 +60,6 @@ export default function PostDate({ postTimeStamp }) {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     const date = new Date(postTimeStamp);
-    console.log(date.getDay());
 
     function formatTime() {
       if (date.getHours() > 12)
