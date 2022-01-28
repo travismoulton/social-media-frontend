@@ -2,6 +2,7 @@ import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import HomePageFeed from '../HomePageFeed/HomePageFeed';
 import GroupHeader from './GroupHeader/GroupHeader';
 import AboutGroup from './AboutGroup/AboutGroup';
 import { groupPageUtils } from './groupPageUtils';
@@ -50,6 +51,7 @@ export default function GroupPage() {
         >
           {links}
         </div>
+        <HomePageFeed />
       </>
     )
   );
