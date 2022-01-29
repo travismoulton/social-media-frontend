@@ -2,7 +2,7 @@ import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import HomePageFeed from '../HomePageFeed/HomePageFeed';
+import ThreadFeed from '../ThreadFeed/ThreadFeed';
 import GroupHeader from './GroupHeader/GroupHeader';
 import AboutGroup from './AboutGroup/AboutGroup';
 import classes from './GroupPage.module.css';
@@ -14,9 +14,9 @@ export default function GroupPage() {
   const history = useHistory();
   const [group, setGroup] = useState(null);
 
-  useEffect(() => {
-    const groupId = history.location.state.groupId;
+  const { groupId } = history.location.state;
 
+  useEffect(() => {
     if (!group || group._id !== groupId)
       (async () => {
         const {
@@ -25,18 +25,7 @@ export default function GroupPage() {
 
         setGroup(group);
       })();
-  }, [group, history]);
-
-  // const links =
-  //   group &&
-  //   group.threads.map((thread) => (
-  //     <Link
-  //       to={{ pathname: `/thread/${thread.title}`, state: { thread } }}
-  //       key={thread._id}
-  //     >
-  //       {thread.title}
-  //     </Link>
-  //   ));
+  }, [group, groupId]);
 
   return (
     group && (
@@ -44,7 +33,7 @@ export default function GroupPage() {
         <GroupHeader group={group} />
         <AboutGroup group={group} />
         <div className={classes.PageFeedWrapper}>
-          <HomePageFeed />
+          <ThreadFeed groupId={groupId} />
         </div>
       </>
     )

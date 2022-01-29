@@ -61,11 +61,16 @@ export default function PostDate({ postTimeStamp }) {
 
     const date = new Date(postTimeStamp);
 
+    function adjustMinuteStampForZero() {
+      if (date.getMinutes() === 0) return '00';
+      if (date.getMinutes() !== 0) return date.getMinutes();
+    }
+
     function formatTime() {
       if (date.getHours() > 12)
-        return `${date.getHours() - 12}:${date.getMinutes()} PM`;
+        return `${date.getHours() - 12}:${adjustMinuteStampForZero()} PM`;
       if (date.getHours() <= 12)
-        return `${date.getHours()}:${date.getMinutes()} AM`;
+        return `${date.getHours()}:${adjustMinuteStampForZero()} AM`;
     }
 
     return `${days[date.getDay()]} ${

@@ -6,9 +6,9 @@ import slugify from 'slugify';
 import PostDate from '../../Post/PostDate/PostDate';
 import VoteBtns from '../../Post/VoteBtns/VoteBtns';
 import postClasses from '../../Post/Post.module.css';
-import classes from './PageFeedCard.module.css';
+import classes from './ThreadFeedCard.module.css';
 
-export default function PageFeedCard({ post, thread }) {
+export default function ThreadFeedCard({ post, thread }) {
   const { user } = useSelector((state) => state.auth);
   const history = useHistory();
 
