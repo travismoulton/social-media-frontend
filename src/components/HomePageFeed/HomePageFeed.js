@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 
 import { pageFeedUtils } from './pageFeedUtils';
+import PageFeedCard from './PageFeedCard/PageFeedCard';
 
-const { fetchThreads } = pageFeedUtils;
+const { fetchPaginatedThreads } = pageFeedUtils;
 
 export default function HomePageFeed() {
   const [threads, setThreads] = useState(null);
@@ -10,13 +11,21 @@ export default function HomePageFeed() {
   useEffect(() => {
     if (!threads) {
       (async () => {
-        const { data } = await fetchThreads(1, 3);
+        const { data } = await fetchPaginatedThreads(1, 10);
         setThreads(data);
       })();
     }
   });
 
-  console.log(threads);
+  const cards =
+    threads &&
+    threads.map((thread) => (
+      <PageFeedCard
+        post={thread.initialPost}
+        thread={thread}
+        key={thread._id}
+      />
+    ));
 
-  return <h1>HomePageFeed</h1>;
+  return <div>{cards}</div>;
 }

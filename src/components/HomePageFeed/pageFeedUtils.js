@@ -1,9 +1,7 @@
 import axios from '../../shared/axiosInstances/threads';
 
 export const pageFeedUtils = {
-  fetchThreads: async function (pageNumber, limit) {
-    // {{url}}/threads?limit=1&page=3&sort=-likeScore
-
+  fetchPaginatedThreads: async function (pageNumber, limit) {
     const { data } = await axios.get(
       `?limit=${limit}&page=${pageNumber}&sort=-likeScore`
     );

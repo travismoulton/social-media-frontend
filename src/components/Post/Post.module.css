@@ -72,6 +72,10 @@
 }
 
 .NumComments {
+  cursor: default;
+}
+
+.NumComments {
   width: 15rem;
   margin-left: 0;
 }

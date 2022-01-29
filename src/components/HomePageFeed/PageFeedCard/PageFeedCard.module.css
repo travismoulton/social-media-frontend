@@ -1,0 +1,19 @@
+.PageFeedCard {
+  display: flex;
+  border: 1px solid #000;
+  width: 75rem;
+
+  margin: 2rem;
+  border-radius: 1rem;
+  background-color: #fff;
+}
+
+.Left {
+  width: 5%;
+}
+
+.CardHeader {
+  padding: 0.3rem 3rem;
+  margin-bottom: 0.9rem;
+  display: flex;
+}

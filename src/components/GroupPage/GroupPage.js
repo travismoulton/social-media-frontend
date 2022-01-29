@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import HomePageFeed from '../HomePageFeed/HomePageFeed';
 import GroupHeader from './GroupHeader/GroupHeader';
 import AboutGroup from './AboutGroup/AboutGroup';
+import classes from './GroupPage.module.css';
 import { groupPageUtils } from './groupPageUtils';
 
 const { fetchGroup } = groupPageUtils;
@@ -42,7 +43,7 @@ export default function GroupPage() {
       <>
         <GroupHeader group={group} />
         <AboutGroup group={group} />
-        <div
+        {/* <div
           style={{
             display: 'flex',
             padding: '30rem',
@@ -50,8 +51,10 @@ export default function GroupPage() {
           }}
         >
           {links}
+        </div> */}
+        <div className={classes.PageFeedWrapper}>
+          <HomePageFeed />
         </div>
-        <HomePageFeed />
       </>
     )
   );
