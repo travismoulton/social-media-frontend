@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
 import { BsChatRightText } from 'react-icons/bs';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import slugify from 'slugify';
 
 import PostDate from '../../Post/PostDate/PostDate';
@@ -15,7 +14,7 @@ export default function PageFeedCard({ post, thread }) {
 
   const currentUserIsPostAuthor = post.author._id === user._id;
 
-  console.log(thread);
+  const { group } = thread;
 
   function redirectToThreadDetail() {
     // The Thread componenet used the initialPost property as the initialPostId
@@ -31,14 +30,30 @@ export default function PageFeedCard({ post, thread }) {
         {!currentUserIsPostAuthor && <VoteBtns post={post} vertical />}
       </div>
 
-      <div className={classes.Right} onClick={redirectToThreadDetail}>
+      <div className={classes.Right}>
         <div className={postClasses.PostHeader}>
-          <p className={postClasses.Author}>{post.author.name}</p>
+          <Link
+            className={classes.Group}
+            to={{
+              pathname: `/group/${group.name}`,
+              state: { groupId: group._id },
+            }}
+          >
+            <p>r/{group.name}</p>
+          </Link>
+          <p className={classes.Author}>Posted by: {post.author.name}</p>
           <PostDate postTimeStamp={post.createdAt} />
         </div>
-        <div className={postClasses.PostContent}>{post.content}</div>
+        <div onClick={redirectToThreadDetail} style={{ cursor: 'pointer' }}>
+          <div className={classes.TitleWrapper}>
+            <h4 className={classes.Title}>{thread.title}</h4>
+          </div>
+          <div className={classes.PostContent}>
+            <span>{post.content}</span>
+            <div className={classes.Blur}></div>
+          </div>
+        </div>
         <div className={postClasses.OptionsRow}>
-          {/* {post.author._id !== user._id && <VoteBtns post={post} />} */}
           <span className={postClasses.NumComments}>
             <BsChatRightText size={16} />
             <span>{thread.numComments} Comments</span>

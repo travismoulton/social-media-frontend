@@ -50,6 +50,7 @@ export default function CreateGroup({ show, closeModal }) {
     touched: false,
     wrapperClass: 'GroupDescriptionWrapper',
     className: 'GroupDescription',
+    maxLength: 128,
   });
 
   const [error, setError] = useState(null);
@@ -144,6 +145,7 @@ export default function CreateGroup({ show, closeModal }) {
       key={el.id}
       className={el.className}
       errorMsg={el.errorMsg}
+      maxLength={el.maxLength}
     />
   ));
 

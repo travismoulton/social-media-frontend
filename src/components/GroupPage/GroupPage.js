@@ -27,31 +27,22 @@ export default function GroupPage() {
       })();
   }, [group, history]);
 
-  const links =
-    group &&
-    group.threads.map((thread) => (
-      <Link
-        to={{ pathname: `/thread/${thread.title}`, state: { thread } }}
-        key={thread._id}
-      >
-        {thread.title}
-      </Link>
-    ));
+  // const links =
+  //   group &&
+  //   group.threads.map((thread) => (
+  //     <Link
+  //       to={{ pathname: `/thread/${thread.title}`, state: { thread } }}
+  //       key={thread._id}
+  //     >
+  //       {thread.title}
+  //     </Link>
+  //   ));
 
   return (
     group && (
       <>
         <GroupHeader group={group} />
         <AboutGroup group={group} />
-        {/* <div
-          style={{
-            display: 'flex',
-            padding: '30rem',
-            flexDirection: 'column',
-          }}
-        >
-          {links}
-        </div> */}
         <div className={classes.PageFeedWrapper}>
           <HomePageFeed />
         </div>
