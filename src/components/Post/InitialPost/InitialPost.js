@@ -6,6 +6,7 @@ import PostDate from '../PostDate/PostDate';
 import SubmitReplyBtn from '../SubmitReplyBtn/SubmitReplyBtn';
 import ReplyInput from '../ReplyInput/ReplyInput';
 import VoteBtns from '../VoteBtns/VoteBtns';
+import LoginOrRegister from '../LoginOrRegister/LoginOrRegister';
 import classes from '../Post.module.css';
 
 export default function Post({ post, reloadThread, numComments }) {
@@ -75,6 +76,8 @@ export default function Post({ post, reloadThread, numComments }) {
           />
         </div>
       )}
+
+      {!user && <LoginOrRegister />}
     </>
   );
 }

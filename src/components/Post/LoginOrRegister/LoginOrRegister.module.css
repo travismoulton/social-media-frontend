@@ -1,0 +1,45 @@
+.Wrapper {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 3rem);
+  margin-left: 2rem;
+  margin-right: 1rem;
+  margin-bottom: 3rem;
+
+  border: 1px solid #eee;
+  height: 5rem;
+  border-radius: 1rem;
+  padding: 3rem;
+}
+
+.Right {
+  width: 30%;
+  display: flex;
+}
+
+.Left {
+  width: 70%;
+  font-size: 1.8rem;
+}
+
+.Link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  width: 7rem;
+  height: 3rem;
+  border-radius: 3px;
+  border: solid 1px #000;
+  color: #000;
+
+  transition: all 0.4s;
+}
+
+.Link:not(:last-child) {
+  margin-right: 2rem;
+}
+
+.Link:hover {
+  background-color: #eee;
+}

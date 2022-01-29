@@ -14,4 +14,13 @@ export default function LoginOrRegister() {
       Register
     </Link>
   );
+
+  return (
+    <div className={classes.Wrapper}>
+      <div className={classes.Left}>Login or register to leave a comment</div>
+      <div className={classes.Right}>
+        {loginBtn} {registerBtn}
+      </div>
+    </div>
+  );
 }
