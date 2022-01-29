@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import GroupSelect from './GroupSelect/GroupSelect';
 import { utils } from './groupDropdownUtils';
 
-const { fetchUserGroups } = utils;
+const { fetchUserGroups, fetchAllGroups } = utils;
 
 export default function GroupDropdown() {
   const [dropdown, setDropdown] = useState({
@@ -22,7 +22,9 @@ export default function GroupDropdown() {
 
   useEffect(() => {
     (async () => {
-      const groups = user && (await fetchUserGroups());
+      // const groups = user && (await fetchUserGroups());
+      const groups = await fetchAllGroups();
+
       if (groups)
         setGroupsAsOptions(
           groups.map((group) => ({
