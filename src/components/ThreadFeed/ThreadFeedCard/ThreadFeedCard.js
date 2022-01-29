@@ -12,7 +12,7 @@ export default function ThreadFeedCard({ post, thread }) {
   const { user } = useSelector((state) => state.auth);
   const history = useHistory();
 
-  const currentUserIsPostAuthor = post.author._id === user._id;
+  const currentUserIsNotAuthor = user && post.author._id !== user._id;
 
   const { group } = thread;
 
@@ -27,7 +27,7 @@ export default function ThreadFeedCard({ post, thread }) {
   return (
     <div className={classes.PageFeedCard}>
       <div className={classes.Left}>
-        {!currentUserIsPostAuthor && <VoteBtns post={post} vertical />}
+        {currentUserIsNotAuthor && <VoteBtns post={post} vertical />}
       </div>
 
       <div className={classes.Right}>

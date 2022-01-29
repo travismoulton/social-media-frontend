@@ -8,8 +8,11 @@ const { fetchAllThreadsPaginated, fetchThreadsByGroupPaginated } =
 
 export default function ThreadFeed({ groupId }) {
   const [threads, setThreads] = useState(null);
-
   const groupRef = useRef(null);
+
+  // If not passed, the groupId prop is undefined. Set it to null so the if check
+  // in the useEffect passes
+  if (!groupId) groupId = null;
 
   const fetchAllThreads = useCallback(async () => {
     const { data } = await fetchAllThreadsPaginated(1, 10);

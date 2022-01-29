@@ -10,6 +10,7 @@ import Register from './components/Register/Register';
 import GroupPage from './components/GroupPage/GroupPage';
 import Thread from './components/Thread/Thread';
 import CreateThread from './components/CreateThread/CreateThread';
+import HomePage from './components/HomePage/HomePage';
 
 import { authSuccess } from './store/authSlice';
 import { appUtils } from './appUtils';
@@ -37,6 +38,7 @@ function App() {
       <Route path="/group/:groupName/createThread" component={CreateThread} />
       <Route path="/group/:groupName" component={GroupPage} />
       <Route path="/thread/:threadName" component={Thread} />
+      <Route path="/" component={HomePage} />
     </Switch>
   );
 

@@ -13,6 +13,7 @@ export default function Post({ post, reloadThread }) {
   const [showReplyInput, setShowReplyInput] = useState(false);
   const [replyContent, setReplyContent] = useState('');
 
+  const currentUserIsNotAuthor = user && post.author._id !== user._id;
 
   return (
     <div className={classes.Post} style={{ marginLeft: '2rem' }}>
@@ -22,13 +23,17 @@ export default function Post({ post, reloadThread }) {
       </div>
       <div className={classes.PostContent}>{post.content}</div>
       <div className={classes.OptionsRow}>
-        {post.author._id !== user._id && <VoteBtns post={post} />}
-        <button
-          className={classes.ReplyBtn}
-          onClick={() => setShowReplyInput((showReplyInput) => !showReplyInput)}
-        >
-          <BsChatRightText size={16} /> <span>Reply</span>
-        </button>
+        {currentUserIsNotAuthor && <VoteBtns post={post} />}
+        {user && (
+          <button
+            className={classes.ReplyBtn}
+            onClick={() =>
+              setShowReplyInput((showReplyInput) => !showReplyInput)
+            }
+          >
+            <BsChatRightText size={16} /> <span>Reply</span>
+          </button>
+        )}
       </div>
       {showReplyInput && (
         <>

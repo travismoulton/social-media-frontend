@@ -25,7 +25,7 @@ export default function Post({ post, reloadThread, numComments }) {
     if (shouldClearReplyInput) setShouldClearReplyInput(false);
   }, [shouldClearReplyInput]);
 
-  const currentUserIsPostAuthor = post.author._id === user._id;
+  const currentUserIsNotAuthor = user && post.author._id !== user._id;
 
   return (
     <>
@@ -33,7 +33,7 @@ export default function Post({ post, reloadThread, numComments }) {
         className={`${classes.Post} ${classes.InitialPost}`}
         style={{ marginLeft: '2rem', marginBottom: '3.5rem' }}
       >
-        {!currentUserIsPostAuthor && (
+        {currentUserIsNotAuthor && (
           <div className={classes.InitialPostLeft}>
             <VoteBtns post={post} vertical />
           </div>
@@ -41,7 +41,7 @@ export default function Post({ post, reloadThread, numComments }) {
         <div
           className={classes.InitialPostRight}
           // This style is only needed if the VoteBtns are in the element
-          style={{ marginLeft: !currentUserIsPostAuthor && '-2rem' }}
+          style={{ marginLeft: currentUserIsNotAuthor && '-2rem' }}
         >
           <div className={classes.PostHeader}>
             <p className={classes.Author}>{post.author.name}</p>
@@ -55,24 +55,26 @@ export default function Post({ post, reloadThread, numComments }) {
           </div>
         </div>
       </div>
-      <div className={classes.ReplyWrapper}>
-        <p>
-          Comment as <span>{user.name}</span>
-        </p>
-        <ReplyInput
-          setReplyContent={setReplyContent}
-          forInitialPost
-          shouldClearInput={shouldClearReplyInput}
-        />
-        <SubmitReplyBtn
-          reply={replyContent}
-          parentPost={post._id}
-          threadId={post.thread}
-          reloadThread={reloadThread}
-          clearReplyInput={clearReplyInput}
-          forInitialPost
-        />
-      </div>
+      {user && (
+        <div className={classes.ReplyWrapper}>
+          <p>
+            Comment as <span>{user.name}</span>
+          </p>
+          <ReplyInput
+            setReplyContent={setReplyContent}
+            forInitialPost
+            shouldClearInput={shouldClearReplyInput}
+          />
+          <SubmitReplyBtn
+            reply={replyContent}
+            parentPost={post._id}
+            threadId={post.thread}
+            reloadThread={reloadThread}
+            clearReplyInput={clearReplyInput}
+            forInitialPost
+          />
+        </div>
+      )}
     </>
   );
 }
