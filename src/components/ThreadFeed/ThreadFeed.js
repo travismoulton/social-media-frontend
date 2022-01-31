@@ -28,6 +28,9 @@ export default function ThreadFeed({ groupId }) {
     if (!threads || groupId !== groupRef.current) {
       if (groupId) groupRef.current = groupId;
 
+      // If rendered inside GroupPage, ThreadFeed will be passed a groupId, and will only
+      // fetch threads for that group. If rendered on the home page, no groupId will be passed
+      // and it will fetch all threads and display them to the home page
       const fetchThreads = groupId ? fetchThreadsByGroup : fetchAllThreads;
       (async () => {
         const data = await fetchThreads(1, 10, groupId);

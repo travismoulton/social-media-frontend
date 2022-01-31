@@ -8,6 +8,10 @@
   background-color: #fff;
 }
 
+.PageFeedCard:last-child {
+  margin-bottom: 0;
+}
+
 .Right {
   flex-grow: 1;
 }
