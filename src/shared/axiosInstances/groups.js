@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const instance = axios.create({
   baseURL: '/groups',
-  timeout: 5000,
+  timeout: 20000,
   withCredentials: true,
 });
 
