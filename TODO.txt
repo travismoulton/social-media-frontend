@@ -15,8 +15,15 @@
 
 //5: General
   // A: Implement a continue is as guest feature
-  // B: Check why there is white background at the bottom of the feed
+
 
 //6: Post
   // A: Implement delete post feature
   // B: Implement an edit post feature
+
+//7: HomePage
+  // A: Put a create post button under the nav
+
+//8: GroupPage
+  // A: Put another create post button at the top under the banner
+  //B: When in CreatePost componenet, get rid of the create post button in AboutGroup
