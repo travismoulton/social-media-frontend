@@ -3,26 +3,45 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { threadFeedUtils } from './threadFeedUtils';
 import ThreadFeedCard from './ThreadFeedCard/ThreadFeedCard';
 
-const { fetchAllThreadsPaginated, fetchThreadsByGroupPaginated } =
-  threadFeedUtils;
+const {
+  fetchAllThreadsPaginated,
+  fetchThreadsByGroupPaginated,
+  fetchNextPage,
+} = threadFeedUtils;
 
 export default function ThreadFeed({ groupId }) {
   const [threads, setThreads] = useState(null);
+
+  const [limit, setLimit] = useState(6);
+  const [nextUrl, setNextUrl] = useState(null);
   const groupRef = useRef(null);
 
   // If not passed, the groupId prop is undefined. Set it to null so the if check
   // in the useEffect passes
   if (!groupId) groupId = null;
 
-  const fetchAllThreads = useCallback(async () => {
-    const { data } = await fetchAllThreadsPaginated(1, 10);
-    return data;
-  }, []);
+  const updateFeed = useCallback(async () => {
+    const { data } = await fetchNextPage(nextUrl);
+    setThreads((threads) => threads.concat(data.threads));
+    setNextUrl(data.next);
+  }, [nextUrl]);
 
-  const fetchThreadsByGroup = useCallback(async () => {
-    const { data } = await fetchThreadsByGroupPaginated(1, 10, groupId);
-    return data;
-  }, [groupId]);
+  useEffect(() => {
+    function handleScroll() {
+      const { scrollHeight, scrollTop, clientHeight } =
+        document.scrollingElement;
+
+      const scrolledToBottom = scrollHeight - scrollTop === clientHeight;
+
+      // The API will return nextUrl as null if on the last page of results.
+      // Don't attempt to fetch the next page if there is no nextUrl
+      if (scrolledToBottom && nextUrl) updateFeed();
+    }
+
+    document.addEventListener('scroll', handleScroll);
+
+    return () => document.removeEventListener('scroll', handleScroll);
+  }, [nextUrl, updateFeed]);
 
   useEffect(() => {
     if (!threads || groupId !== groupRef.current) {
@@ -31,13 +50,18 @@ export default function ThreadFeed({ groupId }) {
       // If rendered inside GroupPage, ThreadFeed will be passed a groupId, and will only
       // fetch threads for that group. If rendered on the home page, no groupId will be passed
       // and it will fetch all threads and display them to the home page
-      const fetchThreads = groupId ? fetchThreadsByGroup : fetchAllThreads;
+      const fetchThreads = groupId
+        ? fetchThreadsByGroupPaginated
+        : fetchAllThreadsPaginated;
+
       (async () => {
-        const data = await fetchThreads(1, 10, groupId);
-        setThreads(data);
+        const { data } = await fetchThreads(limit, groupId);
+
+        setThreads(data.threads);
+        setNextUrl(data.next);
       })();
     }
-  }, [threads, fetchAllThreads, fetchThreadsByGroup, groupId]);
+  }, [threads, groupId, limit]);
 
   const cards =
     threads &&
