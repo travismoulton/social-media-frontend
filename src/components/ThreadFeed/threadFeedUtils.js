@@ -4,7 +4,7 @@ import axios from 'axios';
 export const threadFeedUtils = {
   fetchAllThreadsPaginated: async function (limit) {
     const { data } = await threadsInstance.get(
-      `?page=1&limit=${limit}&sort=-likeScore`
+      `?page=1&limit=${limit}&sort=-likeScore,createdAt`
     );
 
     return data;
@@ -12,7 +12,7 @@ export const threadFeedUtils = {
 
   fetchThreadsByGroupPaginated: async function (limit, groupId) {
     const { data } = await threadsInstance.get(
-      `/byGroup/${groupId}/?page=1&limit=${limit}&sort=-likeScore`
+      `/byGroup/${groupId}/?page=1&limit=${limit}&sort=-likeScore,createdAt`
     );
 
     return data;

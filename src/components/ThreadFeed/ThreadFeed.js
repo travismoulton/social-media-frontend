@@ -22,12 +22,13 @@ export default function ThreadFeed({ groupId }) {
 
   const updateFeed = useCallback(async () => {
     const { data } = await fetchNextPage(nextUrl);
+
     setThreads((threads) => threads.concat(data.threads));
     setNextUrl(data.next);
   }, [nextUrl]);
 
   useEffect(() => {
-    function handleScroll() {
+    function loadNextPaegOnScroll() {
       const { scrollHeight, scrollTop, clientHeight } =
         document.scrollingElement;
 
@@ -38,9 +39,9 @@ export default function ThreadFeed({ groupId }) {
       if (scrolledToBottom && nextUrl) updateFeed();
     }
 
-    document.addEventListener('scroll', handleScroll);
+    document.addEventListener('scroll', loadNextPaegOnScroll);
 
-    return () => document.removeEventListener('scroll', handleScroll);
+    return () => document.removeEventListener('scroll', loadNextPaegOnScroll);
   }, [nextUrl, updateFeed]);
 
   useEffect(() => {
