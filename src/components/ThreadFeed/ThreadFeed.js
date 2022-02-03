@@ -27,6 +27,19 @@ export default function ThreadFeed({ groupId }) {
     setNextUrl(data.next);
   }, [nextUrl]);
 
+  // Probably don't want this in production
+  useEffect(() => {
+    function setLimitBasedOnScreenSize() {
+      const { innerHeight } = window;
+
+      // Each thread feed card is 200px tall, so only load enough to
+      // put one overflowing vertically
+      setLimit(innerHeight / 200 + 1);
+    }
+
+    setLimitBasedOnScreenSize();
+  });
+
   useEffect(() => {
     function loadNextPaegOnScroll() {
       const { scrollHeight, scrollTop, clientHeight } =

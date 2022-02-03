@@ -10,7 +10,7 @@
   // B: When a user logs in from the button on the thread page, redirect them to that thread
 
 //4: Feed
-  // A: Implement a feature to fetch more posts while scrolling down the page
+
   // B: Implement a feature to sort by date or popularity
 
 //5: General
