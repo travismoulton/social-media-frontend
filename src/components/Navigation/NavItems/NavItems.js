@@ -1,7 +1,7 @@
 import { BiHomeSmile } from 'react-icons/bi';
 import { useSelector } from 'react-redux';
 
-import GroupDropdown from './GroupDropdown/GroupDropdown';
+import GroupDropdown from '../../GroupDropdown/GroupDropdown';
 import NavItem from './NavItem/NavItem';
 import ShowCreateGroupBtn from './ShowCreateGroupBtn/ShowCreateGroupBtn';
 import classes from './NavItems.module.css';

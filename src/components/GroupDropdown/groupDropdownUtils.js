@@ -1,5 +1,5 @@
-import axios from '../../../../shared/axiosInstances/memberships';
-import groupsInstance from '../../../../shared/axiosInstances/groups';
+import axios from '../../shared/axiosInstances/memberships';
+import groupsInstance from '../../shared/axiosInstances/groups';
 
 export const utils = {
   fetchUserGroups: async function () {

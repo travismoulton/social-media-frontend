@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import slugify from 'slugify';
 
-import GroupDropdown from '../Navigation/NavItems/GroupDropdown/GroupDropdown';
+import GroupDropdown from '../GroupDropdown/GroupDropdown';
 import AboutGroup from '../GroupPage/AboutGroup/AboutGroup';
 import PostInput from '../PostInput/PostInput';
 import SubitThreadBtn from './SumbitThreadBtn/SubmitThreadBtn';
