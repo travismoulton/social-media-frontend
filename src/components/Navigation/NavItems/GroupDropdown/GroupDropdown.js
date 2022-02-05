@@ -4,9 +4,11 @@ import { useSelector } from 'react-redux';
 import GroupSelect from './GroupSelect/GroupSelect';
 import { utils } from './groupDropdownUtils';
 
-const { fetchUserGroups, fetchAllGroups } = utils;
+const { fetchAllGroups } = utils;
 
-export default function GroupDropdown() {
+export default function GroupDropdown(props) {
+  const { withLink, updateGroupStateAndUrl, preLoadedGroup } = props;
+
   const [dropdown, setDropdown] = useState({
     elementType: 'select',
     elementConfig: {
@@ -16,13 +18,13 @@ export default function GroupDropdown() {
     isSearchable: false,
   });
 
+  const [loaded, setLoaded] = useState(false);
   const [groupsAsOptions, setGroupsAsOptions] = useState(null);
 
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     (async () => {
-      // const groups = user && (await fetchUserGroups());
       const groups = await fetchAllGroups();
 
       if (groups)
@@ -30,10 +32,11 @@ export default function GroupDropdown() {
           groups.map((group) => ({
             value: group._id,
             label: group.name,
+            group,
           }))
         );
     })();
-  }, [user]);
+  }, []);
 
   const setDropdownOptions = useCallback(() => {
     setDropdown({
@@ -43,6 +46,8 @@ export default function GroupDropdown() {
         options: [...groupsAsOptions],
       },
     });
+
+    setLoaded(true);
   }, [dropdown, groupsAsOptions]);
 
   useEffect(() => {
@@ -57,15 +62,22 @@ export default function GroupDropdown() {
     if (shouldUpdateDropdownOptions) setDropdownOptions();
   }, [user, groupsAsOptions, setDropdownOptions, dropdown]);
 
-  function changed(val) {
+  function changed(val, group) {
     setDropdown({ ...dropdown, value: val });
+
+    // When rendered in CreateThread, it should change the groupState when a new group is selected
+    if (updateGroupStateAndUrl) updateGroupStateAndUrl(group);
   }
 
   return (
-    <GroupSelect
-      options={dropdown.elementConfig.options}
-      isSearchable={false}
-      changed={(e) => changed(e.value)}
-    />
+    loaded && (
+      <GroupSelect
+        options={dropdown.elementConfig.options}
+        isSearchable={false}
+        changed={(e) => changed(e.value, e.group)}
+        withLink={withLink}
+        preLoadedGroup={preLoadedGroup}
+      />
+    )
   );
 }

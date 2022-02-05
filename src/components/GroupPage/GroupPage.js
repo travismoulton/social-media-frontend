@@ -1,10 +1,10 @@
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import ThreadFeed from '../ThreadFeed/ThreadFeed';
 import GroupHeader from './GroupHeader/GroupHeader';
 import AboutGroup from './AboutGroup/AboutGroup';
+import CreatePostBanner from '../CreatePostBanner/CreatePostBanner';
 import classes from './GroupPage.module.css';
 import { groupPageUtils } from './groupPageUtils';
 
@@ -33,6 +33,7 @@ export default function GroupPage() {
         <GroupHeader group={group} />
         <AboutGroup group={group} />
         <div className={classes.PageFeedWrapper}>
+          <CreatePostBanner group={group} />
           <ThreadFeed groupId={groupId} />
         </div>
       </>

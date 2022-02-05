@@ -13,6 +13,7 @@ export default function SubmitThreadBtn(props) {
     title,
     setTitleTouched,
     setPostContentTouched,
+    disabled,
   } = props;
 
   const history = useHistory();
@@ -27,7 +28,11 @@ export default function SubmitThreadBtn(props) {
   }
 
   return (
-    <button className={`Global-btn-1 ${classes.Btn}`} onClick={submitHandler}>
+    <button
+      className={`Global-btn-1 ${classes.Btn}`}
+      onClick={submitHandler}
+      disabled={disabled}
+    >
       Create Thread
     </button>
   );

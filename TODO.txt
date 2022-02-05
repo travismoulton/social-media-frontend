@@ -15,6 +15,7 @@
 
 //5: General
   // A: Implement a continue is as guest feature
+  // B: Set app to a loading state while it's checking for a user
 
 
 //6: Post

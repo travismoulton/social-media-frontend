@@ -16,7 +16,7 @@ export default function NavItems() {
             <BiHomeSmile />
           </NavItem>
           <NavItem link="/logout">Logout</NavItem>
-          <GroupDropdown />
+          <GroupDropdown withLink />
           <ShowCreateGroupBtn />
         </>
       ) : (

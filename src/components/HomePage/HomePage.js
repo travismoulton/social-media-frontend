@@ -1,4 +1,5 @@
 import classes from './HomePage.module.css';
+import CreatePostBanner from '../CreatePostBanner/CreatePostBanner';
 import ThreadFeed from '../ThreadFeed/ThreadFeed';
 
 export default function HomePage() {
@@ -10,6 +11,7 @@ export default function HomePage() {
         paddingBottom: '5rem',
       }}
     >
+      <CreatePostBanner />
       <ThreadFeed />
     </div>
   );

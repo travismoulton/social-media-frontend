@@ -1,39 +1,22 @@
 import Select from 'react-select';
 
 import classes from './GroupSelect.module.css';
-import GroupOption from '../GroupOption/GroupOption';
+import GroupOptionWithLink from '../GroupOptionWithLink/GroupOptionWithLink';
+import GroupOptionNoLink from '../GroupOptionNoLink/GroupOptionNoLink';
 
 export default function GroupSelect(props) {
-  const { changed, options, selectId, isSearchable } = props;
+  const { changed, options, isSearchable, withLink, preLoadedGroup } = props;
 
-  const formatOptionLabel = ({ value, label }) => (
-    <GroupOption value={value} label={label} />
+  const formatOptionLabel = ({ value, label }) =>
+    withLink ? (
+      <GroupOptionWithLink value={value} label={label} />
+    ) : (
+      <GroupOptionNoLink value={value} label={label} />
+    );
+
+  const defaultValue = options.find(
+    (option) => option.value === preLoadedGroup
   );
-
-  const customStyles = {
-    option: (provided, state) => ({
-      ...provided,
-      display: 'flex',
-      alignItems: 'space-between',
-      textAlign: 'left',
-      height: '2.5rem',
-      backgroundColor: state.isSelected
-        ? '#00bbff'
-        : state.isFocused
-        ? '#99e6ff'
-        : '#fff',
-
-      color: (state.isFocused || state.isSelected) && '#fff',
-      fontWeight: (state.isFocused || state.isSelected) && '700',
-    }),
-    control: (provided, state) => ({
-      ...provided,
-      ':hover': {
-        ...provided['hover'],
-        boorderColor: '#00bbff',
-      },
-    }),
-  };
 
   return (
     <Select
@@ -41,8 +24,8 @@ export default function GroupSelect(props) {
       className={classes.GroupSelect}
       onChange={changed}
       options={options}
-      // styles={customStyles}
       isSearchable={isSearchable}
+      defaultValue={defaultValue}
     />
   );
 }
