@@ -61,6 +61,7 @@ export default function CreateThread() {
       <GroupDropdown
         updateGroupStateAndUrl={updateGroupStateAndUrl}
         preLoadedGroup={group && group._id}
+        fromCreateThread
       />
       <div className={classes.InputWrapper}>
         <ThreadTitleForm

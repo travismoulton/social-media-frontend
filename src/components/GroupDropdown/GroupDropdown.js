@@ -7,7 +7,12 @@ import { utils } from './groupDropdownUtils';
 const { fetchAllGroups } = utils;
 
 export default function GroupDropdown(props) {
-  const { withLink, updateGroupStateAndUrl, preLoadedGroup } = props;
+  const {
+    fromNavBar,
+    fromCreateThread,
+    updateGroupStateAndUrl,
+    preLoadedGroup,
+  } = props;
 
   const [dropdown, setDropdown] = useState({
     elementType: 'select',
@@ -66,7 +71,7 @@ export default function GroupDropdown(props) {
     setDropdown({ ...dropdown, value: val });
 
     // When rendered in CreateThread, it should change the groupState when a new group is selected
-    if (updateGroupStateAndUrl) updateGroupStateAndUrl(group);
+    if (fromCreateThread) updateGroupStateAndUrl(group);
   }
 
   return (
@@ -75,7 +80,7 @@ export default function GroupDropdown(props) {
         options={dropdown.elementConfig.options}
         isSearchable={false}
         changed={(e) => changed(e.value, e.group)}
-        withLink={withLink}
+        fromNavBar={fromNavBar}
         preLoadedGroup={preLoadedGroup}
       />
     )

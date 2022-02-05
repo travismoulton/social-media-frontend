@@ -1,8 +1,8 @@
 import { AiFillAlert } from 'react-icons/ai';
 
-import classes from '../GroupOptionWithLink/GroupOption.module.css';
+import classes from '../GroupOptionNavBar/GroupOption.module.css';
 
-export default function GroupOption({ value, label }) {
+export default function GroupOptionCreateThread({ value, label }) {
   return (
     <div className={classes.Wrapper}>
       <AiFillAlert />

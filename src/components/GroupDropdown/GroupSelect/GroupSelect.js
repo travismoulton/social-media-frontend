@@ -1,17 +1,17 @@
 import Select from 'react-select';
 
 import classes from './GroupSelect.module.css';
-import GroupOptionWithLink from '../GroupOptionWithLink/GroupOptionWithLink';
-import GroupOptionNoLink from '../GroupOptionNoLink/GroupOptionNoLink';
+import GroupOptionNavBar from '../GroupOptionNavBar/GroupOptionNavBar';
+import GroupOptionCreateThread from '../GroupOptionCreateThread/GroupOptionCreateThread';
 
 export default function GroupSelect(props) {
-  const { changed, options, isSearchable, withLink, preLoadedGroup } = props;
+  const { changed, options, isSearchable, fromNavBar, preLoadedGroup } = props;
 
   const formatOptionLabel = ({ value, label }) =>
-    withLink ? (
-      <GroupOptionWithLink value={value} label={label} />
+    fromNavBar ? (
+      <GroupOptionNavBar value={value} label={label} />
     ) : (
-      <GroupOptionNoLink value={value} label={label} />
+      <GroupOptionCreateThread value={value} label={label} />
     );
 
   const defaultValue = options.find(
