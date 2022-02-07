@@ -6,9 +6,12 @@ export default function HomePage() {
   return (
     <div
       style={{
-        paddingLeft: '30rem',
         paddingTop: '5rem',
         paddingBottom: '5rem',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
       }}
     >
       <CreatePostBanner />

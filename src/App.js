@@ -1,5 +1,5 @@
 import { Switch, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import './App.css';
@@ -19,6 +19,8 @@ const { checkForUser } = appUtils;
 
 function App() {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -26,7 +28,12 @@ function App() {
       // If there is a valid token on the request, coresponding user data will
       // be sent back, and set in the store.
       const userToLogin = await checkForUser();
-      if (userToLogin) dispatch(authSuccess(userToLogin));
+      if (userToLogin) {
+        dispatch(authSuccess(userToLogin));
+        setIsAuthenticated(true);
+      }
+
+      setLoading(false);
     })();
   }, [dispatch]);
 
@@ -45,7 +52,7 @@ function App() {
 
   return (
     <div className="App">
-      <Layout>{routes}</Layout>
+      {!loading && <Layout isAuthenticated={isAuthenticated}>{routes}</Layout>}
     </div>
   );
 }

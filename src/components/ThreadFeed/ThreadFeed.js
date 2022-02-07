@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 
 import { threadFeedUtils } from './threadFeedUtils';
 import ThreadFeedCard from './ThreadFeedCard/ThreadFeedCard';
+import Spinner from '../UI/Spinner/Spinner';
 
 const {
   fetchAllThreadsPaginated,
@@ -87,5 +88,5 @@ export default function ThreadFeed({ groupId }) {
       />
     ));
 
-  return <div>{cards}</div>;
+  return threads ? <div>{cards}</div> : <Spinner />;
 }
