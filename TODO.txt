@@ -29,3 +29,6 @@
   // A: Put another create post button at the top under the banner
   //B: When in CreatePost componenet, get rid of the create post button in AboutGroup
   // C: Need to fix it so that if an annonymous user visits group page it doesn't break
+
+//9: GroupDropdown
+  // A: Need to fix that the the dropdown doesn't load until after the page loads
