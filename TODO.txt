@@ -1,8 +1,5 @@
-//1: Login
-  // A: Make login button submit when the enter button is clicked
-
-//2: UI
-  // A: Implement spinner when loading on all pages
+//1: Login && Register
+  // A: Make login / register buttons submit when the enter button is clicked
 
 //3: Thread
   // A: Implement a feature so that when the user clicks the comments button, it loads the thread at the first reply
@@ -10,22 +7,16 @@
   // B: When a user logs in from the button on the thread page, redirect them to that thread
 
 //4: Feed
-
   // B: Implement a feature to sort by date or popularity
 
 //5: General
   // A: Implement a continue is as guest feature
-  // B: Set app to a loading state while it's checking for a user
-
 
 //6: Post
   // A: Implement delete post feature
   // B: Implement an edit post feature
 
-//7: HomePage
-  // A: Put a create post button under the nav
-
-//8: GroupPage
+//7: GroupPage
   // A: Put another create post button at the top under the banner
   //B: When in CreatePost componenet, get rid of the create post button in AboutGroup
   // C: Need to fix it so that if an annonymous user visits group page it doesn't break
