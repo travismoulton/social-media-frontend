@@ -1,6 +1,3 @@
-/* .App {
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-} */
+.App {
+  min-height: 100vh;
+}

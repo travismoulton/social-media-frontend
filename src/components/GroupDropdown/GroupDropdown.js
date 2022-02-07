@@ -1,37 +1,45 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
 
 import GroupSelect from './GroupSelect/GroupSelect';
 import { utils } from './groupDropdownUtils';
 
-const { fetchUserGroups } = utils;
+const { fetchAllGroups } = utils;
 
-export default function GroupDropdown() {
+export default function GroupDropdown(props) {
+  const {
+    fromNavBar,
+    fromCreateThread,
+    updateGroupStateAndUrl,
+    preLoadedGroup,
+    groupName,
+  } = props;
+
   const [dropdown, setDropdown] = useState({
     elementType: 'select',
     elementConfig: {
       options: [],
     },
-    value: 0,
-    isSearchable: false,
+    // If rendered from inside groupDetail page, there will be a preLoadedGroup
+    // Otherwise their will not.
+    value: preLoadedGroup || 0,
   });
 
   const [groupsAsOptions, setGroupsAsOptions] = useState(null);
 
-  const { user } = useSelector((state) => state.auth);
-
   useEffect(() => {
     (async () => {
-      const groups = user && (await fetchUserGroups());
+      const groups = await fetchAllGroups();
+
       if (groups)
         setGroupsAsOptions(
           groups.map((group) => ({
             value: group._id,
             label: group.name,
+            group,
           }))
         );
     })();
-  }, [user]);
+  }, []);
 
   const setDropdownOptions = useCallback(() => {
     setDropdown({
@@ -46,24 +54,31 @@ export default function GroupDropdown() {
   useEffect(() => {
     // Only update the drop down options if there is a logged in user, groups have been fetched
     const shouldUpdateDropdownOptions =
-      user &&
       groupsAsOptions &&
       // The length of the select menu options should be one more than the length of groups,
       // as there is a blank option. This prevents it from being updated more than once
       dropdown.elementConfig.options.length !== groupsAsOptions.length;
 
     if (shouldUpdateDropdownOptions) setDropdownOptions();
-  }, [user, groupsAsOptions, setDropdownOptions, dropdown]);
+  }, [groupsAsOptions, setDropdownOptions, dropdown, preLoadedGroup]);
 
-  function changed(val) {
+  function changed(val, group) {
     setDropdown({ ...dropdown, value: val });
+
+    // When rendered in CreateThread, it should change the groupState when a new group is selected
+    if (fromCreateThread) updateGroupStateAndUrl(group);
   }
 
   return (
     <GroupSelect
       options={dropdown.elementConfig.options}
-      isSearchable={false}
-      changed={(e) => changed(e.value)}
+      changed={(e) => changed(e.value, e.group)}
+      fromNavBar={fromNavBar}
+      value={dropdown.value}
+      // If rendered from GroupDetail page, this component will be passed preLoadedGroup
+      // and groupName props. If passed these props, use them to set a default value
+      // on the select
+      defaultValue={groupName && { value: preLoadedGroup, label: groupName }}
     />
   );
 }

@@ -1,3 +1,5 @@
 .Main {
   padding-top: 4.8rem;
+  min-height: 100vh;
+  background-color: #eee;
 }

@@ -1,3 +1,6 @@
+import { useHistory } from 'react-router-dom';
+import slugify from 'slugify';
+
 import { submitThreadBtnUtils } from './submitThreadBtnUtils';
 import classes from './SubmitThreadBtn.module.css';
 
@@ -10,16 +13,26 @@ export default function SubmitThreadBtn(props) {
     title,
     setTitleTouched,
     setPostContentTouched,
+    disabled,
   } = props;
+
+  const history = useHistory();
 
   async function submitHandler() {
     if (!title) setTitleTouched();
     if (!postContent) setPostContentTouched();
-    if (title && postContent) await createThread(groupId, title, postContent);
+    if (title && postContent) {
+      const { data: thread } = await createThread(groupId, title, postContent);
+      history.push(`/thread/${slugify(thread.title)}`, { thread });
+    }
   }
 
   return (
-    <button className={`Global-btn-1 ${classes.Btn}`} onClick={submitHandler}>
+    <button
+      className={`Global-btn-1 ${classes.Btn}`}
+      onClick={submitHandler}
+      disabled={disabled}
+    >
       Create Thread
     </button>
   );

@@ -66,17 +66,29 @@
   width: 50%;
 }
 
+.ReplyInputWrapper {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.InitialReplyWrapper {
+  margin-left: 1rem;
+}
+
 .GroupDescription,
-.PostInput {
+.PostInput,
+.ReplyInput {
   width: 100%;
   height: 15rem;
   padding: 0.2rem;
   border: 2px solid #eee;
   border-radius: 5px;
+  resize: vertical;
 }
 
 .PostInput:focus,
-.GroupDescription:focus {
+.GroupDescription:focus,
+.ReplyInput {
   outline: none;
 }
 

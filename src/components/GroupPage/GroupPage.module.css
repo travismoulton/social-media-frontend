@@ -1,0 +1,5 @@
+.PageFeedWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 20rem;
+}

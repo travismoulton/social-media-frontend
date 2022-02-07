@@ -4,7 +4,7 @@ import slugify from 'slugify';
 
 import classes from './GroupOption.module.css';
 
-export default function GroupOption({ value, label }) {
+export default function GroupOptionNavBar({ value, label }) {
   return (
     <div className={classes.Wrapper}>
       <AiFillAlert />

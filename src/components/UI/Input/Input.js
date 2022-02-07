@@ -18,6 +18,7 @@ export default function Input(props) {
     touched,
     required,
     errorMsg,
+    maxLength,
   } = props;
 
   const inputClasses = [classes[className] || className];
@@ -74,7 +75,7 @@ export default function Input(props) {
             data-testid={id}
             rows="4"
             cols="32"
-            maxLength="128"
+            maxLength={maxLength ? maxLength : Infinity}
           ></textarea>
           {errorMsg && <p className={classes.InputError}>{errorMsg}</p>}
         </div>
