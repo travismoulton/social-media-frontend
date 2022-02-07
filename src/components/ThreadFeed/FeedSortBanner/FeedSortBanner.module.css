@@ -1,0 +1,23 @@
+.Banner {
+  height: 5rem;
+  width: 75rem;
+  background-color: #fff;
+  padding: 0 1.6rem;
+  border-radius: 1rem;
+  border: 1px solid #000;
+  margin-left: 2rem;
+  margin-top: 2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Btn {
+  width: 20rem;
+  height: 3rem;
+}
+
+.Btn:not(:last-child) {
+  margin-right: 2rem;
+}

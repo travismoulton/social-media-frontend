@@ -8,6 +8,8 @@
 
 //4: Feed
   // B: Implement a feature to sort by date or popularity
+  // C: Fix bug allowing zoom level on browsers breaking scroll functionality
+  // D: Add a back to top button
 
 //5: General
   // A: Implement a continue is as guest feature

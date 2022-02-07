@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
 import { threadFeedUtils } from './threadFeedUtils';
+import FeedSortBanner from './FeedSortBanner/FeedSortBanner';
 import ThreadFeedCard from './ThreadFeedCard/ThreadFeedCard';
 import Spinner from '../UI/Spinner/Spinner';
 
@@ -15,7 +16,10 @@ export default function ThreadFeed({ groupId }) {
 
   const [limit, setLimit] = useState(6);
   const [nextUrl, setNextUrl] = useState(null);
+
+  const [sortBy, setSortBy] = useState('-likeScore,createdAt');
   const groupRef = useRef(null);
+  const sortRef = useRef('-likeScore,createdAt');
 
   // If not passed, the groupId prop is undefined. Set it to null so the if check
   // in the useEffect passes
@@ -70,13 +74,23 @@ export default function ThreadFeed({ groupId }) {
         : fetchAllThreadsPaginated;
 
       (async () => {
-        const { data } = await fetchThreads(limit, groupId);
+        const { data } = await fetchThreads(limit, sortBy, groupId);
 
         setThreads(data.threads);
         setNextUrl(data.next);
       })();
     }
-  }, [threads, groupId, limit]);
+  }, [threads, groupId, limit, sortBy]);
+
+  // In the FeedSortBanner, when a user toggles to change the sort order, it will update this
+  // component's sortBy state. When that happens, this useEffect will trigger. threads is set to
+  // null to trigger the useEffect will then fetch the threads with the new sort order
+  useEffect(() => {
+    if (sortBy !== sortRef.current) {
+      sortRef.current = sortBy;
+      setThreads(null);
+    }
+  }, [sortRef, sortBy]);
 
   const cards =
     threads &&
@@ -88,5 +102,15 @@ export default function ThreadFeed({ groupId }) {
       />
     ));
 
-  return threads ? <div>{cards}</div> : <Spinner />;
+  return threads ? (
+    <div>
+      <FeedSortBanner
+        updateSortOrder={(sortOrder) => setSortBy(sortOrder)}
+        currentSortOrder={sortBy}
+      />
+      {cards}
+    </div>
+  ) : (
+    <Spinner />
+  );
 }
