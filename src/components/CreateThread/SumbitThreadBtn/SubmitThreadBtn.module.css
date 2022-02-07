@@ -3,3 +3,12 @@
   margin-left: 3rem;
   margin-top: 3rem;
 }
+
+.Disabled {
+  background-color: rgba(0, 121, 211, 0.5);
+}
+
+.Disabled:hover {
+  background-color: rgba(0, 121, 211, 0.5);
+  cursor: not-allowed;
+}

@@ -13,8 +13,7 @@
   // A: Implement delete post feature
   // B: Implement an edit post feature
 
-//7: CreateThread
-  // A: Need a disabled style / class for btn when it's disabled
+
 
 
 

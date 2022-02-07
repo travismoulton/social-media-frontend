@@ -29,7 +29,7 @@ export default function SubmitThreadBtn(props) {
 
   return (
     <button
-      className={`Global-btn-1 ${classes.Btn}`}
+      className={`Global-btn-1 ${classes.Btn} ${disabled && classes.Disabled}`}
       onClick={submitHandler}
       disabled={disabled}
     >
