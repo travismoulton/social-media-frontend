@@ -93,7 +93,7 @@ export default function CreateThread() {
           setTitleTouched={setTitleTouched}
           disabled={!postContent || !title || !group}
         />
-        {group && <AboutGroup group={group} top={`17.5rem`} />}
+        {group && <AboutGroup inPostCreation group={group} top={`17.5rem`} />}
       </div>
     )
   );
