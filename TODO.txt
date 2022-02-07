@@ -6,9 +6,6 @@
     // Should be able to do this by giving the first reply an ID
   // B: When a user logs in from the button on the thread page, redirect them to that thread
 
-//4: Feed
-  // D: Add a back to top button
-
 //5: General
   // A: Implement a continue is as guest feature
 
