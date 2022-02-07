@@ -14,7 +14,6 @@ const {
 export default function ThreadFeed({ groupId }) {
   const [threads, setThreads] = useState(null);
 
-  const [limit, setLimit] = useState(6);
   const [nextUrl, setNextUrl] = useState(null);
 
   const [sortBy, setSortBy] = useState('-likeScore,createdAt');
@@ -32,18 +31,19 @@ export default function ThreadFeed({ groupId }) {
     setNextUrl(data.next);
   }, [nextUrl]);
 
-  // Probably don't want this in production
-  useEffect(() => {
-    function setLimitBasedOnScreenSize() {
-      const { innerHeight } = window;
+  // PROBABLY DON'T WANT THIS IN PRODUCTION. IF THE USER ZOOMS OUT OF THE BROWSER, AND THERFORE
+  // CHANGES THE RENDER HEIGHT ON THE PAGE CARDS THIS WILL BREAK THE PAGINATION FUNCTIONALITY
+  // useEffect(() => {
+  //   function setLimitBasedOnScreenSize() {
+  //     const { innerHeight } = window;
 
-      // Each thread feed card is 200px tall, so only load enough to
-      // put one overflowing vertically
-      setLimit(innerHeight / 200 + 1);
-    }
+  //     // Each thread feed card is 200px tall, so only load enough to
+  //     // put one overflowing vertically
+  //     setLimit(innerHeight / 200 + 1);
+  //   }
 
-    setLimitBasedOnScreenSize();
-  });
+  //   setLimitBasedOnScreenSize();
+  // });
 
   useEffect(() => {
     function loadNextPaegOnScroll() {
@@ -74,13 +74,13 @@ export default function ThreadFeed({ groupId }) {
         : fetchAllThreadsPaginated;
 
       (async () => {
-        const { data } = await fetchThreads(limit, sortBy, groupId);
+        const { data } = await fetchThreads(sortBy, groupId);
 
         setThreads(data.threads);
         setNextUrl(data.next);
       })();
     }
-  }, [threads, groupId, limit, sortBy]);
+  }, [threads, groupId, sortBy]);
 
   // In the FeedSortBanner, when a user toggles to change the sort order, it will update this
   // component's sortBy state. When that happens, this useEffect will trigger. threads is set to
