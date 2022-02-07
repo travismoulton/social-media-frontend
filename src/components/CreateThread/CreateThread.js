@@ -13,6 +13,7 @@ export default function CreateThread() {
   const [group, setGroup] = useState(null);
   const [postContent, setPostContent] = useState(null);
   const [title, setTitle] = useState(null);
+  const [loaded, setLoaded] = useState(false);
 
   const [shouldSetTitleTouched, setShouldSetTitleTouched] = useState(false);
   const [shouldSetPostContentTouched, setShouldSetPostContentTouched] =
@@ -33,6 +34,7 @@ export default function CreateThread() {
       (!group || group._id !== groupStoredInHistory._id);
 
     if (shouldSetGroup) setGroup(groupStoredInHistory);
+    setLoaded(true);
   }, [group, history.location.state]);
 
   function setTitleTouched() {
@@ -54,40 +56,45 @@ export default function CreateThread() {
   }
 
   return (
-    <div className={classes.CreateThread}>
-      <div className={classes.HeaderWrapper}>
-        <h1 className={classes.H1}>Create a thread</h1>
-      </div>
-      <GroupDropdown
-        updateGroupStateAndUrl={updateGroupStateAndUrl}
-        preLoadedGroup={group && group._id}
-        fromCreateThread
-      />
-      <div className={classes.InputWrapper}>
-        <ThreadTitleForm
-          title={title}
-          setTitle={setTitle}
-          shouldSetTitleTouched={shouldSetTitleTouched}
-          setTitleTouched={setTitleTouched}
+    loaded && (
+      <div className={classes.CreateThread}>
+        <div className={classes.HeaderWrapper}>
+          <h1 className={classes.H1}>Create a thread</h1>
+        </div>
+        <GroupDropdown
+          fromCreateThread
+          updateGroupStateAndUrl={updateGroupStateAndUrl}
+          // If rendered from GroupDetailPage, pass the groupId and groupName
+          // Which will be used in setting the default value
+          preLoadedGroup={group && group._id}
+          groupName={group && group.name}
         />
-      </div>
-      <div className={classes.InputWrapper}>
-        <PostInput
+        <div className={classes.InputWrapper}>
+          <ThreadTitleForm
+            title={title}
+            setTitle={setTitle}
+            shouldSetTitleTouched={shouldSetTitleTouched}
+            setTitleTouched={setTitleTouched}
+          />
+        </div>
+        <div className={classes.InputWrapper}>
+          <PostInput
+            postContent={postContent}
+            setPostContent={setPostContent}
+            shouldSetPostContentTouched={shouldSetPostContentTouched}
+            setPostContentTouched={setPostContentTouched}
+          />
+        </div>
+        <SubitThreadBtn
           postContent={postContent}
-          setPostContent={setPostContent}
-          shouldSetPostContentTouched={shouldSetPostContentTouched}
+          groupId={group && group._id}
+          title={title}
           setPostContentTouched={setPostContentTouched}
+          setTitleTouched={setTitleTouched}
+          disabled={!postContent || !title || !group}
         />
+        {group && <AboutGroup group={group} top={`17.5rem`} />}
       </div>
-      <SubitThreadBtn
-        postContent={postContent}
-        groupId={group && group._id}
-        title={title}
-        setPostContentTouched={setPostContentTouched}
-        setTitleTouched={setTitleTouched}
-        disabled={!postContent || !title || !group}
-      />
-      {group && <AboutGroup group={group} top={`17.5rem`} />}
-    </div>
+    )
   );
 }

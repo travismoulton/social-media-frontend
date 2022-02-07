@@ -5,7 +5,7 @@ import GroupOptionNavBar from '../GroupOptionNavBar/GroupOptionNavBar';
 import GroupOptionCreateThread from '../GroupOptionCreateThread/GroupOptionCreateThread';
 
 export default function GroupSelect(props) {
-  const { changed, options, isSearchable, fromNavBar, preLoadedGroup } = props;
+  const { changed, options, fromNavBar, value, defaultValue } = props;
 
   const formatOptionLabel = ({ value, label }) =>
     fromNavBar ? (
@@ -14,17 +14,13 @@ export default function GroupSelect(props) {
       <GroupOptionCreateThread value={value} label={label} />
     );
 
-  const defaultValue = options.find(
-    (option) => option.value === preLoadedGroup
-  );
-
   return (
     <Select
       formatOptionLabel={formatOptionLabel}
       className={classes.GroupSelect}
       onChange={changed}
       options={options}
-      isSearchable={isSearchable}
+      value={options.find((option) => option.value === value)}
       defaultValue={defaultValue}
     />
   );
