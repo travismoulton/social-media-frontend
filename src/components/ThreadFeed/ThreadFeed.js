@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
 import { threadFeedUtils } from './threadFeedUtils';
+import BackToTopBtn from '../BackToTopBtn/BackToTopBtn';
 import FeedSortBanner from './FeedSortBanner/FeedSortBanner';
 import ThreadFeedCard from './ThreadFeedCard/ThreadFeedCard';
 import Spinner from '../UI/Spinner/Spinner';
@@ -103,13 +104,16 @@ export default function ThreadFeed({ groupId }) {
     ));
 
   return threads ? (
-    <div>
-      <FeedSortBanner
-        updateSortOrder={(sortOrder) => setSortBy(sortOrder)}
-        currentSortOrder={sortBy}
-      />
-      {cards}
-    </div>
+    <>
+      <div>
+        <FeedSortBanner
+          updateSortOrder={(sortOrder) => setSortBy(sortOrder)}
+          currentSortOrder={sortBy}
+        />
+        {cards}
+      </div>
+      <BackToTopBtn />
+    </>
   ) : (
     <Spinner />
   );

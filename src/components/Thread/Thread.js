@@ -1,6 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect, Fragment } from 'react';
 
+import BackToTopBtn from '../BackToTopBtn/BackToTopBtn';
 import Spinner from '../UI/Spinner/Spinner';
 import InitialPost from '../Post/InitialPost/InitialPost';
 import Post from '../Post/Post';
@@ -87,16 +88,19 @@ export default function Thread() {
   }
 
   return initialPost ? (
-    <div className={classes.Wrapper}>
-      <div className={classes.Thread}>
-        <InitialPost
-          post={initialPost}
-          reloadThread={reloadThread}
-          numComments={initialPost.numAggregateReplies}
-        />
-        {initialPost.replies.length ? generatePostStructure() : null}
+    <>
+      <div className={classes.Wrapper}>
+        <div className={classes.Thread}>
+          <InitialPost
+            post={initialPost}
+            reloadThread={reloadThread}
+            numComments={initialPost.numAggregateReplies}
+          />
+          {initialPost.replies.length ? generatePostStructure() : null}
+        </div>
       </div>
-    </div>
+      <BackToTopBtn />
+    </>
   ) : (
     <div className={classes.Wrapper}>
       <Spinner />
