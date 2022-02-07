@@ -17,6 +17,5 @@
   // B: Implement an edit post feature
 
 //7: GroupPage
-  // B: When in CreatePost componenet, get rid of the create post button in AboutGroup
   // C: Need to fix it so that if an annonymous user visits group page it doesn't break
 

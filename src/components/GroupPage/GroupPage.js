@@ -1,5 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import ThreadFeed from '../ThreadFeed/ThreadFeed';
 import GroupHeader from './GroupHeader/GroupHeader';
@@ -13,6 +14,7 @@ const { fetchGroup } = groupPageUtils;
 export default function GroupPage() {
   const history = useHistory();
   const [group, setGroup] = useState(null);
+  const { user } = useSelector((state) => state.auth);
 
   const { groupId } = history.location.state;
 
@@ -33,7 +35,7 @@ export default function GroupPage() {
         <GroupHeader group={group} />
         <AboutGroup group={group} />
         <div className={classes.PageFeedWrapper}>
-          <CreatePostBanner group={group} />
+          {user && <CreatePostBanner group={group} />}
           <ThreadFeed groupId={groupId} />
         </div>
       </>

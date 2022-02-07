@@ -1,8 +1,12 @@
+import { useSelector } from 'react-redux';
+
 import classes from './HomePage.module.css';
 import CreatePostBanner from '../CreatePostBanner/CreatePostBanner';
 import ThreadFeed from '../ThreadFeed/ThreadFeed';
 
 export default function HomePage() {
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <div
       style={{
@@ -14,7 +18,7 @@ export default function HomePage() {
         flexDirection: 'column',
       }}
     >
-      <CreatePostBanner />
+      {user && <CreatePostBanner />}
       <ThreadFeed />
     </div>
   );
