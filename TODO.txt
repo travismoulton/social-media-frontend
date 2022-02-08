@@ -1,14 +1,11 @@
-//3: Thread
-  // B: When a user logs in from the button on the thread page, redirect them to that thread
-
 //5: General
   // A: Implement a continue is as guest feature
+  // B: Figure out why screen is vibrating on spinner
 
 //6: Post
   // A: Implement delete post feature
   // B: Implement an edit post feature
 
-
-
-
+//7: Login / Register
+  // A: Test for redirect functionality?
 
