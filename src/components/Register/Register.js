@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ const { register } = registerUtils;
 export default function Login() {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const btnRef = useRef(null);
 
   const [emailInput, setEmailInput] = useState({
     elementType: 'input',
@@ -154,8 +155,7 @@ export default function Login() {
   }
 
   function checkPasswordHasEightCharacters() {
-    // Only display password length error if the passwords match and have a value
-    return checkPasswordsMatch() && passwordInput.value.length > 7;
+    return passwordInput.value.length > 7;
   }
 
   const passwordTooShortError = {
@@ -204,6 +204,27 @@ export default function Login() {
     }
   }
 
+  useEffect(() => {
+    function clickSubmitBtn(e) {
+      const allFieldsHaveAValue =
+        emailInput.valid &&
+        passwordInput.valid &&
+        nameInput.valid &&
+        confirmPasswordInput.valid;
+
+      if (e.key === 'Enter' && allFieldsHaveAValue) btnRef.current.click();
+    }
+
+    document.addEventListener('keydown', clickSubmitBtn);
+
+    return () => document.removeEventListener('keydown', clickSubmitBtn);
+  }, [
+    emailInput.valid,
+    passwordInput.valid,
+    nameInput.valid,
+    confirmPasswordInput.valid,
+  ]);
+
   return (
     <>
       {/* If the user is already logged in redirect to the homepage */}
@@ -212,6 +233,7 @@ export default function Login() {
         {form}
         {error.isError && error.msg}
         <button
+          ref={btnRef}
           className={`${'Global-btn-1 ' + classes.Btn}`}
           onClick={registerHandler}
         >
