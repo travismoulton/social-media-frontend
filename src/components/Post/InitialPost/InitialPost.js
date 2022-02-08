@@ -26,7 +26,8 @@ export default function Post({ post, reloadThread, numComments }) {
     if (shouldClearReplyInput) setShouldClearReplyInput(false);
   }, [shouldClearReplyInput]);
 
-  const currentUserIsNotAuthor = user && post.author._id !== user._id;
+  // const currentUserIsNotAuthor = user && post.author._id !== user._id;
+  const currentUserIsNotAuthor = true;
 
   return (
     <>

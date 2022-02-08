@@ -23,7 +23,8 @@ export default function Post({ post, reloadThread }) {
       </div>
       <div className={classes.PostContent}>{post.content}</div>
       <div className={classes.OptionsRow}>
-        {currentUserIsNotAuthor && <VoteBtns post={post} />}
+        {/* {currentUserIsNotAuthor && <VoteBtns post={post} />} */}
+        <VoteBtns post={post} />
         {user && (
           <button
             className={classes.ReplyBtn}

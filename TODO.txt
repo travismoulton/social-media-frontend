@@ -9,3 +9,6 @@
 //7: Login / Register
   // A: Test for redirect functionality?
 
+//8: Post / Initial Post
+  //A: Currently have workaround allowing users to vote on their own posts. if this is going to be permanant,
+      refactor the code
