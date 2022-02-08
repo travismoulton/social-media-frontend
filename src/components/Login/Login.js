@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 
@@ -7,12 +7,14 @@ import { loginUtils } from './loginUtils';
 import { authStart, authSuccess, authFail } from '../../store/authSlice';
 import classes from './Login.module.css';
 import checkValidityHandler from '../../shared/checkValidityHandler';
+import { useEffect } from 'react';
 
 const { login } = loginUtils;
 
 export default function Login() {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const btnRef = useRef(null);
 
   const [emailInput, setEmailInput] = useState({
     elementType: 'input',
@@ -118,6 +120,18 @@ export default function Login() {
     }
   }
 
+  // If the user presses enter, and there is an email and password in the inputs, toggle
+  // the login btn
+  useEffect(() => {
+    function clickBtn(e) {
+      const credentialsEntered = emailInput.valid && passwordInput.valid;
+      if (e.key === 'Enter' && credentialsEntered) btnRef.current.click();
+    }
+    document.addEventListener('keydown', clickBtn);
+
+    return () => document.removeEventListener('keydown', clickBtn);
+  }, [btnRef, emailInput.valid, passwordInput.valid]);
+
   return (
     <>
       {/* If the user is already logged in redirect to the homepage */}
@@ -126,6 +140,7 @@ export default function Login() {
         {form}
         {error.isError && error.msg}
         <button
+          ref={btnRef}
           className={`${'Global-btn-1 ' + classes.Btn}`}
           onClick={loginHandler}
         >
