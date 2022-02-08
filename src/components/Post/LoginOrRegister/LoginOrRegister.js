@@ -19,7 +19,10 @@ export default function LoginOrRegister() {
   );
 
   const registerBtn = (
-    <Link className={classes.Link} to="/register">
+    <Link
+      className={classes.Link}
+      to={{ pathname: '/register', state: { threadPath, hash, thread } }}
+    >
       Register
     </Link>
   );
