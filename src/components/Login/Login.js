@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, useHistory } from 'react-router-dom';
 
 import Input from '../UI/Input/Input';
 import { loginUtils } from './loginUtils';
@@ -15,6 +15,19 @@ export default function Login() {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const btnRef = useRef(null);
+  const history = useHistory();
+
+  // When directed here from LoginOrRegister, there will be state in the history,
+  // which indicates that after login, the user should be redirected to the Thread
+  // they were viewing
+  const shouldRedirectToThread = !!history.location.state;
+
+  // If passed state through history, extract the threadPath, threadObject, and hash (if present)
+  // Use that to build the redirect path and redirect state
+  const { threadPath, thread, hash } =
+    shouldRedirectToThread && history.location.state;
+  const redirectPath = `${threadPath}${hash && hash}`;
+  const redirectState = { thread, scrollToComments: !!hash };
 
   const [emailInput, setEmailInput] = useState({
     elementType: 'input',
@@ -134,8 +147,17 @@ export default function Login() {
 
   return (
     <>
-      {/* If the user is already logged in redirect to the homepage */}
-      {user && <Redirect to="/" />}
+      {/* If the user is already logged in redirect to the homepage 
+      if they did not login from viewing a thread */}
+      {user && !shouldRedirectToThread && <Redirect to="/" />}
+
+      {/* If the user logs in, and was brought to this route through the link in threadView,
+      redirect them to the thread they were on  */}
+      {user && shouldRedirectToThread && (
+        <Redirect
+          to={{ pathname: redirectPath, state: { ...redirectState } }}
+        />
+      )}
       <div className={classes.Login}>
         {form}
         {error.isError && error.msg}

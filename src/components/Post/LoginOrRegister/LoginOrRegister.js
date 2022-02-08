@@ -1,10 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import classes from './LoginOrRegister.module.css';
 
 export default function LoginOrRegister() {
+  const history = useHistory();
+
+  const threadPath = history.location.pathname;
+  const { hash } = history.location;
+  const { thread } = history.location.state;
+
   const loginBtn = (
-    <Link className={classes.Link} to="/login">
+    <Link
+      className={classes.Link}
+      to={{ pathname: '/login', state: { threadPath, hash, thread } }}
+    >
       Login
     </Link>
   );
