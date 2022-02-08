@@ -4,12 +4,13 @@ import Input from '../../UI/Input/Input';
 import checkValidityHandler from '../../../shared/checkValidityHandler';
 
 export default function ReplyInput(props) {
-  const { setReplyContent, forInitialPost, shouldClearInput } = props;
+  const { setReplyContent, forInitialPost, shouldClearInput, replyContent } =
+    props;
 
   const [contentInput, setContentInput] = useState({
     elementType: 'textarea',
     elementConfig: { placeholder: 'Say something...' },
-    value: '',
+    value: replyContent || '',
     id: 'createReply',
     valid: false,
     validation: { required: true },

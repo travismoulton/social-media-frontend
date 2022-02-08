@@ -1,19 +1,29 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { BsChatRightText } from 'react-icons/bs';
 
+import OptionsRow from './OptionsRow/OptionsRow';
 import PostDate from './PostDate/PostDate';
-import SubmitReplyBtn from './SubmitReplyBtn/SubmitReplyBtn';
-import ReplyInput from './ReplyInput/ReplyInput';
-import VoteBtns from './VoteBtns/VoteBtns';
 import classes from './Post.module.css';
+import ReplyWrapper from './ReplyWrapper/ReplyWrapper';
 
 export default function Post({ post, reloadThread }) {
   const { user } = useSelector((state) => state.auth);
   const [showReplyInput, setShowReplyInput] = useState(false);
   const [replyContent, setReplyContent] = useState('');
+  const [inEditMode, setInEditMode] = useState(false);
 
-  const currentUserIsNotAuthor = user && post.author._id !== user._id;
+  function editBtnHandler() {
+    setReplyContent(post.content);
+    setInEditMode(true);
+    setShowReplyInput(true);
+  }
+
+  function cancelBtnHandler() {
+    setReplyContent('');
+    setShowReplyInput(false);
+
+    if (inEditMode) setInEditMode(false);
+  }
 
   return (
     <div className={classes.Post} style={{ marginLeft: '2rem' }}>
@@ -22,33 +32,24 @@ export default function Post({ post, reloadThread }) {
         <PostDate postTimeStamp={post.createdAt} />
       </div>
       <div className={classes.PostContent}>{post.content}</div>
-      <div className={classes.OptionsRow}>
-        {/* {currentUserIsNotAuthor && <VoteBtns post={post} />} */}
-        <VoteBtns post={post} />
-        {user && (
-          <button
-            className={classes.ReplyBtn}
-            onClick={() =>
-              setShowReplyInput((showReplyInput) => !showReplyInput)
-            }
-          >
-            <BsChatRightText size={16} /> <span>Reply</span>
-          </button>
-        )}
-      </div>
+      {!showReplyInput && (
+        <OptionsRow
+          user={user}
+          setShowReplyInput={() => setShowReplyInput(true)}
+          editBtnHandler={editBtnHandler}
+          post={post}
+        />
+      )}
       {showReplyInput && (
-        <>
-          <div className={classes.ReplyWrapper}>
-            <ReplyInput setReplyContent={setReplyContent} />
-            <SubmitReplyBtn
-              reply={replyContent}
-              parentPost={post._id}
-              threadId={post.thread}
-              closeReplyBox={() => setShowReplyInput(false)}
-              reloadThread={reloadThread}
-            />
-          </div>
-        </>
+        <ReplyWrapper
+          setReplyContent={setReplyContent}
+          replyContent={replyContent}
+          cancelBtnHandler={cancelBtnHandler}
+          post={post}
+          closeReplyBox={() => setShowReplyInput(false)}
+          reloadThread={reloadThread}
+          inEditMode={inEditMode}
+        />
       )}
     </div>
   );

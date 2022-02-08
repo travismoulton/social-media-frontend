@@ -1,18 +1,31 @@
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { BsChatRightText } from 'react-icons/bs';
 
+import OptionsRow from '../OptionsRow/OptionsRow';
 import PostDate from '../PostDate/PostDate';
 import SubmitReplyBtn from '../SubmitReplyBtn/SubmitReplyBtn';
 import ReplyInput from '../ReplyInput/ReplyInput';
 import VoteBtns from '../VoteBtns/VoteBtns';
 import LoginOrRegister from '../LoginOrRegister/LoginOrRegister';
+import EditPostWrapper from '../ReplyWrapper/ReplyWrapper';
 import classes from '../Post.module.css';
 
 export default function Post({ post, reloadThread, numComments }) {
   const { user } = useSelector((state) => state.auth);
   const [replyContent, setReplyContent] = useState('');
   const [shouldClearReplyInput, setShouldClearReplyInput] = useState(false);
+  const [inEditMode, setInEditMode] = useState(false);
+
+  function editBtnHandler() {
+    setReplyContent(post.content);
+    setInEditMode(true);
+  }
+
+  function cancelBtnHandler() {
+    setReplyContent('');
+
+    if (inEditMode) setInEditMode(false);
+  }
 
   // Inside the submitReplyBtn, this will be run when a reply is submitted.
   // This will send a flag over the ReplyInput to clear the input value
@@ -26,38 +39,46 @@ export default function Post({ post, reloadThread, numComments }) {
     if (shouldClearReplyInput) setShouldClearReplyInput(false);
   }, [shouldClearReplyInput]);
 
-  // const currentUserIsNotAuthor = user && post.author._id !== user._id;
-  const currentUserIsNotAuthor = true;
-
   return (
     <>
       <div
         className={`${classes.Post} ${classes.InitialPost}`}
         style={{ marginLeft: '2rem', marginBottom: '3.5rem' }}
       >
-        {currentUserIsNotAuthor && (
-          <div className={classes.InitialPostLeft}>
-            <VoteBtns post={post} vertical />
-          </div>
-        )}
+        <div className={classes.InitialPostLeft}>
+          <VoteBtns post={post} vertical />
+        </div>
+
         <div
           className={classes.InitialPostRight}
-          // This style is only needed if the VoteBtns are in the element
-          style={{ marginLeft: currentUserIsNotAuthor && '-2rem' }}
+          style={{ marginLeft: '-2rem' }}
         >
           <div className={classes.PostHeader}>
             <p className={classes.Author}>{post.author.name}</p>
             <PostDate postTimeStamp={post.createdAt} />
           </div>
           <div className={classes.PostContent}>{post.content}</div>
-          <div className={classes.OptionsRow}>
-            <span className={classes.NumComments}>
-              <BsChatRightText size={16} /> <span>{numComments} Comments</span>
-            </span>
-          </div>
+
+          <OptionsRow
+            user={user}
+            editBtnHandler={editBtnHandler}
+            post={post}
+            forInitialPost
+          />
         </div>
       </div>
-      {user && (
+      {inEditMode && (
+        <EditPostWrapper
+          setReplyContent={setReplyContent}
+          replyContent={replyContent}
+          cancelBtnHandler={cancelBtnHandler}
+          post={post}
+          closeReplyBox={() => setInEditMode(false)}
+          reloadThread={reloadThread}
+          inEditMode={inEditMode}
+        />
+      )}
+      {user && !inEditMode && (
         <div className={classes.ReplyWrapper} id="comments">
           <p>
             Comment as <span>{user.name}</span>
@@ -67,6 +88,7 @@ export default function Post({ post, reloadThread, numComments }) {
             forInitialPost
             shouldClearInput={shouldClearReplyInput}
           />
+
           <SubmitReplyBtn
             reply={replyContent}
             parentPost={post._id}

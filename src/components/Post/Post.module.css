@@ -52,7 +52,7 @@
   color: red;
 }
 
-.ReplyBtn,
+.OptionsRowBtn,
 .NumComments {
   margin-left: 2rem;
   text-decoration: none;
@@ -60,7 +60,7 @@
   border: none;
   padding: 0;
   cursor: pointer;
-  width: 8rem;
+
   height: 3rem;
   transition: all 0.2s;
 
@@ -69,6 +69,15 @@
   align-items: center;
   line-height: 2rem;
   transition: all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.ReplyBtn,
+.NumComments {
+  width: 8rem;
+}
+
+.EditBtn {
+  width: 12rem;
 }
 
 .NumComments {
@@ -80,19 +89,28 @@
   margin-left: 0;
 }
 
-.ReplyBtn:hover,
+.OptionsRowBtn:hover,
 .NumComments:hover {
   background-color: #eee;
   border-radius: 3px;
 }
 
-.ReplyBtn svg,
+.OptionsRowBtn svg,
 .NumComments svg {
   margin-right: 1rem;
 }
 
-.ReplyBtn span,
+.OptionsRowBtn span,
 .NumComments span {
-  padding-bottom: 0.3rem;
+  /* padding-bottom: 0.3rem; */
   font-size: 1.4rem;
+}
+
+.BtnRow {
+  width: 90%;
+  margin-left: 5%;
+
+  display: flex;
+  margin-top: 0.5rem;
+  justify-content: end;
 }
