@@ -1,9 +1,4 @@
-//1: Login && Register
-  // A: Make login / register buttons submit when the enter button is clicked
-
 //3: Thread
-  // A: Implement a feature so that when the user clicks the comments button, it loads the thread at the first reply
-    // Should be able to do this by giving the first reply an ID
   // B: When a user logs in from the button on the thread page, redirect them to that thread
 
 //5: General

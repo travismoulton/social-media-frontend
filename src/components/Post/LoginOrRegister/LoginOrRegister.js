@@ -16,7 +16,7 @@ export default function LoginOrRegister() {
   );
 
   return (
-    <div className={classes.Wrapper}>
+    <div className={classes.Wrapper} id="comments">
       <div className={classes.Left}>Login or register to leave a comment</div>
       <div className={classes.Right}>
         {loginBtn} {registerBtn}

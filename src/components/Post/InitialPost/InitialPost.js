@@ -57,7 +57,7 @@ export default function Post({ post, reloadThread, numComments }) {
         </div>
       </div>
       {user && (
-        <div className={classes.ReplyWrapper}>
+        <div className={classes.ReplyWrapper} id="comments">
           <p>
             Comment as <span>{user.name}</span>
           </p>

@@ -87,6 +87,16 @@ export default function Thread() {
     }
   }
 
+  // Scroll to comments section when coming from #comments hash in link
+  useEffect(() => {
+    if (initialPost) {
+      const { scrollToComments } = history.location.state;
+      if (scrollToComments)
+        // Need to subtract 55 pixels to account for the header overlapping the comments section
+        window.scroll(0, document.getElementById('comments').offsetTop - 55);
+    }
+  }, [initialPost, history.location.state]);
+
   return initialPost ? (
     <>
       <div className={classes.Wrapper}>

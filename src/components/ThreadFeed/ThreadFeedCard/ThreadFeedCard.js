@@ -24,6 +24,16 @@ export default function ThreadFeedCard({ post, thread }) {
     history.push(`/thread/${slugify(thread.title)}`, { thread: threadState });
   }
 
+  function redirectToComments() {
+    // The Thread componenet used the initialPost property as the initialPostId
+    // To make an API call to fetch all posts
+    const threadState = { ...thread, initialPost: thread.initialPost._id };
+
+    history.push(`/thread/${slugify(thread.title)}#comments`, {
+      thread: threadState,
+    });
+  }
+
   return (
     <div className={classes.PageFeedCard}>
       <div className={classes.Left}>
@@ -54,10 +64,27 @@ export default function ThreadFeedCard({ post, thread }) {
           </div>
         </div>
         <div className={postClasses.OptionsRow}>
-          <span className={postClasses.NumComments}>
+          {/* <span className={postClasses.NumComments}>
             <BsChatRightText size={16} />
-            <span>{thread.numComments} Comments</span>
-          </span>
+            <span onClick={redirectToComments}>
+              {thread.numComments} Comments
+            </span>
+          </span> */}
+          <Link
+            to={{
+              pathname: `/thread/${slugify(thread.title)}`,
+              hash: 'comments',
+              state: {
+                thread: { ...thread, initialPost: thread.initialPost._id },
+                scrollToComments: true,
+              },
+            }}
+          >
+            <span className={postClasses.NumComments}>
+              <BsChatRightText size={16} />
+              <span>{thread.numComments} Comments</span>
+            </span>
+          </Link>
         </div>
       </div>
     </div>
