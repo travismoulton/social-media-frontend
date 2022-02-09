@@ -30,8 +30,7 @@ export default function ReplyWrapper(props) {
 
         <SubmitReplyBtn
           reply={replyContent}
-          parentPost={post._id}
-          threadId={post.thread}
+          post={post}
           closeReplyBox={closeReplyBox}
           reloadThread={reloadThread}
           inEditMode={inEditMode}

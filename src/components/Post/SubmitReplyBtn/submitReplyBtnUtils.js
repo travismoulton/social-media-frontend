@@ -10,4 +10,10 @@ export const submitReplyBtnUtils = {
 
     return data;
   },
+
+  editPost: async function (content, postId) {
+    const { data } = await axios.patch(`/${postId}`, { content });
+
+    return data;
+  },
 };

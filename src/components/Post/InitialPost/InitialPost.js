@@ -64,6 +64,7 @@ export default function Post({ post, reloadThread, numComments }) {
             editBtnHandler={editBtnHandler}
             post={post}
             forInitialPost
+            numComments={numComments}
           />
         </div>
       </div>

@@ -5,8 +5,14 @@ import classes from '../Post.module.css';
 import VoteBtns from '../VoteBtns/VoteBtns';
 
 export default function OptionsRow(props) {
-  const { user, post, setShowReplyInput, editBtnHandler, forInitialPost } =
-    props;
+  const {
+    user,
+    post,
+    setShowReplyInput,
+    editBtnHandler,
+    forInitialPost,
+    numComments,
+  } = props;
   const currentUserIsAuthor = user && post.author._id === user._id;
   return (
     <div className={classes.OptionsRow}>
@@ -22,6 +28,11 @@ export default function OptionsRow(props) {
             <BsChatRightText size={16} /> <span>Reply</span>
           </button>
         </>
+      )}
+      {forInitialPost && (
+        <span className={classes.NumComments}>
+          <BsChatRightText size={16} /> <span>{numComments} Comments</span>
+        </span>
       )}
       {currentUserIsAuthor && (
         <>
