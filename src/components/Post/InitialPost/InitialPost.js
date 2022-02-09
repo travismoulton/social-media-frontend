@@ -92,8 +92,7 @@ export default function Post({ post, reloadThread, numComments }) {
 
           <SubmitReplyBtn
             reply={replyContent}
-            parentPost={post._id}
-            threadId={post.thread}
+            post={post}
             reloadThread={reloadThread}
             clearReplyInput={clearReplyInput}
             forInitialPost

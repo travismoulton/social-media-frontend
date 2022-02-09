@@ -14,20 +14,16 @@ export default function SubmitReplyBtn(props) {
     inEditMode,
   } = props;
 
-  async function submitPostHandler() {
-    await submitReply(reply, post.parentPost, post.thread);
+  async function submitHandler() {
+    inEditMode
+      ? await editPost(reply, post._id)
+      : await submitReply(reply, post._id, post.thread);
 
     forInitialPost && clearReplyInput();
 
     !forInitialPost && closeReplyBox();
 
     reloadThread();
-  }
-
-  async function submitEditHander() {
-    const data = await editPost(reply, post._id);
-
-    console.log(data);
   }
 
   return (
@@ -37,7 +33,7 @@ export default function SubmitReplyBtn(props) {
       className={`Global-btn-1 ${
         forInitialPost ? classes.ForInitialBtn : classes.Btn
       } ${!reply && classes.Disabled}`}
-      onClick={inEditMode ? submitEditHander : submitPostHandler}
+      onClick={submitHandler}
     >
       {inEditMode ? 'Submit changes' : 'Submit'}
     </button>

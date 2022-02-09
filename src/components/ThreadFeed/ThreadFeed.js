@@ -32,22 +32,8 @@ export default function ThreadFeed({ groupId }) {
     setNextUrl(data.next);
   }, [nextUrl]);
 
-  // PROBABLY DON'T WANT THIS IN PRODUCTION. IF THE USER ZOOMS OUT OF THE BROWSER, AND THERFORE
-  // CHANGES THE RENDER HEIGHT ON THE PAGE CARDS THIS WILL BREAK THE PAGINATION FUNCTIONALITY
-  // useEffect(() => {
-  //   function setLimitBasedOnScreenSize() {
-  //     const { innerHeight } = window;
-
-  //     // Each thread feed card is 200px tall, so only load enough to
-  //     // put one overflowing vertically
-  //     setLimit(innerHeight / 200 + 1);
-  //   }
-
-  //   setLimitBasedOnScreenSize();
-  // });
-
   useEffect(() => {
-    function loadNextPaegOnScroll() {
+    function loadNextPageOnScroll() {
       const { scrollHeight, scrollTop, clientHeight } =
         document.scrollingElement;
 
@@ -58,9 +44,9 @@ export default function ThreadFeed({ groupId }) {
       if (scrolledToBottom && nextUrl) updateFeed();
     }
 
-    document.addEventListener('scroll', loadNextPaegOnScroll);
+    document.addEventListener('scroll', loadNextPageOnScroll);
 
-    return () => document.removeEventListener('scroll', loadNextPaegOnScroll);
+    return () => document.removeEventListener('scroll', loadNextPageOnScroll);
   }, [nextUrl, updateFeed]);
 
   useEffect(() => {
