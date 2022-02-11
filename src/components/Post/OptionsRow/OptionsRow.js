@@ -1,5 +1,5 @@
 import { BsChatRightText } from 'react-icons/bs';
-import { TiEdit } from 'react-icons/ti';
+import { TiEdit, TiTrash } from 'react-icons/ti';
 
 import classes from '../Post.module.css';
 import VoteBtns from '../VoteBtns/VoteBtns';
@@ -12,6 +12,7 @@ export default function OptionsRow(props) {
     editBtnHandler,
     forInitialPost,
     numComments,
+    deletePostHandler,
   } = props;
   const currentUserIsAuthor = user && post.author._id === user._id;
   return (
@@ -34,13 +35,20 @@ export default function OptionsRow(props) {
           <BsChatRightText size={16} /> <span>{numComments} Comments</span>
         </span>
       )}
-      {currentUserIsAuthor && (
+      {currentUserIsAuthor && !post.isDeleted && (
         <>
           <button
             onClick={editBtnHandler}
             className={`${classes.OptionsRowBtn} ${classes.EditBtn}`}
           >
             <TiEdit size={16} /> <span>Edit post</span>
+          </button>
+
+          <button
+            onClick={deletePostHandler}
+            className={`${classes.OptionsRowBtn} ${classes.EditBtn}`}
+          >
+            <TiTrash size={16} /> <span>Delete post</span>
           </button>
         </>
       )}

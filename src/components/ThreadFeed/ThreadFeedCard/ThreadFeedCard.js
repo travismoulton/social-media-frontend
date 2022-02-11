@@ -12,8 +12,6 @@ export default function ThreadFeedCard({ post, thread }) {
   const { user } = useSelector((state) => state.auth);
   const history = useHistory();
 
-  const currentUserIsNotAuthor = user && post.author._id !== user._id;
-
   const { group } = thread;
 
   function redirectToThreadDetail() {
@@ -24,20 +22,10 @@ export default function ThreadFeedCard({ post, thread }) {
     history.push(`/thread/${slugify(thread.title)}`, { thread: threadState });
   }
 
-  function redirectToComments() {
-    // The Thread componenet used the initialPost property as the initialPostId
-    // To make an API call to fetch all posts
-    const threadState = { ...thread, initialPost: thread.initialPost._id };
-
-    history.push(`/thread/${slugify(thread.title)}#comments`, {
-      thread: threadState,
-    });
-  }
-
   return (
     <div className={classes.PageFeedCard}>
       <div className={classes.Left}>
-        {currentUserIsNotAuthor && <VoteBtns post={post} vertical />}
+        {user && <VoteBtns post={post} vertical />}
       </div>
 
       <div className={classes.Right}>
@@ -64,12 +52,6 @@ export default function ThreadFeedCard({ post, thread }) {
           </div>
         </div>
         <div className={postClasses.OptionsRow}>
-          {/* <span className={postClasses.NumComments}>
-            <BsChatRightText size={16} />
-            <span onClick={redirectToComments}>
-              {thread.numComments} Comments
-            </span>
-          </span> */}
           <Link
             to={{
               pathname: `/thread/${slugify(thread.title)}`,

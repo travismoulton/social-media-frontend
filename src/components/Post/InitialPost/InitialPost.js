@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 
+import { postUtils } from '../postUtils';
 import OptionsRow from '../OptionsRow/OptionsRow';
 import PostDate from '../PostDate/PostDate';
 import SubmitReplyBtn from '../SubmitReplyBtn/SubmitReplyBtn';
@@ -9,6 +10,8 @@ import VoteBtns from '../VoteBtns/VoteBtns';
 import LoginOrRegister from '../LoginOrRegister/LoginOrRegister';
 import EditPostWrapper from '../ReplyWrapper/ReplyWrapper';
 import classes from '../Post.module.css';
+
+const { deletePost } = postUtils;
 
 export default function Post({ post, reloadThread, numComments }) {
   const { user } = useSelector((state) => state.auth);
@@ -34,6 +37,13 @@ export default function Post({ post, reloadThread, numComments }) {
     setShouldClearReplyInput(true);
   }
 
+  async function deletePostHandler() {
+    console.log('deletePostHandler');
+    await deletePost(post._id);
+
+    reloadThread();
+  }
+
   // This will run after the flag has been sent to ReplyInput and the reply has been deleted
   useEffect(() => {
     if (shouldClearReplyInput) setShouldClearReplyInput(false);
@@ -45,16 +55,20 @@ export default function Post({ post, reloadThread, numComments }) {
         className={`${classes.Post} ${classes.InitialPost}`}
         style={{ marginLeft: '2rem', marginBottom: '3.5rem' }}
       >
-        <div className={classes.InitialPostLeft}>
-          <VoteBtns post={post} vertical />
-        </div>
+        {user && (
+          <div className={classes.InitialPostLeft}>
+            <VoteBtns post={post} vertical />
+          </div>
+        )}
 
         <div
           className={classes.InitialPostRight}
           style={{ marginLeft: '-2rem' }}
         >
           <div className={classes.PostHeader}>
-            <p className={classes.Author}>{post.author.name}</p>
+            <p className={classes.Author}>
+              {!post.isDeleted ? post.author.name : '[Post deleted by author]'}
+            </p>
             <PostDate postTimeStamp={post.createdAt} />
           </div>
           <div className={classes.PostContent}>{post.content}</div>
@@ -65,6 +79,7 @@ export default function Post({ post, reloadThread, numComments }) {
             post={post}
             forInitialPost
             numComments={numComments}
+            deletePostHandler={deletePostHandler}
           />
         </div>
       </div>
