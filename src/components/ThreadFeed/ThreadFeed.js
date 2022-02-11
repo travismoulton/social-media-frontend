@@ -21,6 +21,9 @@ export default function ThreadFeed({ groupId }) {
   const groupRef = useRef(null);
   const sortRef = useRef('-likeScore,createdAt');
 
+  // Capture the original scroll height of the page so it can be used to detect the component
+  // unmounting in loadNextPageOnScroll function
+
   // If not passed, the groupId prop is undefined. Set it to null so the if check
   // in the useEffect passes
   if (!groupId) groupId = null;
@@ -37,7 +40,9 @@ export default function ThreadFeed({ groupId }) {
       const { scrollHeight, scrollTop, clientHeight } =
         document.scrollingElement;
 
-      const scrolledToBottom = scrollHeight - scrollTop === clientHeight;
+      const scrolledToBottom =
+        scrollHeight - scrollTop === clientHeight &&
+        scrollHeight !== clientHeight;
 
       // The API will return nextUrl as null if on the last page of results.
       // Don't attempt to fetch the next page if there is no nextUrl

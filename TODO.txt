@@ -1,17 +1,8 @@
 //5: General
   // A: Implement a continue is as guest feature
-  // B: Figure out why screen is vibrating on spinner
 
-//6: Post
-  // A: Implement delete post feature
-  // B: Implement an edit post feature
 
 //7: Login / Register
   // A: Test for redirect functionality?
 
-//8: Post / Initial Post
-  //A: Currently have workaround allowing users to vote on their own posts. if this is going to be permanant,
-      refactor the code
 
-//9: ThreadFeed
-  // A: Getting an error when switching from ThreadFeed to a thread. Need to cancel async effect in useEffect?

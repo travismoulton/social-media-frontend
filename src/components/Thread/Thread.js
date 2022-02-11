@@ -112,7 +112,7 @@ export default function Thread() {
       <BackToTopBtn />
     </>
   ) : (
-    <div className={classes.Wrapper}>
+    <div style={{ padding: '10rem', overflow: 'hidden' }}>
       <Spinner />
     </div>
   );
