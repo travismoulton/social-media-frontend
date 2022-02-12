@@ -22,10 +22,14 @@ export default function ThreadFeedCard({ post, thread }) {
     history.push(`/thread/${slugify(thread.title)}`, { thread: threadState });
   }
 
+  console.log(thread);
+
   return (
     <div className={classes.PageFeedCard}>
       <div className={classes.Left}>
-        {user && <VoteBtns post={post} vertical />}
+        {user && (
+          <VoteBtns post={post} vertical threadScore={thread.likeScore} />
+        )}
       </div>
 
       <div className={classes.Right}>

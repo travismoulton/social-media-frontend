@@ -8,7 +8,7 @@ import { voteBtnUtils } from './voteBtnUtils';
 
 const { addDislike, addLike, removeDislike, removeLike } = voteBtnUtils;
 
-export default function VoteBtns({ post: postData, vertical }) {
+export default function VoteBtns({ post: postData, vertical, threadScore }) {
   const [post, setPost] = useState(postData);
   const { user } = useSelector((state) => state.auth);
 
@@ -38,11 +38,13 @@ export default function VoteBtns({ post: postData, vertical }) {
     const userHasNotVoted =
       !usersDisliked.includes(user._id) && !usersLiked.includes(user._id);
 
+    // If the component is rendered from ThreadFeedCard, it will be passed a threadSccore, which
+    // should be displayed. Otherwise, it should display the post likeScore
     if (userHasNotVoted) {
       if (likeScore === 0) return 'Vote';
-      if (likeScore !== 0) return likeScore;
+      if (likeScore !== 0) return threadScore ? threadScore : likeScore;
     } else {
-      return likeScore;
+      return threadScore ? threadScore : likeScore;
     }
   }
 
