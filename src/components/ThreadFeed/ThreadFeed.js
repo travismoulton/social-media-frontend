@@ -21,9 +21,6 @@ export default function ThreadFeed({ groupId }) {
   const groupRef = useRef(null);
   const sortRef = useRef('-likeScore,createdAt');
 
-  // Capture the original scroll height of the page so it can be used to detect the component
-  // unmounting in loadNextPageOnScroll function
-
   // If not passed, the groupId prop is undefined. Set it to null so the if check
   // in the useEffect passes
   if (!groupId) groupId = null;

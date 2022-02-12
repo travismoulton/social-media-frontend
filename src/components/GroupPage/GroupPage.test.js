@@ -2,6 +2,7 @@ import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 
 import { groupPageUtils as utils } from './groupPageUtils';
+import { threadFeedUtils } from '../ThreadFeed/threadFeedUtils';
 
 import {
   customRender,
@@ -13,6 +14,7 @@ import GroupPage from './GroupPage';
 
 jest.mock('./groupPageUtils');
 jest.mock('./GroupHeader/MembershipBtn/membershipBtnUtils');
+jest.mock('../ThreadFeed/threadFeedUtils');
 
 describe('<GroupPage />', () => {
   async function setup() {
@@ -46,7 +48,15 @@ describe('<GroupPage />', () => {
     mockFetchGroup = createSpy(
       utils,
       'fetchGroup',
-      Promise.resolve({ data: { Group: mockGroup } })
+      Promise.resolve({ data: { group: mockGroup } })
+    );
+
+    // GroupPage renders the ThreadFeed component, which will throw an error if it does not receive
+    // a data object
+    createSpy(
+      threadFeedUtils,
+      'fetchThreadsByGroupPaginated',
+      Promise.resolve({ data: { threads: [], next: null } })
     );
   });
 
@@ -57,6 +67,8 @@ describe('<GroupPage />', () => {
 
   test('renders and sets the group on the intial setState call', async () => {
     await waitFor(() => setup());
+
+    await waitFor(() => expect(mockFetchGroup).toBeCalled());
 
     expect(screen.getAllByText('fake group', { exact: false })).toHaveLength(2);
   });
