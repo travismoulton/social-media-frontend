@@ -15,9 +15,6 @@ export default function CreateThread() {
   const [title, setTitle] = useState(null);
   const [loaded, setLoaded] = useState(false);
 
-  const [shouldSetTitleTouched, setShouldSetTitleTouched] = useState(false);
-  const [shouldSetPostContentTouched, setShouldSetPostContentTouched] =
-    useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -36,20 +33,6 @@ export default function CreateThread() {
     if (shouldSetGroup) setGroup(groupStoredInHistory);
     setLoaded(true);
   }, [group, history.location.state]);
-
-  function setTitleTouched() {
-    if (!title)
-      setShouldSetTitleTouched(
-        (shouldSetTitleTouched) => !shouldSetTitleTouched
-      );
-  }
-
-  function setPostContentTouched() {
-    if (!postContent)
-      setShouldSetPostContentTouched(
-        (shouldSetPostContentTouched) => !shouldSetPostContentTouched
-      );
-  }
 
   function updateGroupStateAndUrl(group) {
     history.push(`/group/${slugify(group.name)}/createThread`, { group });
@@ -70,27 +53,18 @@ export default function CreateThread() {
           groupName={group && group.name}
         />
         <div className={classes.InputWrapper}>
-          <ThreadTitleForm
-            title={title}
-            setTitle={setTitle}
-            shouldSetTitleTouched={shouldSetTitleTouched}
-            setTitleTouched={setTitleTouched}
-          />
+          <ThreadTitleForm title={title} setTitle={setTitle} />
         </div>
         <div className={classes.InputWrapper}>
           <PostInput
             postContent={postContent}
             setPostContent={setPostContent}
-            shouldSetPostContentTouched={shouldSetPostContentTouched}
-            setPostContentTouched={setPostContentTouched}
           />
         </div>
         <SubitThreadBtn
           postContent={postContent}
           groupId={group && group._id}
           title={title}
-          setPostContentTouched={setPostContentTouched}
-          setTitleTouched={setTitleTouched}
           disabled={!postContent || !title || !group}
         />
         {group && <AboutGroup inPostCreation group={group} top={`17.5rem`} />}

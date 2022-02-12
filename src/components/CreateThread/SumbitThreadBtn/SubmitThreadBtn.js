@@ -7,25 +7,14 @@ import classes from './SubmitThreadBtn.module.css';
 const { createThread } = submitThreadBtnUtils;
 
 export default function SubmitThreadBtn(props) {
-  const {
-    groupId,
-    postContent,
-    title,
-    setTitleTouched,
-    setPostContentTouched,
-    disabled,
-  } = props;
+  const { groupId, postContent, title, disabled } = props;
 
   const history = useHistory();
 
   async function submitHandler() {
-    if (!title) setTitleTouched();
-    if (!postContent) setPostContentTouched();
-    if (title && postContent) {
-      const { data: thread } = await createThread(groupId, title, postContent);
+    const { data: thread } = await createThread(groupId, title, postContent);
 
-      history.push(`/thread/${slugify(thread.title)}`, { thread });
-    }
+    history.push(`/thread/${slugify(thread.title)}`, { thread });
   }
 
   return (

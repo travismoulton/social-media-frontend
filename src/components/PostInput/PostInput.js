@@ -1,19 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
 
 import Input from '../UI/Input/Input';
 import checkValidityHandler from '../../shared/checkValidityHandler';
 
-export default function PostInput(props) {
-  const {
-    postContent,
-    setPostContent,
-    shouldSetPostContentTouched,
-    setPostContentTouched,
-  } = props;
-
-  const history = useHistory();
-
+export default function PostInput({ postContent, setPostContent }) {
   const [contentInput, setContentInput] = useState({
     elementType: 'textarea',
     elementConfig: { placeholder: 'Say something...' },
@@ -26,20 +16,6 @@ export default function PostInput(props) {
     className: 'PostInput',
     errorMsg: '',
   });
-
-  // When the Create Thread button is clicked, if there is no post content, a flag will be sent from
-  // CreateThread to mark the input as touched and display the error message
-  useEffect(() => {
-    if (shouldSetPostContentTouched) {
-      setContentInput({
-        ...contentInput,
-        touched: true,
-        errorMsg: 'Post can not be empty',
-      });
-
-      setPostContentTouched();
-    }
-  }, [contentInput, shouldSetPostContentTouched, setPostContentTouched]);
 
   function inputChangedHandler(e, input) {
     const { value } = e.target;
