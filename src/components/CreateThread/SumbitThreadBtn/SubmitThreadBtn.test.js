@@ -1,3 +1,6 @@
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
+
 import {
   customRender,
   screen,
@@ -18,13 +21,23 @@ describe('<SubmitThreadBtn />', () => {
       title: 'title',
     };
 
-    customRender(<SubmitThreadBtn {...props} />);
+    const history = createMemoryHistory();
+
+    customRender(
+      <Router history={history}>
+        <SubmitThreadBtn {...props} />
+      </Router>
+    );
   }
 
   let mockSubmitThread;
 
   beforeEach(() => {
-    mockSubmitThread = createSpy(utils, 'createThread', Promise.resolve({}));
+    mockSubmitThread = createSpy(
+      utils,
+      'createThread',
+      Promise.resolve({ data: { title: 'threadTitle' } })
+    );
   });
 
   afterEach(() => {

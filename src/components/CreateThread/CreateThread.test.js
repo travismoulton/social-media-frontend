@@ -30,14 +30,4 @@ describe('<CreateThread />', () => {
 
     expect(screen.getByText('Create Thread')).toBeInTheDocument();
   });
-
-  test('if the CreateThread btn is clicked with no title or post content, the error is displayed', () => {
-    setup();
-
-    const btn = screen.getByText('Create Thread');
-    fireEvent.click(btn);
-
-    expect(screen.getByText('Title is required')).toBeInTheDocument();
-    expect(screen.getByText('Post can not be empty')).toBeInTheDocument();
-  });
 });

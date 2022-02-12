@@ -23,6 +23,7 @@ export default function SubmitThreadBtn(props) {
     if (!postContent) setPostContentTouched();
     if (title && postContent) {
       const { data: thread } = await createThread(groupId, title, postContent);
+
       history.push(`/thread/${slugify(thread.title)}`, { thread });
     }
   }
