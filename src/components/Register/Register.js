@@ -10,6 +10,8 @@ import checkValidityHandler from '../../shared/checkValidityHandler';
 
 const { register } = registerUtils;
 
+//
+
 export default function Register() {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ export default function Register() {
   // Use that to build the redirect path and redirect state
   const { threadPath, thread, hash } =
     shouldRedirectToThread && history.location.state;
-  const redirectPath = `${threadPath}${hash && hash}`;
+  const redirectPath = `${threadPath}${hash ? hash : ''}`;
   const redirectState = { thread, scrollToComments: !!hash };
 
   const [emailInput, setEmailInput] = useState({
