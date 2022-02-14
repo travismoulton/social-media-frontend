@@ -26,7 +26,7 @@ export default function Login() {
   // Use that to build the redirect path and redirect state
   const { threadPath, thread, hash } =
     shouldRedirectToThread && history.location.state;
-  const redirectPath = `${threadPath}${hash && hash}`;
+  const redirectPath = `${threadPath}${hash ? hash : ''}`;
   const redirectState = { thread, scrollToComments: !!hash };
 
   const [emailInput, setEmailInput] = useState({
