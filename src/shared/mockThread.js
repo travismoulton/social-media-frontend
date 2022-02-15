@@ -5,12 +5,12 @@ export const mockThread = {
   title: 'mockThread',
 };
 
-const mockAuthor1 = {
+export const mockAuthor1 = {
   _id: 'mockUser1',
   name: 'mockUser1',
 };
 
-const mockAuthor2 = {
+export const mockAuthor2 = {
   _id: 'mockUser2',
   name: 'mockUser2',
 };
