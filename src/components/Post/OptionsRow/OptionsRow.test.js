@@ -24,7 +24,7 @@ describe('<OptionsRow />', () => {
     expect(screen.getByText('10 Comments')).toBeInTheDocument();
   });
 
-  test('If not for forInitialPost, Vote Buttons as well as reply button are displayed and NumComments is not', () => {
+  test('If not forInitialPost, Vote Buttons as well as reply button are displayed and NumComments is not', () => {
     const newProps = { ...props, forInitialPost: false };
     customRender(<OptionsRow {...newProps} />, { preloadedState });
 
