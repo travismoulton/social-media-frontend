@@ -11,10 +11,10 @@ export default function BackToTopBtn() {
 
   useEffect(() => {
     function detectScrollPosition() {
-      const { pageYOffset } = window;
+      const { scrollY } = window;
 
-      // If pageYOffset is not 0, the user is not at the top of the page
-      setShow(pageYOffset !== 0);
+      // If scrollY is not 0, the user is not at the top of the page
+      setShow(scrollY !== 0);
     }
     document.addEventListener('scroll', detectScrollPosition);
 
