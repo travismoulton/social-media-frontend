@@ -1,9 +1,25 @@
 import { createMemoryHistory } from 'history';
 import { Router } from 'react-router-dom';
 
-import { customRender, screen, fireEvent } from '../../shared/testUtils';
+import {
+  customRender,
+  screen,
+  fireEvent,
+  waitFor,
+  createSpy,
+  cre,
+} from '../../shared/testUtils';
 import CreateThread from './CreateThread';
+import { utils } from '../GroupDropdown/groupDropdownUtils';
 
+jest.mock('../GroupDropdown/groupDropdownUtils');
+
+const mockGroups = [
+  { groupOne: { _id: 'groupOne', name: 'groupOne' } },
+  { groupTwo: { _id: 'groupTwo', name: 'groupTwo' } },
+  { groupThree: { _id: 'groupThree', name: 'groupThree' } },
+  { groupFour: { _id: 'groupFour', name: 'groupFour' } },
+];
 describe('<CreateThread />', () => {
   const date = Date.now();
   const mockGroup = {
@@ -13,6 +29,20 @@ describe('<CreateThread />', () => {
     memberCount: 10,
     _id: 'groupId',
   };
+
+  let mockFetchGroups;
+  beforeEach(() => {
+    mockFetchGroups = createSpy(
+      utils,
+      'fetchAllGroups',
+      Promise.resolve({ data: mockGroups })
+    );
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+    mockFetchGroups = null;
+  });
 
   function setup() {
     const history = createMemoryHistory();
