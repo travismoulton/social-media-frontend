@@ -50,6 +50,7 @@ export default function ThreadFeedCard({ post, thread }) {
           </div>
           <div className={classes.PostContent}>
             <span>{post.content}</span>
+            {/* The blur div will provide a fading out look for posts over a certain height */}
             <div className={classes.Blur}></div>
           </div>
         </div>
