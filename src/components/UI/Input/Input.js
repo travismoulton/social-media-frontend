@@ -1,5 +1,4 @@
 import classes from './Input.module.css';
-import CustomSelect from './CustomSelect/CustomSelect';
 
 export default function Input(props) {
   let inputElement = null;
@@ -11,7 +10,6 @@ export default function Input(props) {
     changed,
     id,
     wrapperClass,
-    isSearchable,
     className,
     label,
     invalid,
@@ -48,19 +46,19 @@ export default function Input(props) {
       );
       break;
 
-    case 'select':
-      inputElement = (
-        <div className={classes.SelectWrapper}>
-          <CustomSelect
-            changed={changed}
-            options={elementConfig.options}
-            value={value}
-            isSearchable={isSearchable}
-          />
-        </div>
-      );
+    // case 'select':
+    //   inputElement = (
+    //     <div className={classes.SelectWrapper}>
+    //       <CustomSelect
+    //         changed={changed}
+    //         options={elementConfig.options}
+    //         value={value}
+    //         isSearchable={isSearchable}
+    //       />
+    //     </div>
+    //   );
 
-      break;
+    //   break;
 
     case 'textarea':
       inputElement = (

@@ -64,7 +64,6 @@ export default function ThreadFeed({ groupId }) {
 
       (async () => {
         const { data } = await fetchThreads(sortBy, groupId);
-        console.log(data);
 
         setThreads(data.threads);
         setNextUrl(data.next);
