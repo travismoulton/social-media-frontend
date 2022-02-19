@@ -4,5 +4,3 @@
 
 // Future TODOs?
   // Implement a test for BackToTopBtn and ThreadFeed to test the onScroll functionality. Can't do this in JSDom
-
-// Delete custom select file inside Input folder?

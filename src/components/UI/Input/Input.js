@@ -46,20 +46,6 @@ export default function Input(props) {
       );
       break;
 
-    // case 'select':
-    //   inputElement = (
-    //     <div className={classes.SelectWrapper}>
-    //       <CustomSelect
-    //         changed={changed}
-    //         options={elementConfig.options}
-    //         value={value}
-    //         isSearchable={isSearchable}
-    //       />
-    //     </div>
-    //   );
-
-    //   break;
-
     case 'textarea':
       inputElement = (
         <div className={classes[wrapperClass]} style={{ position: 'relative' }}>
