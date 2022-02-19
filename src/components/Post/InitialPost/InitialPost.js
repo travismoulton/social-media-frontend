@@ -38,7 +38,6 @@ export default function Post({ post, reloadThread, numComments }) {
   }
 
   async function deletePostHandler() {
-    console.log('deletePostHandler');
     await deletePost(post._id);
 
     reloadThread();

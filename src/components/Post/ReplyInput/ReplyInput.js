@@ -57,5 +57,5 @@ export default function ReplyInput(props) {
     />
   ));
 
-  return <>{form}</>;
+  return form;
 }

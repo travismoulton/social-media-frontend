@@ -2,7 +2,3 @@
   // A: Implement a continue is as guest feature
 
 
-//7: Login / Register
-  // A: Test for redirect functionality?
-
-
