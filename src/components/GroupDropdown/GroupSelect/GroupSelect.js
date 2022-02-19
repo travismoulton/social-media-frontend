@@ -22,6 +22,7 @@ export default function GroupSelect(props) {
       options={options}
       value={options.find((option) => option.value === value)}
       defaultValue={defaultValue}
+      aria-label="Select"
     />
   );
 }

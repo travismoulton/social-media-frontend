@@ -29,7 +29,6 @@ export default function GroupDropdown(props) {
   useEffect(() => {
     (async () => {
       const groups = await fetchAllGroups();
-      console.log(groups);
 
       if (groups)
         setGroupsAsOptions(
