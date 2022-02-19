@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 
-import classes from './HomePage.module.css';
 import CreatePostBanner from '../CreatePostBanner/CreatePostBanner';
 import ThreadFeed from '../ThreadFeed/ThreadFeed';
 
