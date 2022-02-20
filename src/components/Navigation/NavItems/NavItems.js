@@ -10,12 +10,16 @@ export default function NavItems({ isAuthenticated }) {
     <ul data-testid="NavItems" className={classes.NavItems}>
       {isAuthenticated ? (
         <>
-          <NavItem link="/">
-            <BiHomeSmile />
-          </NavItem>
-          <NavItem link="/logout">Logout</NavItem>
-          <GroupDropdown fromNavBar />
-          <ShowCreateGroupBtn />
+          <span className={classes.NavItemsLeft}>
+            <NavItem link="/">
+              <BiHomeSmile /> Home
+            </NavItem>
+            <GroupDropdown fromNavBar />
+          </span>
+          <span className={classes.NavItemsRight}>
+            <ShowCreateGroupBtn />
+            <NavItem link="/logout">Logout</NavItem>
+          </span>
         </>
       ) : (
         <>

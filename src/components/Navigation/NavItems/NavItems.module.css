@@ -9,3 +9,22 @@
   height: 100%;
   width: 100%;
 }
+
+.NavItemsRight,
+.NavItemsLeft {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.NavItemsLeft {
+  width: 40%;
+}
+
+.NavItemsRight {
+  width: 25%;
+}
+
+.active {
+  border-bottom: none;
+}
