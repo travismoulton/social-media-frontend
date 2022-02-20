@@ -24,10 +24,12 @@ export default function NavItems({ isAuthenticated }) {
       ) : (
         <>
           <NavItem link="/">
-            <BiHomeSmile />
+            <BiHomeSmile /> Home
           </NavItem>
-          <NavItem link="/register">Register</NavItem>
-          <NavItem link="/login">Login</NavItem>
+          <span className={classes.UnauthenticatedRight}>
+            <NavItem link="/register">Register</NavItem>
+            <NavItem link="/login">Login</NavItem>
+          </span>
         </>
       )}
     </ul>
