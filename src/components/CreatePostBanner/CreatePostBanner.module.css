@@ -6,7 +6,7 @@
   background-color: var(--color-dark-blue);
   border-radius: 1rem;
   padding: 0 1.6rem;
-  transition: all 0.5s;
+  transition: all 0.2s;
   color: var(--color-white);
   border-style: none;
   height: 5rem;
