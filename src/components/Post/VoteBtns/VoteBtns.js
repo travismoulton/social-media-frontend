@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { FiArrowUp } from 'react-icons/fi';
 import { FiArrowDown } from 'react-icons/fi';
@@ -11,12 +11,19 @@ const { addDislike, addLike, removeDislike, removeLike } = voteBtnUtils;
 export default function VoteBtns({ post: postData, vertical, threadScore }) {
   const [post, setPost] = useState(postData);
   const { user } = useSelector((state) => state.auth);
+  const threadScoreRef = useRef(threadScore);
 
   async function likeHandler() {
     if (post.usersLiked.includes(user._id)) {
+      // Update ThreadScoreRef before state update so that is rendered properly
+      // after state update causes componenet rerender
+      if (threadScore) threadScoreRef.current--;
+
       const { data } = await removeLike(post._id);
       setPost(data.post);
     } else {
+      if (threadScore) threadScoreRef.current++;
+
       const { data } = await addLike(post._id);
       setPost(data.post);
     }
@@ -24,9 +31,13 @@ export default function VoteBtns({ post: postData, vertical, threadScore }) {
 
   async function dislikeHandler() {
     if (post.usersDisliked.includes(user._id)) {
+      if (threadScore) threadScoreRef.current++;
+
       const { data } = await removeDislike(post._id);
       setPost(data.post);
     } else {
+      if (threadScore) threadScoreRef.current--;
+
       const { data } = await addDislike(post._id);
       setPost(data.post);
     }
@@ -42,9 +53,10 @@ export default function VoteBtns({ post: postData, vertical, threadScore }) {
     // should be displayed. Otherwise, it should display the post likeScore
     if (userHasNotVoted) {
       if (likeScore === 0) return 'Vote';
-      if (likeScore !== 0) return threadScore ? threadScore : likeScore;
+      if (likeScore !== 0)
+        return threadScore ? threadScoreRef.current : likeScore;
     } else {
-      return threadScore ? threadScore : likeScore;
+      return threadScore ? threadScoreRef.current : likeScore;
     }
   }
 
