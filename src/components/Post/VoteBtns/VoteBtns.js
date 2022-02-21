@@ -13,16 +13,32 @@ export default function VoteBtns({ post: postData, vertical, threadScore }) {
   const { user } = useSelector((state) => state.auth);
   const threadScoreRef = useRef(threadScore);
 
+  function incrementThreadScore() {
+    if (post.usersDisliked.includes(user._id)) {
+      threadScoreRef.current += 2;
+    } else {
+      threadScoreRef.current += 1;
+    }
+  }
+
+  function decrementThreadScore() {
+    if (post.usersLiked.includes(user._id)) {
+      threadScoreRef.current -= 2;
+    } else {
+      threadScoreRef.current -= 1;
+    }
+  }
+
   async function likeHandler() {
     if (post.usersLiked.includes(user._id)) {
       // Update ThreadScoreRef before state update so that is rendered properly
       // after state update causes componenet rerender
-      if (threadScore) threadScoreRef.current--;
+      if (threadScore) decrementThreadScore();
 
       const { data } = await removeLike(post._id);
       setPost(data.post);
     } else {
-      if (threadScore) threadScoreRef.current++;
+      if (threadScore) incrementThreadScore();
 
       const { data } = await addLike(post._id);
       setPost(data.post);
@@ -31,12 +47,12 @@ export default function VoteBtns({ post: postData, vertical, threadScore }) {
 
   async function dislikeHandler() {
     if (post.usersDisliked.includes(user._id)) {
-      if (threadScore) threadScoreRef.current++;
+      if (threadScore) incrementThreadScore();
 
       const { data } = await removeDislike(post._id);
       setPost(data.post);
     } else {
-      if (threadScore) threadScoreRef.current--;
+      if (threadScore) decrementThreadScore();
 
       const { data } = await addDislike(post._id);
       setPost(data.post);
