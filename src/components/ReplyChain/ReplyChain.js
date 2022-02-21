@@ -5,7 +5,7 @@ export default function ReplyChain({ posts, numPosts, forInitialPost }) {
   const [show, setShow] = useState(true);
 
   const btn = (
-    <button onClick={() => setShow((show) => !show)}>
+    <button className={classes.Btn} onClick={() => setShow((show) => !show)}>
       {show ? 'Hide replies' : `Show ${numPosts} replies`}
     </button>
   );

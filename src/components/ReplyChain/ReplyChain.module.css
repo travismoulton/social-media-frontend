@@ -8,12 +8,27 @@
 }
 
 .SideBar {
-  width: 0.3rem;
-  background-color: green;
+  width: 0.1rem;
+  background-color: #d9d9d9;
   height: 100%;
   transition: all cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
 .SideBarWrapper:hover .SideBar {
-  background-color: orange;
+  background-color: var(--color-dark-blue);
+}
+
+.Btn {
+  text-decoration: none;
+  background: none;
+  padding: 0;
+  border: none;
+  font-size: 1.4rem;
+  padding-bottom: 1px;
+}
+
+.Btn:hover {
+  padding-bottom: 0;
+  border-bottom: 1px solid #000;
+  cursor: pointer;
 }
