@@ -1,0 +1,38 @@
+.Container {
+  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 3rem;
+}
+
+.Header p {
+  font-size: 2rem;
+  margin-top: -0.5rem;
+}
+
+.Svg {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.Btn {
+  width: 8rem;
+  height: 2.6rem;
+}
+
+.Btn:last-child {
+  margin-left: 6rem;
+}
+
+.BtnRow {
+  display: flex;
+  justify-content: center;
+}

@@ -40,6 +40,8 @@
   background-color: #edeff1;
   border-top: 1px solid #c6ccd2;
   margin-top: 5rem;
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
 
 .Error {
