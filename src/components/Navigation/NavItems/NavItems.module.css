@@ -10,24 +10,15 @@
   width: 100%;
 }
 
-.NavItemsRight,
-.NavItemsLeft {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.InSideBar {
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  padding-top: 2rem;
+  padding-left: 2rem;
 }
 
-.NavItemsLeft {
-  width: 40%;
-}
-
-.NavItemsRight {
-  width: 25%;
-}
-
-.UnauthenticatedRight {
-  width: 20%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.InSideBar p,
+.InSideBar li {
+  margin-bottom: 3rem;
 }
