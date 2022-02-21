@@ -64,10 +64,16 @@ export default function ThreadFeedCard({ post, thread }) {
                 scrollToComments: true,
               },
             }}
+            style={{ textDecoration: 'none' }}
           >
-            <span className={postClasses.NumComments}>
+            <span
+              className={`${postClasses.NumComments} ${classes.CommentsLink}`}
+            >
               <BsChatRightText size={16} />
-              <span>{thread.numComments} Comments</span>
+              <span>
+                {thread.numComments}{' '}
+                {thread.numComments === 1 ? 'Comment' : 'Comments'}
+              </span>
             </span>
           </Link>
         </div>

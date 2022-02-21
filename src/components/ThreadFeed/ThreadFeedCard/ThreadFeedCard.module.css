@@ -76,3 +76,8 @@
   filter: blur(25px);
   background-color: #fff;
 }
+
+.CommentsLink {
+  cursor: pointer;
+  color: #000;
+}
