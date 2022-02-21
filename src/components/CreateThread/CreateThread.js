@@ -44,14 +44,16 @@ export default function CreateThread() {
         <div className={classes.HeaderWrapper}>
           <h1 className={classes.H1}>Create a thread</h1>
         </div>
-        <GroupDropdown
-          fromCreateThread
-          updateGroupStateAndUrl={updateGroupStateAndUrl}
-          // If rendered from GroupDetailPage, pass the groupId and groupName
-          // Which will be used in setting the default value
-          preLoadedGroup={group && group._id}
-          groupName={group && group.name}
-        />
+        <div style={{ marginLeft: '3rem', marginTop: '1rem' }}>
+          <GroupDropdown
+            fromCreateThread
+            updateGroupStateAndUrl={updateGroupStateAndUrl}
+            // If rendered from GroupDetailPage, pass the groupId and groupName
+            // Which will be used in setting the default value
+            preLoadedGroup={group && group._id}
+            groupName={group && group.name}
+          />
+        </div>
         <div className={classes.InputWrapper}>
           <ThreadTitleForm title={title} setTitle={setTitle} />
         </div>

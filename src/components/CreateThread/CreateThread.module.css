@@ -6,6 +6,7 @@
 
 .HeaderWrapper {
   border-bottom: 1px solid #eee;
+  margin-left: 3rem;
 }
 
 .H1 {
@@ -14,6 +15,7 @@
   text-transform: uppercase;
   margin-left: 1.5rem;
   margin-bottom: 0.5rem;
+  margin-left: 0;
 }
 
 .InputWrapper {
