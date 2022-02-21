@@ -34,12 +34,9 @@ export default function GroupPage() {
       <>
         <GroupHeader group={group} />
         <AboutGroup group={group} />
+
         <div className={classes.PageFeedWrapper}>
-          {user && (
-            <span style={{ marginLeft: '2rem' }}>
-              <CreatePostBanner group={group} />
-            </span>
-          )}
+          {user && <CreatePostBanner group={group} />}
           <ThreadFeed groupId={groupId} />
         </div>
       </>

@@ -102,7 +102,6 @@
 
 .OptionsRowBtn span,
 .NumComments span {
-  /* padding-bottom: 0.3rem; */
   font-size: 1.4rem;
 }
 
@@ -113,4 +112,11 @@
   display: flex;
   margin-top: 0.5rem;
   justify-content: end;
+}
+
+@media only screen and (max-width: 500px) {
+  .PostHeader {
+    padding: 0.3rem;
+    margin-left: -5%;
+  }
 }

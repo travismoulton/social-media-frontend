@@ -17,3 +17,15 @@
   background-color: var(--color-dark-blue-hover);
   cursor: pointer;
 }
+
+@media only screen and (max-width: 800px) {
+  .Btn {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .Btn {
+    width: 95%;
+  }
+}

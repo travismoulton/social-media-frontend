@@ -93,13 +93,12 @@ export default function ThreadFeed({ groupId }) {
 
   return threads ? (
     <>
-      <div>
-        <FeedSortBanner
-          updateSortOrder={(sortOrder) => setSortBy(sortOrder)}
-          currentSortOrder={sortBy}
-        />
-        {cards}
-      </div>
+      <FeedSortBanner
+        updateSortOrder={(sortOrder) => setSortBy(sortOrder)}
+        currentSortOrder={sortBy}
+      />
+      {cards}
+
       <BackToTopBtn />
     </>
   ) : (

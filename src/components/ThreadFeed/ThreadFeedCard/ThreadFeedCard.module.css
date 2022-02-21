@@ -3,7 +3,8 @@
   border: 1px solid #d9d9d9;
   width: 75rem;
 
-  margin: 2rem;
+  margin: 1rem;
+
   border-radius: 1rem;
   background-color: #fff;
 }
@@ -80,4 +81,20 @@
 .CommentsLink {
   cursor: pointer;
   color: #000;
+}
+
+@media only screen and (max-width: 800px) {
+  .PageFeedCard {
+    width: 90%;
+  }
+
+  .Left {
+    width: 10%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .PageFeedCard {
+    width: 95%;
+  }
 }
