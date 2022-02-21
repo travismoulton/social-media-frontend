@@ -2,10 +2,19 @@
   border: 1px solid #999;
   position: absolute;
   right: 15%;
+  width: 25rem;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 3rem;
 }
 
 .Banner {
   background-color: #0c4b32;
+  width: 100%;
+  text-align: center;
 }
 
 .Banner p {
@@ -20,11 +29,17 @@
   padding: 1rem;
 }
 
+.InnerWrapper p {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #d9d9d9;
+}
+
 .BtnAndDateWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  justify-self: end;
 }
 
 .CreatePostBtn {

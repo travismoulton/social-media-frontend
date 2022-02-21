@@ -28,12 +28,16 @@ export default function AboutGroup({ group, top, inPostCreation }) {
   }
 
   return (
+    // Style is for Top is passed as a prop so it can be positioned correctly
+    // based on what page it is rendered on
     <div className={classes.Container} style={{ top: top }}>
       <div className={classes.Banner}>
         <p>About {group.name}</p>
       </div>
       <div className={classes.InnerWrapper}>
-        <p className={classes.Description}>{group.description}</p>
+        {group.description && (
+          <p className={classes.Description}>{group.description}</p>
+        )}
         <p className={classes.MemberCount}>
           Number of members: {group.memberCount}
         </p>
