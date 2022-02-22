@@ -33,7 +33,7 @@ export default function GroupPage() {
     group && (
       <>
         <GroupHeader group={group} />
-        <AboutGroup group={group} />
+        <AboutGroup group={group} GroupPage />
 
         <div className={classes.PageFeedWrapper}>
           {user && <CreatePostBanner group={group} />}

@@ -8,8 +8,30 @@
   padding: 1rem 20rem 0rem 20rem;
   display: flex;
   align-items: center;
+  width: 75%;
+  height: 6rem;
 }
 
 .Bottom h1 {
   margin: 0;
+  margin-left: calc((100% - 75rem) / 2);
+}
+
+@media only screen and (max-width: 1050px) {
+  .Bottom {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .Bottom {
+    margin-left: 5%;
+    align-items: center;
+    justify-content: start;
+    padding: 1rem;
+  }
+
+  .Bottom h1 {
+    margin-left: 0;
+  }
 }

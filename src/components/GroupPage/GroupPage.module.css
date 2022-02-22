@@ -7,3 +7,10 @@
 
   width: 75%;
 }
+
+@media only screen and (max-width: 1050px) {
+  .PageFeedWrapper {
+    padding: 1rem;
+    width: 100%;
+  }
+}

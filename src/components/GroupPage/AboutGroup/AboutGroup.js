@@ -3,7 +3,7 @@ import slugify from 'slugify';
 
 import classes from './AboutGroup.module.css';
 
-export default function AboutGroup({ group, top, inPostCreation }) {
+export default function AboutGroup({ group, GroupPage, inPostCreation }) {
   const months = [
     'Jan',
     'Feb',
@@ -30,7 +30,11 @@ export default function AboutGroup({ group, top, inPostCreation }) {
   return (
     // Style is for Top is passed as a prop so it can be positioned correctly
     // based on what page it is rendered on
-    <div className={classes.Container} style={{ top: top }}>
+    <div
+      className={
+        GroupPage ? classes.GroupPageContainer : classes.CreatePostContainer
+      }
+    >
       <div className={classes.Banner}>
         <p>About {group.name}</p>
       </div>

@@ -69,7 +69,7 @@ export default function CreateThread() {
           title={title}
           disabled={!postContent || !title || !group}
         />
-        {group && <AboutGroup inPostCreation group={group} top={`17.5rem`} />}
+        {group && <AboutGroup inPostCreation group={group} />}
       </div>
     )
   );
