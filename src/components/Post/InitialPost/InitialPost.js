@@ -60,10 +60,7 @@ export default function Post({ post, reloadThread, numComments }) {
           </div>
         )}
 
-        <div
-          className={classes.InitialPostRight}
-          style={{ marginLeft: '-2rem' }}
-        >
+        <div className={classes.InitialPostRight}>
           <div className={classes.PostHeader}>
             <p className={classes.Author}>
               {!post.isDeleted ? post.author.name : '[Post deleted by author]'}

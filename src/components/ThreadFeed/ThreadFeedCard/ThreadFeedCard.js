@@ -31,7 +31,7 @@ export default function ThreadFeedCard({ post, thread }) {
       </div>
 
       <div className={classes.Right}>
-        <div className={postClasses.PostHeader}>
+        <div className={postClasses.FeedCardHeader}>
           <Link
             className={classes.Group}
             to={{

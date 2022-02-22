@@ -5,8 +5,7 @@
 }
 
 .ForInitialBtn {
-  margin-left: 100%;
-  transform: translateX(-100%);
+  margin-left: calc(100% - 9rem);
 }
 
 .Disabled {

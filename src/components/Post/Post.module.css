@@ -8,11 +8,16 @@
   display: flex;
 }
 
+.InitialPostRight {
+  width: 100%;
+}
+
 .InitialPostLeft {
   width: 5%;
 }
 
-.PostHeader {
+.PostHeader,
+.FeedCardHeader {
   padding: 0.3rem 3rem;
   margin-bottom: 0.9rem;
   display: flex;
@@ -114,9 +119,49 @@
   justify-content: end;
 }
 
+@media only screen and (max-width: 900px) {
+  .InitialPostLeft {
+    width: 10%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .NumComments {
+    margin-left: 0;
+  }
+
+  .OptionsRow {
+    padding: 1rem 0;
+    padding-right: 2rem;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .EditBtn {
+    width: auto;
+  }
+}
+
+@media only screen and (max-width: 565px) {
+  .OptionsRowBtn span {
+    font-size: 1rem;
+  }
+
+  .OptionsRowBtn {
+    margin-right: 0.1rem;
+    margin-left: 0.1rem;
+  }
+}
+
 @media only screen and (max-width: 500px) {
-  .PostHeader {
+  .FeedCardHeader {
     padding: 0.3rem;
     margin-left: -5%;
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  .EditBtn span {
+    display: none;
   }
 }
