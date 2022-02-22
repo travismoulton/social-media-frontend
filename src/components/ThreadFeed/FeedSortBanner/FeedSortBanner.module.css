@@ -42,8 +42,34 @@
   }
 }
 
+@media only screen and (max-width: 650px) {
+  .Btn {
+    height: 5rem;
+  }
+
+  .Banner {
+    height: 6rem;
+  }
+}
+
 @media only screen and (max-width: 500px) {
   .Banner {
     width: 95%;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .Banner {
+    height: 12rem;
+    flex-direction: column;
+  }
+
+  .Btn {
+    height: 3rem;
+    width: 20rem;
+  }
+
+  .Btn:not(:last-child) {
+    margin-bottom: 1rem;
   }
 }
