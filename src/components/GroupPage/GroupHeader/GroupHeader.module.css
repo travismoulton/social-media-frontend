@@ -25,6 +25,7 @@
 
 @media only screen and (max-width: 800px) {
   .Bottom {
+    width: 95%;
     margin-left: 5%;
     align-items: center;
     justify-content: start;
