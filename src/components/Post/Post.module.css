@@ -6,6 +6,8 @@
 
 .InitialPost {
   display: flex;
+  margin-left: 2rem;
+  margin-bottom: 3.5rem;
 }
 
 .InitialPostRight {
@@ -47,13 +49,20 @@
   margin: 1rem;
 }
 
-.ReplyWrapper p {
+.CommentAs {
   margin-left: 1rem;
   margin-bottom: 0.3rem;
   font-weight: 400;
 }
 
-.ReplyWrapper p span {
+.ReplyAs {
+  margin-left: 5%;
+  margin-bottom: 0.3rem;
+  font-weight: 400;
+}
+
+.CommentAs span,
+.ReplyAs span {
   color: red;
 }
 

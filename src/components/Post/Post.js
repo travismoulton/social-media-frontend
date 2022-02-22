@@ -63,6 +63,7 @@ export default function Post({ post, reloadThread }) {
           closeReplyBox={() => setShowReplyInput(false)}
           reloadThread={reloadThread}
           inEditMode={inEditMode}
+          username={user.name}
         />
       )}
     </div>

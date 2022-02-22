@@ -11,10 +11,16 @@ export default function ReplyWrapper(props) {
     closeReplyBox,
     reloadThread,
     inEditMode,
+    username,
   } = props;
 
   return (
     <div className={classes.ReplyWrapper}>
+      {!inEditMode && (
+        <p className={classes.ReplyAs}>
+          Reply as <span>{username}</span>
+        </p>
+      )}
       <ReplyInput
         setReplyContent={setReplyContent}
         replyContent={replyContent}

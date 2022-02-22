@@ -106,3 +106,27 @@
 .Invalid {
   border: 1px solid red;
 }
+
+@media only screen and (max-width: 1100px) {
+  .GroupNameWrapper,
+  .GroupDescriptionWrapper {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .GroupNameWrapper {
+    flex-direction: column;
+  }
+
+  .GroupNameWrapper label {
+    margin-bottom: 1rem;
+  }
+
+  .GroupNameWrapper .InputAsteric {
+    margin-left: 0.3rem;
+    top: 2.7rem;
+    left: calc((100% + 21rem) / 2);
+    font-size: 2rem;
+  }
+}

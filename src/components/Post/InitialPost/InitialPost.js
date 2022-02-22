@@ -50,10 +50,7 @@ export default function Post({ post, reloadThread, numComments }) {
 
   return (
     <>
-      <div
-        className={`${classes.Post} ${classes.InitialPost}`}
-        style={{ marginLeft: '2rem', marginBottom: '3.5rem' }}
-      >
+      <div className={`${classes.Post} ${classes.InitialPost}`}>
         {user && (
           <div className={classes.InitialPostLeft}>
             <VoteBtns post={post} vertical />
@@ -92,7 +89,7 @@ export default function Post({ post, reloadThread, numComments }) {
       )}
       {user && !inEditMode && (
         <div className={classes.ReplyWrapper} id="comments">
-          <p>
+          <p className={classes.CommentAs}>
             Comment as <span>{user.name}</span>
           </p>
           <ReplyInput
