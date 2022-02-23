@@ -18,3 +18,10 @@
     left: 20%;
   }
 }
+
+@media only screen and (max-width: 550px) {
+  .Modal {
+    width: 80%;
+    left: 10%;
+  }
+}
