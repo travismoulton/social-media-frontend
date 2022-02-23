@@ -124,9 +124,26 @@
   }
 
   .GroupNameWrapper .InputAsteric {
-    margin-left: 0.3rem;
     top: 2.7rem;
     left: calc((100% + 21rem) / 2);
-    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .LoginInputWrapper,
+  .RegisterInputWrapper {
+    width: 25rem;
+    flex-direction: column;
+  }
+
+  .LoginInputWrapper label,
+  .RegisterInputWrapper label {
+    margin-bottom: 1rem;
+  }
+
+  .LoginInputWrapper .InputAsteric,
+  .RegisterInputWrapper .InputAsteric {
+    top: 2.5rem;
+    left: calc((100% + 21rem) / 2);
   }
 }

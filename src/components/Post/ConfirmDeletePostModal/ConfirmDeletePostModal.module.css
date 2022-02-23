@@ -23,6 +23,10 @@
   right: 1rem;
 }
 
+.Svg:hover {
+  cursor: pointer;
+}
+
 .Btn {
   width: 8rem;
   height: 2.6rem;
