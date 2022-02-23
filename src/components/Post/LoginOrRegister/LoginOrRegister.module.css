@@ -43,3 +43,44 @@
 .Link:hover {
   background-color: #eee;
 }
+
+@media only screen and (max-width: 800px) {
+  .Right {
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .Left {
+    width: 65%;
+  }
+
+  .Wrapper {
+    justify-content: space-between;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .Wrapper {
+    flex-direction: column;
+    height: 10rem;
+    padding: 1.5rem;
+  }
+
+  .Left,
+  .Right {
+    width: auto;
+  }
+
+  .Left {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .Wrapper {
+    height: 12rem;
+  }
+}
