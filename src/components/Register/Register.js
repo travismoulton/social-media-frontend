@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Link, useHistory } from 'react-router-dom';
 
+import ContinueAsGuest from '../Navigation/NavItems/ContinueAsGuest/ContinueAsGuest';
 import Input from '../UI/Input/Input';
 import { registerUtils } from './registerUtils';
 import { authStart, authSuccess, authFail } from '../../store/authSlice';
@@ -9,8 +10,6 @@ import classes from './Register.module.css';
 import checkValidityHandler from '../../shared/checkValidityHandler';
 
 const { register } = registerUtils;
-
-//
 
 export default function Register() {
   const { user } = useSelector((state) => state.auth);
@@ -264,6 +263,11 @@ export default function Register() {
         >
           Register
         </button>
+        <p>- or -</p>
+        <ContinueAsGuest
+          redirectPath={shouldRedirectToThread && redirectPath}
+          redirectState={shouldRedirectToThread && redirectState}
+        />
         <p>
           Already have an account? <Link to="login">Login</Link>
         </p>

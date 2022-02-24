@@ -170,7 +170,10 @@ export default function Login() {
           Login
         </button>
         <p>- or -</p>
-        <ContinueAsGuest />
+        <ContinueAsGuest
+          redirectPath={shouldRedirectToThread && redirectPath}
+          redirectState={shouldRedirectToThread && redirectState}
+        />
         <p>
           Need an account? <Link to="register">Register</Link>
         </p>

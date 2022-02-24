@@ -7,9 +7,13 @@ import { loginUtils } from '../../../Login/loginUtils';
 
 const { login } = loginUtils;
 
-export default function ContinueAsGuest({ fromNavBar }) {
+export default function ContinueAsGuest(props) {
+  const { fromNavBar, redirectPath, redirectState } = props;
+
   const history = useHistory();
   const dispatch = useDispatch();
+
+  console.log({ redirectState, redirectPath });
 
   async function clickHandler() {
     dispatch(authStart());
@@ -17,8 +21,13 @@ export default function ContinueAsGuest({ fromNavBar }) {
 
     // data.data contains the user info
     if (data.status === 'success') {
-      history.push('/');
       dispatch(authSuccess(data.data));
+
+      if (redirectPath) {
+        history.push(redirectPath, { ...redirectState });
+      } else {
+        history.push('/');
+      }
     } else if (data.status === 'fail') {
       dispatch(authFail());
     }
