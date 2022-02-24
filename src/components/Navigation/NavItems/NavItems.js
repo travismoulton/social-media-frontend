@@ -3,6 +3,7 @@ import { BiHomeSmile } from 'react-icons/bi';
 import GroupDropdown from '../../GroupDropdown/GroupDropdown';
 import NavItem from './NavItem/NavItem';
 import ShowCreateGroupBtn from './ShowCreateGroupBtn/ShowCreateGroupBtn';
+import ContinueAsGuest from './ContinueAsGuest/ContinueAsGuest';
 import classes from './NavItems.module.css';
 
 export default function NavItems({ isAuthenticated, inSideBar }) {
@@ -25,6 +26,7 @@ export default function NavItems({ isAuthenticated, inSideBar }) {
               <BiHomeSmile /> Home
             </NavItem>
             <NavItem link="/register">Register</NavItem>
+            <ContinueAsGuest fromNavBar />
             <NavItem link="/login">Login</NavItem>
           </>
         )}
@@ -47,6 +49,7 @@ export default function NavItems({ isAuthenticated, inSideBar }) {
               <BiHomeSmile /> Home
             </NavItem>
             <NavItem link="/register">Register</NavItem>
+            <ContinueAsGuest fromNavBar />
             <NavItem link="/login">Login</NavItem>
           </>
         )}

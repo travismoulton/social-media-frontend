@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, Link, useHistory } from 'react-router-dom';
 
+import ContinueAsGuest from '../Navigation/NavItems/ContinueAsGuest/ContinueAsGuest';
 import Input from '../UI/Input/Input';
 import { loginUtils } from './loginUtils';
 import { authStart, authSuccess, authFail } from '../../store/authSlice';
@@ -168,6 +169,8 @@ export default function Login() {
         >
           Login
         </button>
+        <p>- or -</p>
+        <ContinueAsGuest />
         <p>
           Need an account? <Link to="register">Register</Link>
         </p>
