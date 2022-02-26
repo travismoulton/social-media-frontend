@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: '/groups',
+  baseURL: 'https://social-backend-123.herokuapp.com/groups',
   timeout: 20000,
   withCredentials: true,
 });

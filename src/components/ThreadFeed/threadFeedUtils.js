@@ -7,6 +7,8 @@ export const threadFeedUtils = {
       `?page=1&limit=8&sort=${sortBy}`
     );
 
+    console.log(data);
+
     return data;
   },
 
