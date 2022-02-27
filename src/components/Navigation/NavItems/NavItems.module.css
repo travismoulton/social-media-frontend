@@ -19,6 +19,7 @@
 }
 
 .InSideBar p,
-.InSideBar li {
+.InSideBar li,
+.InSideBar button {
   margin-bottom: 3rem;
 }

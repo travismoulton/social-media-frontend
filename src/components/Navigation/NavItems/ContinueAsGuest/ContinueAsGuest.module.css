@@ -7,6 +7,7 @@
   font-size: 1.6rem;
   border-bottom: 1px solid transparent;
   padding-top: 0.1rem;
+  padding-left: 0;
 }
 
 .FromNavBar:hover {
