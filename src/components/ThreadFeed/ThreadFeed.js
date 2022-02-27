@@ -29,7 +29,11 @@ export default function ThreadFeed({ groupId }) {
     const { data } = await fetchNextPage(nextUrl);
 
     setThreads((threads) => threads.concat(data.threads));
-    setNextUrl(data.next);
+
+    const next = !!data.next
+      ? `https://social-backend-123.herokuapp.com${data.next}`
+      : null;
+    setNextUrl(next);
   }, [nextUrl]);
 
   useEffect(() => {
