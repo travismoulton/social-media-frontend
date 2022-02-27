@@ -68,7 +68,10 @@ export default function ThreadFeed({ groupId }) {
         console.log(data);
 
         setThreads(data.threads);
-        setNextUrl(`https://social-backend-123.herokuapp.com/${data.next}`);
+        const next = !!data.next
+          ? `https://social-backend-123.herokuapp.com${data.next}`
+          : null;
+        setNextUrl(next);
       })();
     }
   }, [threads, groupId, sortBy]);
