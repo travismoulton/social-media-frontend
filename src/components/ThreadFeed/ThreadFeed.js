@@ -65,8 +65,10 @@ export default function ThreadFeed({ groupId }) {
       (async () => {
         const { data } = await fetchThreads(sortBy, groupId);
 
+        console.log(data);
+
         setThreads(data.threads);
-        setNextUrl(data.next);
+        setNextUrl(`https://social-backend-123.herokuapp.com/${data.next}`);
       })();
     }
   }, [threads, groupId, sortBy]);
