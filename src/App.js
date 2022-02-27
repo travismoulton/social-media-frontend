@@ -42,19 +42,6 @@ function App() {
     setIsAuthenticated(!!user);
   }, [user]);
 
-  // const routes = (
-  //   <Switch>
-  //     <Route path="/login" component={Login} />
-  //     <Route path="/logout" component={Logout} />
-  //     <Route path="/register" component={Register} />
-  //     <Route path="/group/:groupName/createThread" component={CreateThread} />
-  //     <Route path="/group/:groupName" component={GroupPage} />
-  //     <Route path="/thread/:threadName" component={Thread} />
-  //     <Route path="/createThread" component={CreateThread} />
-  //     <Route path="/" component={HomePage} />
-  //   </Switch>
-  // );
-
   const routes = !isAuthenticated ? (
     <Switch>
       <Route path="/login" component={Login} />

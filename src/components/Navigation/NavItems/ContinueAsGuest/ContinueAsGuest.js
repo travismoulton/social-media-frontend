@@ -13,8 +13,6 @@ export default function ContinueAsGuest(props) {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  console.log({ redirectState, redirectPath });
-
   async function clickHandler() {
     dispatch(authStart());
     const { data } = await login('guest@guest.com', 'pass1234');
