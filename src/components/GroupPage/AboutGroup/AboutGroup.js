@@ -32,7 +32,7 @@ export default function AboutGroup({ group, GroupPage, inPostCreation }) {
     // based on what page it is rendered on
     <div
       className={
-        GroupPage ? classes.GroupPageContainer : classes.CreatePostContainer
+        GroupPage ? classes.GroupPageContainer : classes.CreateThreadContainer
       }
     >
       <div className={classes.Banner}>

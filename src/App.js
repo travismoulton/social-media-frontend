@@ -53,9 +53,9 @@ function App() {
   ) : (
     <Switch>
       <Route path="/logout" component={Logout} />
+      <Route path="/group/:groupName/createThread" component={CreateThread} />
       <Route path="/group/:groupName" component={GroupPage} />
       <Route path="/thread/:threadName" component={Thread} />
-      <Route path="/group/:groupName/createThread" component={CreateThread} />
       <Route path="/createThread" component={CreateThread} />
       <Route path="/" component={HomePage} />
     </Switch>

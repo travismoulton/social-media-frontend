@@ -1,9 +1,6 @@
-//5: General
-  // A: Implement a continue is as guest feature
-
-
 // Future TODOs?
   // Implement a test for BackToTopBtn and ThreadFeed to test the onScroll functionality. Can't do this in JSDom
 
 // TODO:
-  // Fix routing based on authentication status. Hide routes that shouldn't be accessed
+  // Fix spinner on every page to not cause overflow
+  // Put up a spinner while waiting for heroku?
