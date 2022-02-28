@@ -98,6 +98,8 @@ export default function ThreadFeed({ groupId }) {
       />
     ));
 
+  // return <Spinner />;
+
   return threads ? (
     <>
       <FeedSortBanner
@@ -109,6 +111,8 @@ export default function ThreadFeed({ groupId }) {
       <BackToTopBtn />
     </>
   ) : (
-    <Spinner />
+    <div style={{ overflow: 'hidden' }}>
+      <Spinner />
+    </div>
   );
 }

@@ -1,7 +1,12 @@
 import classes from './Spinner.module.css';
 
-const Spinner = () => (
-  <div data-testid="Spinner" className={classes.loader}>
+const Spinner = ({ initialLoad }) => (
+  <div
+    data-testid="Spinner"
+    className={
+      initialLoad ? `${classes.loader} ${classes.white}` : classes.loader
+    }
+  >
     Loading...
   </div>
 );

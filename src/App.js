@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './App.css';
+import Spinner from './components/UI/Spinner/Spinner';
 import Login from './components/Login/Login';
 import Logout from './components/Logout/Logout';
 import Layout from './components/Layout/Layout';
@@ -63,7 +64,13 @@ function App() {
 
   return (
     <div className="App">
-      {!loading && <Layout isAuthenticated={isAuthenticated}>{routes}</Layout>}
+      {!loading ? (
+        <Layout isAuthenticated={isAuthenticated}>{routes}</Layout>
+      ) : (
+        <div style={{ overflow: 'hidden', paddingTop: '14.8rem' }}>
+          <Spinner initialLoad />
+        </div>
+      )}
     </div>
   );
 }
