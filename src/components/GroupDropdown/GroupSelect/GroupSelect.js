@@ -28,10 +28,14 @@ export default function GroupSelect(props) {
     }),
   };
 
+  const className = fromNavBar
+    ? classes.GroupSelect
+    : classes.CreateThreadContainer;
+
   return (
     <Select
       formatOptionLabel={formatOptionLabel}
-      className={classes.GroupSelect}
+      className={className}
       onChange={changed}
       options={options}
       value={options.find((option) => option.value === value)}

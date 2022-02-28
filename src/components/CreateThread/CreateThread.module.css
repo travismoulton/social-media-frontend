@@ -22,3 +22,31 @@
   margin-top: 3rem;
   margin-left: 3rem;
 }
+
+@media only screen and (max-width: 1200px) {
+  .CreateThread {
+    padding: 10rem 2rem;
+  }
+}
+
+@media only screen and (max-width: 825px) {
+  .CreateThread {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10rem 0;
+  }
+
+  .InputWrapper {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    margin-left: 0;
+  }
+
+  .HeaderWrapper {
+    margin-left: 0;
+  }
+}

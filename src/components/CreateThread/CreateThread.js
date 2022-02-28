@@ -44,7 +44,8 @@ export default function CreateThread() {
         <div className={classes.HeaderWrapper}>
           <h1 className={classes.H1}>Create a thread</h1>
         </div>
-        <div style={{ marginLeft: '3rem', marginTop: '1rem' }}>
+        {/* <div style={{ marginLeft: '3rem', marginTop: '1rem' }}> */}
+        <div className={classes.InputWrapper}>
           <GroupDropdown
             fromCreateThread
             updateGroupStateAndUrl={updateGroupStateAndUrl}
