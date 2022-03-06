@@ -19,6 +19,10 @@ export default function GroupPage() {
   const { groupId } = history.location.state;
 
   useEffect(() => {
+    if (group) document.title = `/r${group.name}`;
+  });
+
+  useEffect(() => {
     if (!group || group._id !== groupId)
       (async () => {
         const {

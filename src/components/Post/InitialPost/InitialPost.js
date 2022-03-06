@@ -13,7 +13,7 @@ import classes from '../Post.module.css';
 
 const { deletePost } = postUtils;
 
-export default function Post({ post, reloadThread, numComments }) {
+export default function Post({ post, reloadThread, numComments, threadTitle }) {
   const { user } = useSelector((state) => state.auth);
   const [replyContent, setReplyContent] = useState('');
   const [shouldClearReplyInput, setShouldClearReplyInput] = useState(false);
@@ -51,7 +51,7 @@ export default function Post({ post, reloadThread, numComments }) {
   return (
     <>
       <div className={`${classes.Post} ${classes.InitialPost}`}>
-        {user && (
+        {user && !post.isDeleted && (
           <div className={classes.InitialPostLeft}>
             <VoteBtns post={post} vertical />
           </div>
@@ -64,6 +64,9 @@ export default function Post({ post, reloadThread, numComments }) {
             </p>
             <PostDate postTimeStamp={post.createdAt} />
           </div>
+
+          <h6>{threadTitle}</h6>
+
           <div className={classes.PostContent}>{post.content}</div>
 
           <OptionsRow

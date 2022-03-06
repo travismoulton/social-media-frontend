@@ -16,6 +16,10 @@ export default function Thread() {
   const [thread, setThread] = useState(null);
   const [initialPost, setInitialPost] = useState(null);
 
+  useEffect(() => {
+    if (thread) document.title = thread.title;
+  });
+
   // Upon loading the component, it uses the Thread passed through History
   // and sets it to state
   useEffect(() => {
@@ -105,6 +109,7 @@ export default function Thread() {
             post={initialPost}
             reloadThread={reloadThread}
             numComments={initialPost.numAggregateReplies}
+            threadTitle={thread.title}
           />
           {initialPost.replies.length ? generatePostStructure() : null}
         </div>

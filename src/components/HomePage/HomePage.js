@@ -1,10 +1,15 @@
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import CreatePostBanner from '../CreatePostBanner/CreatePostBanner';
 import ThreadFeed from '../ThreadFeed/ThreadFeed';
 
 export default function HomePage() {
   const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    document.title = 'Threddit';
+  });
 
   return (
     <div

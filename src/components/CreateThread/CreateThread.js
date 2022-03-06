@@ -18,6 +18,10 @@ export default function CreateThread() {
   const history = useHistory();
 
   useEffect(() => {
+    document.title = 'Create A Thread';
+  });
+
+  useEffect(() => {
     // If the component is rendered from groupPage, there will be a group passed in the history state
     // If the componenet is rendered from the CreatePostBanner on the app home page, there will
     // be no group, so it should be set to null

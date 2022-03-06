@@ -6,8 +6,6 @@ export const loginUtils = {
       .post(`login`, { email, password })
       .catch((err) => err.response);
 
-    console.log(data);
-
     return data;
   },
 };

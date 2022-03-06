@@ -18,6 +18,10 @@ export default function Register() {
 
   const history = useHistory();
 
+  useEffect(() => {
+    document.title = 'Register';
+  });
+
   // When directed here from LoginOrRegister, there will be state in the history,
   // which indicates that after login, the user should be redirected to the Thread
   // they were viewing
