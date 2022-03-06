@@ -25,14 +25,36 @@
 
 @media only screen and (max-width: 800px) {
   .Bottom {
-    width: 95%;
+    width: 90%;
     margin-left: 5%;
     align-items: center;
     justify-content: start;
     padding: 1rem;
+    margin-right: 5%;
   }
 
   .Bottom h1 {
     margin-left: 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .Bottom {
+    justify-content: space-between;
+  }
+
+  .Bottom h1 {
+    font-size: 3rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .Bottom {
+    flex-direction: column;
+    height: 10rem;
+  }
+
+  .Bottom h1 {
+    margin-bottom: 2rem;
   }
 }

@@ -3,3 +3,15 @@
   width: 12.5rem;
   margin-left: 5rem;
 }
+
+@media only screen and (max-width: 500px) {
+  .Btn {
+    margin-left: 2rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .Btn {
+    height: 3.8rem;
+  }
+}
