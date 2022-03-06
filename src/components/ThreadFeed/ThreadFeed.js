@@ -30,9 +30,7 @@ export default function ThreadFeed({ groupId }) {
 
     setThreads((threads) => threads.concat(data.threads));
 
-    const next = !!data.next
-      ? `https://social-backend-123.herokuapp.com${data.next}`
-      : null;
+    const next = !!data.next ? `https://api.threddit.win${data.next}` : null;
     setNextUrl(next);
   }, [nextUrl]);
 
@@ -71,7 +69,7 @@ export default function ThreadFeed({ groupId }) {
 
         setThreads(data.threads);
         const next = !!data.next
-          ? `https://social-backend-123.herokuapp.com${data.next}`
+          ? `https://api.threddit.win${data.next}`
           : null;
         setNextUrl(next);
       })();

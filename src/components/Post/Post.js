@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 import { postUtils } from './postUtils';
 import OptionsRow from './OptionsRow/OptionsRow';
@@ -44,7 +45,9 @@ export default function Post({ post, reloadThread }) {
         </p>
         <PostDate postTimeStamp={post.createdAt} />
       </div>
-      <div className={classes.PostContent}>{post.content}</div>
+      <div className={classes.PostContent}>
+        <ReactMarkdown>{post.content}</ReactMarkdown>
+      </div>
       {showOptionsRow && (
         <OptionsRow
           user={user}

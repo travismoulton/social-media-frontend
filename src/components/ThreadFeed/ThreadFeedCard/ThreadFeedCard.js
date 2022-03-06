@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { BsChatRightText } from 'react-icons/bs';
 import { useHistory, Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import slugify from 'slugify';
 
 import PostDate from '../../Post/PostDate/PostDate';
@@ -49,7 +50,9 @@ export default function ThreadFeedCard({ post, thread }) {
             <h4 className={classes.Title}>{thread.title}</h4>
           </div>
           <div className={classes.PostContent}>
-            <span>{post.content}</span>
+            <span>
+              <ReactMarkdown>{post.content}</ReactMarkdown>
+            </span>
             {/* The blur div will provide a fading out look for posts over a certain height */}
             <div className={classes.Blur}></div>
           </div>

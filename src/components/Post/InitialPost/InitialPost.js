@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 import { postUtils } from '../postUtils';
 import OptionsRow from '../OptionsRow/OptionsRow';
@@ -67,7 +68,9 @@ export default function Post({ post, reloadThread, numComments, threadTitle }) {
 
           <h6>{threadTitle}</h6>
 
-          <div className={classes.PostContent}>{post.content}</div>
+          <div className={classes.PostContent}>
+            <ReactMarkdown>{post.content}</ReactMarkdown>
+          </div>
 
           <OptionsRow
             user={user}
