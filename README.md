@@ -1,44 +1,13 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# Threaded Chat Application
 
-## Available Scripts
+[Check out the site here](https://threddit.win)
 
-In the project directory, you can run:
+### How to interact with the site
 
-### `npm start`
+This is a simplified reddit clone with user registration and login functionality, and the ability for users to create their own groups. Users can also create threads, and can comment on threads, and the sub-comments within them. The comments are threaded, with the ability to hide all replies to a certain comment. Users can delete and edit their own comments. There is also a voting feature to up or down vote comments / threads. The thread feeds on the home page and group pages are sorted by popularity by default, but can also sorted by newest or oldest threads. On the thread feeds, there is scrolling pagination, so if there are any more threads, scrolling down will make an api call and load them.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### The tech I used.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+This full stack application features Node and Express on the backend as a rest api, and with React on the frontend. The database is mongoDB, with mongoose as an ORM. The authenitcation is handled with JWT and cookies. The backend is hosted on heroku. The frontend is built with React with hooks. Global app state is managed by React-Redux using Redux toolkit. Styling is handled with CSS modules. React-router-dom is utilized for navigating the site. The frontend is tested with Jest and React-Testing-Library.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Thanks for taking the time to check out my project!
