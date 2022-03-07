@@ -20,7 +20,7 @@ export default function GroupPage() {
 
   useEffect(() => {
     if (group) document.title = `/r${group.name}`;
-  });
+  }, [group]);
 
   useEffect(() => {
     if (!group || group._id !== groupId)

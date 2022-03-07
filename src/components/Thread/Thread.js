@@ -18,7 +18,7 @@ export default function Thread() {
 
   useEffect(() => {
     if (thread) document.title = thread.title;
-  });
+  }, [thread]);
 
   // Upon loading the component, it uses the Thread passed through History
   // and sets it to state

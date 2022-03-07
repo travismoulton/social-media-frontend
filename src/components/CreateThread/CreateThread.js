@@ -19,7 +19,7 @@ export default function CreateThread() {
 
   useEffect(() => {
     document.title = 'Create A Thread';
-  });
+  }, []);
 
   useEffect(() => {
     // If the component is rendered from groupPage, there will be a group passed in the history state

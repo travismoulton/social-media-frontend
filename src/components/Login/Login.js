@@ -20,7 +20,7 @@ export default function Login() {
 
   useEffect(() => {
     document.title = 'Login';
-  });
+  }, []);
 
   // When directed here from LoginOrRegister, there will be state in the history,
   // which indicates that after login, the user should be redirected to the Thread

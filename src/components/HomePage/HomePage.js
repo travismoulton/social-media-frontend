@@ -9,7 +9,7 @@ export default function HomePage() {
 
   useEffect(() => {
     document.title = 'Threddit';
-  });
+  }, []);
 
   return (
     <div
